@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+}
+
+.is-displayed-desktop {
+    display: none;
+}
+
+@media (min-width: 481px) {
+    .is-displayed-desktop {
+        display: block;
+    }
+}
+
+.is-displayed-mobile {
+    display: none;
+}
+
+@media (max-width: 480px) {
+    .is-displayed-mobile {
+        display: block;
+    }
+}

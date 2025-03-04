@@ -21,3 +21,19 @@ body {
         display: block;
     }
 }
+
+h1 {
+    font-size: 64px;
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 45px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .h1 {
+        font-size: 40px;
+    }
+}

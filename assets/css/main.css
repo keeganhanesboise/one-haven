@@ -22,18 +22,37 @@ body {
     }
 }
 
+p {
+    font-size: 24px;
+}
 h1 {
     font-size: 64px;
 }
 
+h2 {
+    font-size: 48px;
+}
+
 @media (max-width: 480px) {
+    p {
+        font-size: 14px;
+    }
     h1 {
         font-size: 45px;
+    }
+    h2 {
+        font-size: 36px;
     }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
+    p {
+        font-size: 14px;
+    }
     .h1 {
         font-size: 40px;
+    }
+    .h2 {
+        font-size: 32px;
     }
 }

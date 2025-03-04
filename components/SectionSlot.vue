@@ -17,7 +17,15 @@
 <style scoped>
   .section-container {
     height: clamp(600px, 100vh, 1200px);
+    padding: 50px;
   }
+
+  @media (max-width: 480px) {
+    .section-container {
+      padding: 50px 25px;
+    }
+  }
+
   .section-background-white {
     background-color: white;
   }

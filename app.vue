@@ -4,6 +4,7 @@
     <GamesAndEvents />
     <Menu />
     <ImgCarousel :images="images"/>
+    <ContactUs />
   </div>
 </template>
 

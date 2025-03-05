@@ -3,9 +3,9 @@
     <div class="menu-container">
       <div class="menu-img-container">
         <div class="menu">
-          <img id="purpleMug" src="/public/img/purple-mug.svg" alt="" />
+          <img id="purpleMug" src="/img/purple-mug.svg" alt="" />
           <h2 class="menu-heading">Menu</h2>
-          <img id="blueMug" src="/public/img/blue-mug.svg" alt="" />
+          <img id="blueMug" src="/img/blue-mug.svg" alt="" />
         </div>
       </div>
     </div>

@@ -11,19 +11,17 @@
             venenatis in, vehicula ornare ipsum. Nulla facilisi.</p>
         </div>
         <div class="event-info-img">
-          <img id="redD20" src="/public/img/red-d20.svg" alt=""/>
+          <img id="redD20" src="/img/red-d20.svg" alt=""/>
         </div>
       </div>
       <div class="event-calendar-container">
         <div>
-          <img id="calendar" src="/public/img/calendar.png" alt=""/>
+          <img id="calendar" src="/img/calendar.png" alt=""/>
         </div>
       </div>
     </div>
   </SectionSlot>
 </template>
-<script setup lang="ts">
-</script>
 
 <style scoped>
   #redD20 {

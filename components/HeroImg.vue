@@ -3,7 +3,8 @@
     <div class="hero-container">
       <img id="hero-img-desktop" src="/img/coffee-mug-magic-one-haven.svg" alt="">
       <div class="logo-container">
-        <h1 id="siteTitle">One Haven</h1>
+        <img id="logo" class="is-displayed-desktop" src="/img/one-haven-logo-desktop.svg" alt="" />
+        <img id="logo-mobile" class="is-displayed-mobile" src="/img/one-haven-logo-mobile.svg" alt="" />
         <ul class="call-to-actions">
           <li><a>Coffee</a></li>
           <li><a>Gaming</a></li>
@@ -21,8 +22,8 @@
     min-height: 600px;
     max-width: 800px;
   }
-  #siteTitle {
-    text-align: center;
+  #logo {
+    padding: 20px;
   }
   .hero-container {
     display: flex;

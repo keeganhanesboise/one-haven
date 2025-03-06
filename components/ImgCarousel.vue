@@ -6,7 +6,7 @@
       </button>
       <ul class="img-list">
         <li class="img-container" v-for="image in currentImages" :key="image">
-          <img v-if="image" class="img" :src="image"  alt=""/>
+          <img @click="openImg(image)" v-if="image" class="img" :src="image"  alt=""/>
           <div v-else></div>
         </li>
       </ul>
@@ -14,6 +14,7 @@
         <img id="next" src="/img/next-icon.png" alt="next image slide"/>
       </button>
     </div>
+    <ImgModal :isVisible="showModal" @close="closeImg" :image="openedImg"/>
   </SectionSlot>
 </template>
 
@@ -25,6 +26,8 @@
   const slideSize = 6;
 
   const startIndex = ref(0);
+  const showModal = ref(false);
+  const openedImg = ref('');
 
   const currentImages = computed(() => {
     if (props.images && props.images.length > 0) {
@@ -59,6 +62,15 @@
         startIndex.value = newIndex;
       }
     }
+  }
+
+  function openImg(url: string): void {
+    openedImg.value = url;
+    showModal.value = true;
+  }
+
+  function closeImg(): void {
+    showModal.value = false;
   }
 </script>
 
@@ -95,6 +107,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 8px;
   }
   .img {
     position: absolute;
@@ -104,7 +117,10 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 8px;
+    transition: transform .3s ease;
+  }
+  .img:hover {
+    transform: translate(-50%, -50%) scale(1.05);
   }
   @media (min-width: 481px) and (max-width: 768px) {
     #prev, #next {

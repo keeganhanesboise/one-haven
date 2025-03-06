@@ -1,24 +1,72 @@
 <template>
-  <SectionSlot id="imgCarousel" color="whitesmoke">
+  <SectionSlot id="imgCarousel" color="whitesmoke" v-if="images && images.length > 0">
     <div class="carousel-container">
-      <img id="prev" src="/img/prev-icon.png" alt="previous image slide"/>
+      <button @click="prevSlide">
+        <img id="prev" src="/img/prev-icon.png" alt="previous image slide"/>
+      </button>
       <ul class="img-list">
-        <li class="img-container" v-for="image in images" :key="image">
-          <img class="img" :src="image"  alt=""/>
+        <li class="img-container" v-for="image in currentImages" :key="image">
+          <img v-if="image" class="img" :src="image"  alt=""/>
+          <div v-else></div>
         </li>
       </ul>
-      <img id="next" src="/img/next-icon.png" alt="next image slide"/>
+      <button @click="nextSlide">
+        <img id="next" src="/img/next-icon.png" alt="next image slide"/>
+      </button>
     </div>
   </SectionSlot>
 </template>
 
 <script setup lang="ts">
-  defineProps<{
+  const props = defineProps<{
     images?: string[];
   }>();
+
+  const slideSize = 6;
+
+  const startIndex = ref(0);
+
+  const currentImages = computed(() => {
+    if (props.images && props.images.length > 0) {
+      const endIndex = startIndex.value + slideSize;
+      const safeEndIndex = Math.min(endIndex, props.images?.length);
+      const images = props.images.slice(startIndex.value, safeEndIndex);
+
+      const placeholdersNeeded = 6 - images.length;
+      const placeholders = Array(placeholdersNeeded).fill(null);
+      return [...images, ...placeholders];
+    }
+    return [];
+  })
+
+  function nextSlide(): void {
+    if (props.images && props.images.length > 6) {
+      const newIndex = startIndex.value + slideSize;
+      if (newIndex >= props.images.length) {
+        startIndex.value = 0;
+      } else {
+        startIndex.value = newIndex;
+      }
+    }
+  }
+
+  function prevSlide(): void {
+    if (props.images && props.images.length > 6) {
+      const newIndex = startIndex.value - slideSize;
+      if (newIndex < 0) {
+        startIndex.value = Math.floor(props.images.length / slideSize) * slideSize;
+      } else {
+        startIndex.value = newIndex;
+      }
+    }
+  }
 </script>
 
 <style scoped>
+  button {
+    all: unset;
+    cursor: pointer;
+  }
   #prev, #next {
     width: 75px;
     height: 75px;
@@ -40,11 +88,21 @@
   }
   .img-container {
     flex: 1 1 calc(33.3333% - 10px);
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
     min-width: 200px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
     border-radius: 8px;
   }

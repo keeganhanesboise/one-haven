@@ -11,11 +11,16 @@
 
 <script setup lang="ts">
   const images = ref<string[]>([
-    '/img/coffee-example.png',
-    '/img/coffee-example.png',
-    '/img/coffee-example.png',
-    '/img/coffee-example.png',
-    '/img/coffee-example.png',
-    '/img/coffee-example.png',
+    '/img/carousel/cafe-lounge.jpg',
+    '/img/carousel/coffee-bar.jpg',
+    '/img/carousel/espresso-machine.jpg',
+    '/img/carousel/cafe-food.jpg',
+    '/img/carousel/cafe-lounge-2.jpg',
+    '/img/carousel/gaming-section.jpg',
+    '/img/carousel/board-games.jpg',
+    '/img/carousel/cafe-food-2.jpg',
+    '/img/carousel/hold-fast-coffee.jpg',
+    '/img/carousel/cafe-lounge-3.jpg',
+    '/img/carousel/cafe-food-3.jpg',
   ]);
 </script>

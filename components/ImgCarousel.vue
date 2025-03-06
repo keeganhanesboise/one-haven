@@ -1,5 +1,5 @@
 <template>
-  <SectionSlot id="imgCarousel" color="white">
+  <SectionSlot id="imgCarousel" color="whitesmoke">
     <div class="carousel-container">
       <img id="prev" src="/img/prev-icon.png" alt="previous image slide"/>
       <ul class="img-list">

@@ -4,7 +4,7 @@
       <div class="menu-img-container">
         <div class="menu">
           <img id="purpleMug" src="/img/purple-mug.svg" alt="" />
-          <h2 class="menu-heading">Menu</h2>
+          <img id="menuImg" class="menu-img" :src="menuImage" alt="" />
           <img id="blueMug" src="/img/blue-mug.svg" alt="" />
         </div>
       </div>
@@ -12,7 +12,16 @@
   </SectionSlot>
 </template>
 
+<script setup lang="ts">
+  defineProps<{
+    menuImage: string;
+  }>();
+</script>
+
 <style scoped>
+#menuImg {
+  width: 100%;
+}
 #purpleMug {
   rotate: -5deg;
   max-width: 150px;
@@ -40,16 +49,11 @@
   width: 100%;
 }
 .menu {
-  width: 100%;
-  max-width: 800px;
-  height: 1000px;
-  background-color: white;
   position: relative;
 }
-.menu-heading {
+.menu-img {
   width: 100%;
-  text-align: center;
+  max-width: 800px;
+  background-color: white;
 }
 </style>
-<script setup lang="ts">
-</script>

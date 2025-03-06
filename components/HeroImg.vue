@@ -24,6 +24,7 @@
   }
   #logo {
     padding: 20px;
+    max-width: 500px;
   }
   .hero-container {
     display: flex;

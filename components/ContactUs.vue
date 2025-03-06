@@ -1,5 +1,5 @@
 <template>
-  <SectionSlot id="contactUs" color="whitesmoke">
+  <SectionSlot id="contactUs" color="white">
     <div class="contact-container">
       <div class="header-container">
         <h2>Contact Us</h2>
@@ -44,7 +44,7 @@
     object-fit: cover;
   }
   .info-container {
-    background-color: white;
+    background-color: whitesmoke;
   }
   .info-padding {
     padding: 25px;

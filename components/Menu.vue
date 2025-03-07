@@ -1,11 +1,10 @@
 <template>
-  <SectionSlot id="menu" color="whitesmoke">
+  <SectionSlot :id="id" color="whitesmoke">
     <div class="menu-container">
       <div class="menu-img-container">
         <div class="menu">
-          <img id="purpleMug" src="/img/purple-mug.svg" alt="" />
-          <img id="menuImg" class="menu-img" :src="menuImage" alt="" />
-          <img id="blueMug" src="/img/blue-mug.svg" alt="" />
+          <h1 class="sr-only">{{ menuTitle }}</h1>
+          <img :id="`${id}menuImg`" class="menu-img" :src="menuImage" alt="" />
         </div>
       </div>
     </div>
@@ -14,28 +13,13 @@
 
 <script setup lang="ts">
   defineProps<{
-    menuImage: string;
+    menuImage: string,
+    menuTitle: string,
+    id: string
   }>();
 </script>
 
 <style scoped>
-#menuImg {
-  width: 100%;
-}
-#purpleMug {
-  rotate: -5deg;
-  max-width: 150px;
-  position: absolute;
-  top: -25px;
-  left: -75px;
-}
-#blueMug {
-  rotate: 5deg;
-  max-width: 150px;
-  position: absolute;
-  bottom: -25px;
-  right: -75px;
-}
 .menu-container {
   display: flex;
   justify-content: center;
@@ -53,6 +37,7 @@
 }
 .menu-img {
   width: 100%;
+  max-height: 1000px;
   max-width: 800px;
   background-color: white;
 }

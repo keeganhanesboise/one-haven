@@ -1,5 +1,6 @@
 <template>
   <SectionSlot id="imgCarousel" color="whitesmoke" v-if="images && images.length > 0">
+    <h1 class="sr-only">One Haven Cafe & Game Shop Images</h1>
     <div class="carousel-container">
       <button @click="prevSlide">
         <img id="prev" src="/img/prev-icon.png" alt="previous image slide"/>

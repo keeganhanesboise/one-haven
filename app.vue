@@ -2,8 +2,8 @@
   <div>
     <HeroImg />
     <GamesAndEvents />
-    <Menu menu-image="/img/cafe-menu.png" />
-    <Menu menu-image="/img/bakery-menu.png" color="white" />
+    <Menu menu-image="/img/cafe-menu.png" menu-title="Cafe Menu" id="cafe-menu" />
+    <Menu menu-image="/img/bakery-menu.png" menu-title="Bakery Menu" id="bakery-manu" color="white" />
     <ImgCarousel :images="images"/>
     <ContactUs />
   </div>

@@ -6,8 +6,9 @@
           <img id="hero-img-desktop" src="/img/coffee-mug-magic-one-haven.svg" alt="">
         </div>
         <div class="logo-container">
-          <img id="logo" class="is-displayed-desktop" src="/img/one-haven-logo-desktop.svg" alt="" />
-          <img id="logo-mobile" class="is-displayed-mobile" src="/img/one-haven-logo-mobile.svg" alt="" />
+          <h1 class="sr-only">Welcome to One Haven Cafe & Game Shop</h1>
+          <img id="logo" class="is-displayed-desktop" src="/img/one-haven-logo-desktop.svg" alt="One Haven Cafe & Game Shop Logo" />
+          <img id="logo-mobile" class="is-displayed-mobile" src="/img/one-haven-logo-mobile.svg" alt="One Haven Cafe & Game Shop Logo" />
           <ul class="call-to-actions">
             <li><a>Coffee</a></li>
             <li><a>Gaming</a></li>

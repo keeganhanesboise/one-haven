@@ -15,9 +15,7 @@
         </div>
       </div>
       <div class="event-calendar-container">
-        <div>
-          <img id="calendar" src="/img/calendar.png" alt=""/>
-        </div>
+        <Calendar />
       </div>
     </div>
   </SectionSlot>
@@ -27,10 +25,6 @@
   #redD20 {
     width: 100%;
     max-width: 200px
-  }
-  #calendar {
-    width: 100%;
-    max-width: 1200px
   }
   .games-and-events-container {
     display: flex;

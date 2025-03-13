@@ -12,12 +12,37 @@
       </div>
       <div class="day" :class="{ 'is-today': isToday(day) }" v-for="(day, index) in calendarDays" :key="index">
         <span class="day-number" v-if="day">{{ day }}</span>
+        <div v-if="hasEvent(day)" class="event">{{ getEventForDay(day) }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+  type CalendarEvent = {
+    date: number;
+    month: number;
+    year: number;
+    eventTitle: string;
+  };
+
+  const props = defineProps<{
+    events?: CalendarEvent[];
+  }>();
+
+  const hasEvent = (day: number | null): boolean | undefined => {
+    return props.events?.some(
+      (event) => event.date === day && event.month === currentMonth.value && event.year === currentYear.value
+    ) ?? false;
+  };
+
+  const getEventForDay = (day: number | null): string => {
+    const event = props.events?.find(
+      (event) => event.date === day && event.month === currentMonth.value && event.year === currentYear.value
+    );
+    return event ? event.eventTitle : '';
+  };
+
   const today = new Date();
   const currentYear = ref(today.getFullYear());
   const currentMonth = ref(today.getMonth()); // 0 = January
@@ -109,10 +134,12 @@ button {
 .day-number {
   padding-left: 5px;
   padding-top: 5px;
+  align-self: flex-start;
 }
 
 .day {
   display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   border: 1px solid #ccc;
@@ -131,5 +158,11 @@ button {
   background: #ffcc00;
   color: black;
   font-weight: bold;
+}
+
+.event {
+  padding: 2px 4px;
+  font-size: 0.8rem;
+  color: #333;
 }
 </style>

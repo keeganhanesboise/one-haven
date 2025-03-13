@@ -15,11 +15,19 @@
         </div>
       </div>
       <div class="event-calendar-container">
-        <Calendar />
+        <Calendar :events="calendarEvents" />
       </div>
     </div>
   </SectionSlot>
 </template>
+
+<script setup lang="ts">
+  const calendarEvents = ref([
+    { date: 5, month: 2, year: 2025, eventTitle: 'Game Night' },
+    { date: 14, month: 2, year: 2025, eventTitle: 'Special Event' },
+    { date: 25, month: 2, year: 2025, eventTitle: 'Board Game Tournament' },
+  ])
+</script>
 
 <style scoped>
   #redD20 {

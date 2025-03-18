@@ -1,5 +1,5 @@
 <template>
-  <SectionSlot id="gamesAndEvents">
+  <SectionSlot id="gamesAndEvents" color="lilac">
     <div class="games-and-events-container">
       <div class="event-info-container">
         <div class="event-info-text">
@@ -24,6 +24,12 @@
 </template>
 
 <style scoped>
+  h2 {
+    color: white;
+  }
+  p {
+    color: white;
+  }
   #redD20 {
     width: 100%;
     max-width: 200px

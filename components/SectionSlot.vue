@@ -16,9 +16,7 @@
 
 <style scoped>
   .section-container {
-    height: clamp(600px, 100vh, 1200px);
     padding: 50px;
-    max-width: 2500px;
   }
 
   @media (max-width: 480px) {
@@ -32,5 +30,8 @@
   }
   .section-background-whitesmoke {
     background-color: whitesmoke;
+  }
+  .section-background-lilac {
+    background-color: #A5A1B0;
   }
 </style>

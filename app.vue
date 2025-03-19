@@ -3,7 +3,7 @@
     <HeroImg />
     <GamesAndEvents />
     <Menu menu-image="/img/cafe-menu.png" menu-title="Cafe Menu" id="cafe-menu" />
-    <Menu menu-image="/img/bakery-menu.png" menu-title="Bakery Menu" id="bakery-manu" color-primary="white" />
+    <Menu menu-image="/img/bakery-menu.png" menu-title="Bakery Menu" id="bakery-manu" color-primary="white"  color-secondary="whitesmoke" section-separator-svg="/img/section-curve-white.svg" section-separator-svg-bottom="/img/section-curve-white-bottom.svg" />
     <ImgCarousel :images="images"/>
     <ContactUs />
   </div>

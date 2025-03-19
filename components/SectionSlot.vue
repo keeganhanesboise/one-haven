@@ -1,11 +1,13 @@
 <template>
-  <img v-if="sectionSeparatorSvg" class="section-separator" :class="sectionBackgroundSecondary" :src="sectionSeparatorSvg" alt="" />
-  <section class="section-container-primary" :class="sectionBackgroundPrimary">
-    <div class="section-container-secondary">
-      <slot></slot>
+  <section>
+    <img v-if="sectionSeparatorSvg" class="section-separator" :class="sectionBackgroundSecondary" :src="sectionSeparatorSvg" alt="" />
+    <div class="section-container-primary" :class="sectionBackgroundPrimary">
+      <div class="section-container-secondary">
+        <slot></slot>
+      </div>
     </div>
+    <img v-if="sectionSeparatorSvgBottom" class="section-separator"  :class="sectionBackgroundSecondary" :src="sectionSeparatorSvgBottom" alt="" />
   </section>
-  <img v-if="sectionSeparatorSvgBottom" class="section-separator"  :class="sectionBackgroundSecondary" :src="sectionSeparatorSvgBottom" alt="" />
 </template>
 
 <script setup>

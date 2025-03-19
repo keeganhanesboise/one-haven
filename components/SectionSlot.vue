@@ -2,6 +2,7 @@
   <section class="section-container" :class="sectionBackgroundColor">
     <slot></slot>
   </section>
+  <img v-if="sectionSeparatorSvg" class="section-separator"  :class="sectionBackgroundColor" :src="sectionSeparatorSvg" alt="" />
 </template>
 
 <script setup>
@@ -9,6 +10,10 @@
     color: {
       type: String,
       default: 'white'
+    },
+    sectionSeparatorSvg: {
+      type: String,
+      default: ''
     }
   });
   const sectionBackgroundColor = computed(() => `section-background-${props.color}`)
@@ -25,6 +30,10 @@
     }
   }
 
+  .section-separator {
+    display: block;
+  }
+
   .section-background-white {
     background-color: white;
   }
@@ -32,6 +41,6 @@
     background-color: whitesmoke;
   }
   .section-background-lilac {
-    background-color: #A5A1B0;
+    background-color: #6b667a;
   }
 </style>

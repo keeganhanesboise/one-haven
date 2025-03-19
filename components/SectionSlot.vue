@@ -1,24 +1,34 @@
 <template>
-  <section class="section-container-primary" :class="sectionBackgroundColor">
+  <img v-if="sectionSeparatorSvg" class="section-separator" :class="sectionBackgroundSecondary" :src="sectionSeparatorSvg" alt="" />
+  <section class="section-container-primary" :class="sectionBackgroundPrimary">
     <div class="section-container-secondary">
       <slot></slot>
     </div>
   </section>
-  <img v-if="sectionSeparatorSvg" class="section-separator"  :class="sectionBackgroundColor" :src="sectionSeparatorSvg" alt="" />
+  <img v-if="sectionSeparatorSvgBottom" class="section-separator"  :class="sectionBackgroundSecondary" :src="sectionSeparatorSvgBottom" alt="" />
 </template>
 
 <script setup>
   const props = defineProps({
-    color: {
+    colorPrimary: {
+      type: String,
+      default: 'white'
+    },
+    colorSecondary: {
       type: String,
       default: 'white'
     },
     sectionSeparatorSvg: {
       type: String,
       default: ''
+    },
+    sectionSeparatorSvgBottom: {
+      type: String,
+      default: ''
     }
   });
-  const sectionBackgroundColor = computed(() => `section-background-${props.color}`)
+  const sectionBackgroundPrimary = computed(() => `section-background-${props.colorPrimary}`)
+  const sectionBackgroundSecondary = computed(() => `section-background-${props.colorSecondary}`)
 </script>
 
 <style scoped>

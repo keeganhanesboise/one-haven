@@ -1,5 +1,5 @@
 <template>
-  <SectionSlot id="heroImg" color="whitesmoke" section-separator-svg="/img/section-curve-lilac.svg" >
+  <SectionSlot id="heroImg" color-primary="whitesmoke">
     <div class="hero-container">
       <div class="hero-content-container">
         <div class="hero-img-container">

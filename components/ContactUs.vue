@@ -1,5 +1,5 @@
 <template>
-  <SectionSlot id="contactUs" color="white">
+  <SectionSlot id="contactUs" color-primary="white">
     <div class="contact-container">
       <div class="header-container">
         <h2>Contact Us</h2>

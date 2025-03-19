@@ -1,5 +1,5 @@
 <template>
-  <SectionSlot :id="id" color="whitesmoke">
+  <SectionSlot :id="id" color-primary="whitesmoke">
     <div class="menu-container">
       <div class="menu-img-container">
         <div class="menu">

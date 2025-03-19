@@ -1,6 +1,8 @@
 <template>
-  <section class="section-container" :class="sectionBackgroundColor">
-    <slot></slot>
+  <section class="section-container-primary" :class="sectionBackgroundColor">
+    <div class="section-container-secondary">
+      <slot></slot>
+    </div>
   </section>
   <img v-if="sectionSeparatorSvg" class="section-separator"  :class="sectionBackgroundColor" :src="sectionSeparatorSvg" alt="" />
 </template>
@@ -20,14 +22,21 @@
 </script>
 
 <style scoped>
-  .section-container {
+  .section-container-primary {
     padding: 50px;
+    display: flex;
+    justify-content: center;
   }
 
   @media (max-width: 480px) {
-    .section-container {
+    .section-container-primary {
       padding: 50px 25px;
     }
+  }
+
+  .section-container-secondary {
+    max-width: 1600px;
+    width: 100%;
   }
 
   .section-separator {

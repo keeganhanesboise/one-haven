@@ -1,5 +1,5 @@
 <template>
-  <SectionSlot id="heroImg" color-primary="whitesmoke">
+  <SectionSlot>
     <div class="hero-container">
       <div class="hero-content-container">
         <div class="hero-img-container">

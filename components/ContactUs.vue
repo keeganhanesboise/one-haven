@@ -1,5 +1,5 @@
 <template>
-  <SectionSlot id="contactUs" color-primary="white">
+  <SectionSlot>
     <div class="contact-container">
       <div class="header-container">
         <h2>Contact Us</h2>
@@ -21,6 +21,9 @@
 </template>
 
 <style scoped>
+  h2 {
+    color: white;
+  }
   #googleMaps {
     width: 100%;
   }

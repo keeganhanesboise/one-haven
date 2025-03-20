@@ -1,10 +1,10 @@
 <template>
-  <SectionSlot :id="id" color-primary="whitesmoke">
+  <SectionSlot>
     <div class="menu-container">
       <div class="menu-img-container">
-        <div class="menu">
-          <h1 class="sr-only">{{ menuTitle }}</h1>
-          <img :id="`${id}menuImg`" class="menu-img" :src="menuImage" alt="" />
+        <div v-for="menu in menus" class="menu">
+          <h1 class="sr-only">{{ menu.menuTitle }}</h1>
+          <img :id="`${menu.id}menuImg`" class="menu-img" :src="menu.menuImage" alt="" />
         </div>
       </div>
     </div>
@@ -12,10 +12,14 @@
 </template>
 
 <script setup lang="ts">
-  defineProps<{
+  type Menu = {
     menuImage: string,
     menuTitle: string,
     id: string
+  };
+
+  defineProps<{
+    menus?: Menu[];
   }>();
 </script>
 
@@ -31,6 +35,8 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  gap: 45px;
+  flex-wrap: wrap;
 }
 .menu {
   position: relative;

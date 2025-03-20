@@ -1,5 +1,5 @@
 <template>
-  <SectionSlot id="gamesAndEvents" color-primary="lilac" color-secondary="whitesmoke" section-separator-svg="/img/section-curve-lilac.svg" section-separator-svg-bottom="/img/section-curve-lilac-bottom.svg">
+  <SectionSlot>
     <div class="games-and-events-container">
       <div class="event-info-container">
         <div class="event-info-text">

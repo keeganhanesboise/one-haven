@@ -64,4 +64,7 @@
   .section-background-lilac {
     background-color: #6b667a;
   }
+  .section-background-dragonfly {
+    background-color: #104241;
+  }
 </style>

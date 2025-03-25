@@ -1,5 +1,5 @@
 <template>
-  <SectionSlot id="heroImg" color="whitesmoke" >
+  <SectionSlot>
     <div class="hero-container">
       <div class="hero-content-container">
         <div class="hero-img-container">
@@ -23,9 +23,7 @@
 <style scoped>
   #hero-img-desktop {
     width: 100%;
-    max-height: 1200px;
-    min-height: 600px;
-    max-width: 800px;
+    max-width: 500px;
   }
   #logo {
     padding: 20px;
@@ -41,8 +39,7 @@
   .hero-content-container {
     display: flex;
     align-items: center;
-    justify-content: center;
-    max-width: 1700px;
+    max-width: 1200px;
     width: 100%;
   }
   .hero-img-container {

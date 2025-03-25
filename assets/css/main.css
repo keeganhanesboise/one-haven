@@ -33,11 +33,15 @@ body {
     overflow: hidden;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6, p, address {
     font-family: "Baskerville Old Face", serif;
 }
 
-p {
+address {
+    font-style: normal;
+}
+
+p, address {
     font-size: 24px;
 }
 h1 {
@@ -49,7 +53,7 @@ h2 {
 }
 
 @media (max-width: 480px) {
-    p {
+    p, address {
         font-size: 14px;
     }
     h1 {
@@ -61,7 +65,7 @@ h2 {
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
-    p {
+    p, address {
         font-size: 14px;
     }
     h1 {

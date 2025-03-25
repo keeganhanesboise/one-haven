@@ -9,10 +9,23 @@
           <img id="googleMaps" src="/img/map-example.png" alt="" />
         </div>
         <div class="info-container">
-          <div class="info-padding">
-            <h3>Hours:</h3>
-            <h3>Phone Number:</h3>
-            <h3>Address:</h3>
+          <div class="address-container">
+            <address>
+              One Haven<br>
+              5956 Stetson Hills Blvd,<br>
+              Colorado Springs, CO 80923
+            </address>
+          </div>
+          <div class="hours-container">
+            <ul class="hours-list">
+              <li>Monday: <span>8AM-10PM</span></li>
+              <li>Tuesday: <span>8AM-3PM</span></li>
+              <li>Wednesday: <span>8AM-10PM</span></li>
+              <li>Thursday: <span>8AM-10PM</span></li>
+              <li>Friday: <span>8AM-10PM</span></li>
+              <li>Saturday: <span>8AM-10PM</span></li>
+              <li>Sunday: <span>Closed</span></li>
+            </ul>
           </div>
         </div>
       </div>
@@ -47,9 +60,11 @@
     object-fit: cover;
   }
   .info-container {
+    display: flex;
     background-color: whitesmoke;
+    justify-content: space-between;
   }
-  .info-padding {
+  .address-container {
     padding: 25px;
   }
   @media (max-width: 768px) {
@@ -59,6 +74,15 @@
     .map-container, .info-container {
       width: auto;
     }
+  }
+  .hours-list {
+    list-style: none;
+    padding: 25px;
+    margin: 0;
+  }
+  .hours-list > li {
+    display: flex;
+    justify-content: space-between;
   }
 </style>
 <script setup lang="ts">

@@ -3,6 +3,14 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   css: ['~/assets/css/main.css'],
   devtools: { enabled: true },
+  ssr: false,
+  runtimeConfig: {
+    public: {
+      contentfulPreviewMode: process.env.CONTENTFUL_PREVIEW_MODE || 'false',
+      contentfulSpaceId: process.env.CONTENTFUL_SPACE_ID || '',
+      contentfulAccessToken: process.env.CONTENTFUL_ACCESS_TOKEN || '',
+    },
+  },
   app: {
     head: {
       htmlAttrs: {

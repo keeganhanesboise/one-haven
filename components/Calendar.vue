@@ -12,36 +12,98 @@
       </div>
       <div class="day" :class="{ 'is-today': isToday(day) }" v-for="(day, index) in calendarDays" :key="index">
         <span class="day-number" v-if="day">{{ day }}</span>
-        <div v-if="hasEvent(day)" class="event">{{ getEventForDay(day) }}</div>
+<!--        <div v-if="hasEvent(day)" class="event">{{ getEventForDay(day) }}</div>-->
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  type CalendarEvent = {
-    date: number;
-    month: number;
-    year: number;
-    eventTitle: string;
-  };
+  import type { CalendarEventEntry, CalendarDisplayEvent } from '~/types/contentful';
 
   const props = defineProps<{
-    events?: CalendarEvent[];
+    events?: CalendarEventEntry[];
+    year: number;
+    month: number;
   }>();
 
-  const hasEvent = (day: number | null): boolean | undefined => {
-    return props.events?.some(
-      (event) => event.date === day && event.month === currentMonth.value && event.year === currentYear.value
-    ) ?? false;
-  };
+  // todo -> add other fields in event
+  const generateDisplayEvents = (events: CalendarEventEntry[], year: number, month: number): CalendarDisplayEvent[] => {
+    const calendarDisplayEvents: CalendarDisplayEvent[] = [];
 
-  const getEventForDay = (day: number | null): string => {
-    const event = props.events?.find(
-      (event) => event.date === day && event.month === currentMonth.value && event.year === currentYear.value
-    );
-    return event ? event.eventTitle : '';
-  };
+    const monthStart = new Date(year, month - 1, 1);
+    const monthEnd = new Date(year, month, 1);
+    monthEnd.setHours(0, 0, 0, 0);
+
+    events.forEach(event => {
+      const startDate = new Date(event.fields.startDate);
+      const endDate = new Date(startDate);
+      endDate.setHours(endDate.getHours() + event.fields.duration);
+
+      if (!event.fields.recurrenceRule || event.fields.recurrenceRule.length === 0) {
+        if (startDate >= monthStart && startDate <= monthEnd) {
+          calendarDisplayEvents.push({
+            name: event.fields.name,
+            summary: event.fields.summary,
+            startDate: startDate,
+            endDate: endDate
+          })
+        }
+      } else {
+        let recurrenceEnd = event.fields.recurrenceEndDate ? new Date(event.fields.recurrenceEndDate) : monthEnd;
+
+        if (recurrenceEnd > monthEnd) recurrenceEnd = monthEnd;
+
+        let recurrenceDate = new Date(startDate);
+
+        while (recurrenceDate <= recurrenceEnd) {
+          if (recurrenceDate >= monthStart) {
+            calendarDisplayEvents.push({
+              name: event.fields.name,
+              summary: event.fields.summary,
+              startDate: new Date(recurrenceDate),
+              endDate: new Date(recurrenceDate.getTime() + event.fields.duration * 60 * 60 * 1000),
+            });
+          }
+
+          // todo -> handle when the user selects more than one recurrence rule
+          // todo -> and one needs to take precedence over the other
+          if (event.fields.recurrenceRule.includes('Weekly')) {
+            recurrenceDate.setDate(recurrenceDate.getDate() + 7);
+          } else if (event.fields.recurrenceRule.includes('bi-weekly')) {
+            recurrenceDate.setDate(recurrenceDate.getDate() + 14);
+          } else if (event.fields.recurrenceRule.includes('monthly')) {
+            recurrenceDate.setMonth(recurrenceDate.getMonth() + 1);
+          } else {
+            // todo -> handle this case where recurrenceRule was improperly set
+            console.log('orh narh');
+            recurrenceDate.setDate(recurrenceDate.getDate() + 7);
+          }
+        }
+      }
+    });
+
+    return calendarDisplayEvents;
+  }
+
+  onMounted(async () => {
+    if (props.events) {
+      console.log(generateDisplayEvents(props.events, props.year, props.month));
+    }
+  });
+
+  // const hasEvent = (day: number | null): boolean | undefined => {
+  //   return props.events?.some(
+  //     (event) => event.date === day && event.month === currentMonth.value && event.year === currentYear.value
+  //   ) ?? false;
+  // };
+  //
+  // const getEventForDay = (day: number | null): string => {
+  //   const event = props.events?.find(
+  //     (event) => event.date === day && event.month === currentMonth.value && event.year === currentYear.value
+  //   );
+  //   return event ? event.eventTitle : '';
+  // };
 
   const today = new Date();
   const currentYear = ref(today.getFullYear());

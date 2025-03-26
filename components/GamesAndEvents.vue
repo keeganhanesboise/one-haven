@@ -14,19 +14,48 @@
           <img id="redD20" src="/img/red-d20.svg" alt=""/>
         </div>
       </div>
-      <div class="event-calendar-container">
-        <Calendar :events="calendarEvents" />
+      <div v-if="!fetchingCalendarEvents" class="event-calendar-container">
+        <Calendar :events="calendarEvents" :year="2025" :month="4" />
       </div>
     </div>
   </SectionSlot>
 </template>
 
 <script setup lang="ts">
-  const calendarEvents = ref([
-    { date: 5, month: 2, year: 2025, eventTitle: 'Game Night' },
-    { date: 14, month: 2, year: 2025, eventTitle: 'Special Event' },
-    { date: 25, month: 2, year: 2025, eventTitle: 'Board Game Tournament' },
-  ])
+  import { useContentful } from '~/composables/useContentful';
+  import type { CalendarEventEntry } from '~/types/contentful';
+
+  const contentfulClient = useContentful();
+  const calendarEvents = ref<CalendarEventEntry[]>([]);
+  const fetchingCalendarEvents = ref(false);
+
+  fetchingCalendarEvents.value = true;
+
+  const getEventsForMonth = async (year: number, month: number): Promise<any> => {
+    const startDate = `${year}-${String(month).padStart(2, '0')}-01T00:00:00Z`;
+    const endDate = new Date(year, month, 1).toISOString();
+
+    try {
+      const events = await contentfulClient.getEntries({
+        content_type: 'calendarEvent',
+        'fields.startDate[gte]': startDate,
+        'fields.startDate[lt]': endDate,
+      });
+
+      calendarEvents.value = events.items;
+    } catch (error) {
+      console.error('Error fetching events:', error);
+    } finally {
+      fetchingCalendarEvents.value = false
+    }
+  }
+
+  onMounted(async () => {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = 4;
+    await getEventsForMonth(currentYear, currentMonth)
+  });
 </script>
 
 <style scoped>

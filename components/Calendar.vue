@@ -2,7 +2,7 @@
   <div class="calendar">
     <div class="calendar-header">
       <button @click="changeMonth(-1)">←</button>
-      <h3>{{ new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long', year: 'numeric' }) }}</h3>
+      <h3>{{ new Date(selectedYear, selectedMonth).toLocaleString('default', { month: 'long', year: 'numeric' }) }}</h3>
       <button @click="changeMonth(1)">→</button>
     </div>
 
@@ -12,7 +12,9 @@
       </div>
       <div class="day" :class="{ 'is-today': isToday(day) }" v-for="(day, index) in calendarDays" :key="index">
         <span class="day-number" v-if="day">{{ day }}</span>
-<!--        <div v-if="hasEvent(day)" class="event">{{ getEventForDay(day) }}</div>-->
+        <div v-if="hasEvent(day)" class="event">
+          <div v-for="event in getEventsForDay(day)" :key="event">{{ event }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -23,16 +25,20 @@
 
   const props = defineProps<{
     events?: CalendarEventEntry[];
-    year: number;
-    month: number;
+    startingYear: number;
+    startingMonth: number;
   }>();
+
+  const selectedYear = ref(props.startingYear);
+  const selectedMonth = ref(props.startingMonth);
+  const displayedEvents = ref<CalendarDisplayEvent[]>([]);
 
   // todo -> add other fields in event
   const generateDisplayEvents = (events: CalendarEventEntry[], year: number, month: number): CalendarDisplayEvent[] => {
     const calendarDisplayEvents: CalendarDisplayEvent[] = [];
 
-    const monthStart = new Date(year, month - 1, 1);
-    const monthEnd = new Date(year, month, 1);
+    const monthStart = new Date(year, month, 1);
+    const monthEnd = new Date(year, month + 1, 1);
     monthEnd.setHours(0, 0, 0, 0);
 
     events.forEach(event => {
@@ -40,15 +46,18 @@
       const endDate = new Date(startDate);
       endDate.setHours(endDate.getHours() + event.fields.duration);
 
+      // event doesn't recur
       if (!event.fields.recurrenceRule || event.fields.recurrenceRule.length === 0) {
         if (startDate >= monthStart && startDate <= monthEnd) {
           calendarDisplayEvents.push({
             name: event.fields.name,
             summary: event.fields.summary,
             startDate: startDate,
+            dayOfMonth: startDate.getDate(),
             endDate: endDate
           })
         }
+      // event is recurring, find out which dates it occurs this month based on it's initial start day
       } else {
         let recurrenceEnd = event.fields.recurrenceEndDate ? new Date(event.fields.recurrenceEndDate) : monthEnd;
 
@@ -62,6 +71,7 @@
               name: event.fields.name,
               summary: event.fields.summary,
               startDate: new Date(recurrenceDate),
+              dayOfMonth: recurrenceDate.getDate(),
               endDate: new Date(recurrenceDate.getTime() + event.fields.duration * 60 * 60 * 1000),
             });
           }
@@ -70,13 +80,14 @@
           // todo -> and one needs to take precedence over the other
           if (event.fields.recurrenceRule.includes('Weekly')) {
             recurrenceDate.setDate(recurrenceDate.getDate() + 7);
-          } else if (event.fields.recurrenceRule.includes('bi-weekly')) {
+          } else if (event.fields.recurrenceRule.includes('Bi-Weekly')) {
             recurrenceDate.setDate(recurrenceDate.getDate() + 14);
-          } else if (event.fields.recurrenceRule.includes('monthly')) {
+          } else if (event.fields.recurrenceRule.includes('Monthly')) {
             recurrenceDate.setMonth(recurrenceDate.getMonth() + 1);
           } else {
             // todo -> handle this case where recurrenceRule was improperly set
             console.log('orh narh');
+            console.log(event);
             recurrenceDate.setDate(recurrenceDate.getDate() + 7);
           }
         }
@@ -88,33 +99,26 @@
 
   onMounted(async () => {
     if (props.events) {
-      console.log(generateDisplayEvents(props.events, props.year, props.month));
+      displayedEvents.value = generateDisplayEvents(props.events, selectedYear.value, selectedMonth.value);
     }
   });
 
-  // const hasEvent = (day: number | null): boolean | undefined => {
-  //   return props.events?.some(
-  //     (event) => event.date === day && event.month === currentMonth.value && event.year === currentYear.value
-  //   ) ?? false;
-  // };
-  //
-  // const getEventForDay = (day: number | null): string => {
-  //   const event = props.events?.find(
-  //     (event) => event.date === day && event.month === currentMonth.value && event.year === currentYear.value
-  //   );
-  //   return event ? event.eventTitle : '';
-  // };
+  const hasEvent = (day: number | null): boolean | undefined => {
+    return displayedEvents.value.some((event) => event.dayOfMonth === day) ?? false;
+  };
 
-  const today = new Date();
-  const currentYear = ref(today.getFullYear());
-  const currentMonth = ref(today.getMonth()); // 0 = January
-
+  const getEventsForDay = (day: number | null): string[] => {
+    return displayedEvents.value
+      .filter((event) => event.dayOfMonth === day)
+      .map((event) => event.name)
+  };
+  
   const daysInMonth = computed(() => {
-    return new Date(currentYear.value, currentMonth.value + 1, 0).getDate();
+    return new Date(selectedYear.value, selectedMonth.value + 1, 0).getDate();
   });
 
   const firstDayOfMonth = computed(() => {
-    return new Date(currentYear.value, currentMonth.value, 1).getDay(); // 0 = Sunday
+    return new Date(selectedYear.value, selectedMonth.value, 1).getDay(); // 0 = Sunday
   });
 
   const calendarDays = computed(() => {
@@ -134,23 +138,27 @@
   });
 
   const isToday = (day: number | null): boolean => {
+    const today = new Date();
     return (
       day === today.getDate() &&
-      currentMonth.value === today.getMonth() &&
-      currentYear.value === today.getFullYear()
+      selectedMonth.value === today.getMonth() &&
+      selectedYear.value === today.getFullYear()
     );
   };
 
   const changeMonth = (offset: number) => {
-    let newMonth = currentMonth.value + offset;
+    let newMonth = selectedMonth.value + offset;
     if (newMonth < 0) {
-      currentMonth.value = 11;
-      currentYear.value -= 1;
+      selectedMonth.value = 11;
+      selectedYear.value -= 1;
     } else if (newMonth > 11) {
-      currentMonth.value = 0;
-      currentYear.value += 1;
+      selectedMonth.value = 0;
+      selectedYear.value += 1;
     } else {
-      currentMonth.value = newMonth;
+      selectedMonth.value = newMonth;
+    }
+    if (props.events) {
+      displayedEvents.value = generateDisplayEvents(props.events, selectedYear.value, selectedMonth.value);
     }
   }
 </script>

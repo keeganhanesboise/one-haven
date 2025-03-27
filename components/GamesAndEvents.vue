@@ -15,7 +15,7 @@
         </div>
       </div>
       <div v-if="!fetchingCalendarEvents" class="event-calendar-container">
-        <Calendar :events="calendarEvents" :year="2025" :month="4" />
+        <Calendar :events="calendarEvents" :startingYear="currentYear" :startingMonth="currentMonth" />
       </div>
     </div>
   </SectionSlot>
@@ -29,19 +29,18 @@
   const calendarEvents = ref<CalendarEventEntry[]>([]);
   const fetchingCalendarEvents = ref(false);
 
-  fetchingCalendarEvents.value = true;
+  const currentDate = new Date();
+  const currentYear = ref(currentDate.getFullYear());
+  const currentMonth = ref(currentDate.getMonth());
 
-  const getEventsForMonth = async (year: number, month: number): Promise<any> => {
-    const startDate = `${year}-${String(month).padStart(2, '0')}-01T00:00:00Z`;
-    const endDate = new Date(year, month, 1).toISOString();
+  const getEvents = async (): Promise<any> => {
+    fetchingCalendarEvents.value = true;
 
     try {
+      // ponder -> fetch only current months events instead of all?
       const events = await contentfulClient.getEntries({
         content_type: 'calendarEvent',
-        'fields.startDate[gte]': startDate,
-        'fields.startDate[lt]': endDate,
       });
-
       calendarEvents.value = events.items;
     } catch (error) {
       console.error('Error fetching events:', error);
@@ -51,10 +50,7 @@
   }
 
   onMounted(async () => {
-    const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    const currentMonth = 4;
-    await getEventsForMonth(currentYear, currentMonth)
+    await getEvents();
   });
 </script>
 

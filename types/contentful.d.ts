@@ -15,10 +15,11 @@ export interface CalendarEvent {
 export type CalendarEventEntry = Entry<CalendarEvent>;
 
 export interface CalendarDisplayEvent {
-  name?: string;
-  summary?: string;
+  name: string;
+  summary: string;
   description?: Document;
   icon?: Asset;
   startDate: Date;
+  dayOfMonth: number;
   endDate: Date;
 }

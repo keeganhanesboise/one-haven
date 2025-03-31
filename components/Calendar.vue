@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-  import type { CalendarEventEntry, CalendarDisplayEvent } from '~/types/contentful';
+  import type { CalendarDisplayEvent, CalendarEventEntry } from '~/types/contentful';
 
   const props = defineProps<{
     events?: CalendarEventEntry[];
@@ -47,9 +47,17 @@
     monthEnd.setHours(0, 0, 0, 0);
 
     events.forEach(event => {
-      const startDate = new Date(event.fields.startDate);
+      const {
+        recurrenceRule,
+        recurrenceEndDate,
+        name,
+        duration,
+        summary,
+        startDate
+      } = event.fields;
+      const occurrenceDate = new Date(startDate);
       const endDate = new Date(startDate);
-      endDate.setHours(endDate.getHours() + event.fields.duration);
+      endDate.setHours(endDate.getHours() + duration);
 
       const startTimeOptions: Intl.DateTimeFormatOptions = {
         hour: 'numeric',
@@ -59,47 +67,47 @@
       };
 
       // event doesn't recur
-      if (!event.fields.recurrenceRule || event.fields.recurrenceRule.length === 0) {
-        if (startDate >= monthStart && startDate <= monthEnd) {
+      if (!recurrenceRule || recurrenceRule.length === 0) {
+        if (occurrenceDate >= monthStart && occurrenceDate <= monthEnd) {
           calendarDisplayEvents.push({
-            id: event.fields.name + startDate,
-            name: event.fields.name,
-            summary: event.fields.summary,
-            startDate: startDate,
-            startTime: new Intl.DateTimeFormat('en-US', startTimeOptions).format(startDate),
-            dayOfMonth: startDate.getDate(),
+            id: name + occurrenceDate,
+            name: name,
+            summary: summary,
+            startDate: occurrenceDate,
+            startTime: new Intl.DateTimeFormat('en-US', startTimeOptions).format(occurrenceDate),
+            dayOfMonth: occurrenceDate.getDate(),
             endDate: endDate
           })
         }
 
       // event is recurring, find out which dates it occurs this month based on it's initial start day
       } else {
-        let recurrenceEnd = event.fields.recurrenceEndDate ? new Date(event.fields.recurrenceEndDate) : monthEnd;
+        let recurrenceEnd = recurrenceEndDate ? new Date(recurrenceEndDate) : monthEnd;
 
         if (recurrenceEnd > monthEnd) recurrenceEnd = monthEnd;
 
-        let recurrenceDate = new Date(startDate);
+        let recurrenceDate = new Date(occurrenceDate);
 
         while (recurrenceDate <= recurrenceEnd) {
           if (recurrenceDate >= monthStart) {
             calendarDisplayEvents.push({
-              id: event.fields.name + new Date(recurrenceDate),
-              name: event.fields.name,
-              summary: event.fields.summary,
+              id: name + new Date(recurrenceDate),
+              name: name,
+              summary: summary,
               startDate: new Date(recurrenceDate),
-              startTime: new Intl.DateTimeFormat('en-US', startTimeOptions).format(startDate),
+              startTime: new Intl.DateTimeFormat('en-US', startTimeOptions).format(occurrenceDate),
               dayOfMonth: recurrenceDate.getDate(),
-              endDate: new Date(recurrenceDate.getTime() + event.fields.duration * 60 * 60 * 1000),
+              endDate: new Date(recurrenceDate.getTime() + duration * 60 * 60 * 1000),
             });
           }
 
           // todo -> handle when the user selects more than one recurrence rule
           // todo -> and one needs to take precedence over the other
-          if (event.fields.recurrenceRule.includes('Weekly')) {
+          if (recurrenceRule.includes('Weekly')) {
             recurrenceDate.setDate(recurrenceDate.getDate() + 7);
-          } else if (event.fields.recurrenceRule.includes('Bi-Weekly')) {
+          } else if (recurrenceRule.includes('Bi-Weekly')) {
             recurrenceDate.setDate(recurrenceDate.getDate() + 14);
-          } else if (event.fields.recurrenceRule.includes('Monthly')) {
+          } else if (recurrenceRule.includes('Monthly')) {
             recurrenceDate.setMonth(recurrenceDate.getMonth() + 1);
           } else {
             // todo -> handle this case where recurrenceRule was improperly set

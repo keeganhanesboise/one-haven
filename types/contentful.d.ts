@@ -15,6 +15,7 @@ export interface CalendarEvent {
 export type CalendarEventEntry = Entry<CalendarEvent>;
 
 export interface CalendarDisplayEvent {
+  id: string;
   name: string;
   summary: string;
   description?: Document;

@@ -13,8 +13,7 @@
       <div class="day" :class="{ 'has-event': hasEvent(day) }" v-for="(day, index) in calendarDays" :key="index">
         <span class="day-number" v-if="day">{{ day }}<span v-if="isToday(day)"> (today)</span></span>
         <ul v-if="hasEvent(day)">
-          <!-- todo needs unique key -->
-          <li v-for="event in getEventsForDay(day)" :key="event.name">
+          <li v-for="event in getEventsForDay(day)" :key="event.id">
             <div class="event">
               <span class="event-time">{{ event.startTime }}</span>
               {{ event.name }}
@@ -63,6 +62,7 @@
       if (!event.fields.recurrenceRule || event.fields.recurrenceRule.length === 0) {
         if (startDate >= monthStart && startDate <= monthEnd) {
           calendarDisplayEvents.push({
+            id: event.fields.name + startDate,
             name: event.fields.name,
             summary: event.fields.summary,
             startDate: startDate,
@@ -83,6 +83,7 @@
         while (recurrenceDate <= recurrenceEnd) {
           if (recurrenceDate >= monthStart) {
             calendarDisplayEvents.push({
+              id: event.fields.name + new Date(recurrenceDate),
               name: event.fields.name,
               summary: event.fields.summary,
               startDate: new Date(recurrenceDate),

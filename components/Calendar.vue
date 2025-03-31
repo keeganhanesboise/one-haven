@@ -10,11 +10,17 @@
       <div class="day-label" v-for="day in ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']" :key="day">
         {{ day }}
       </div>
-      <div class="day" :class="{ 'is-today': isToday(day) }" v-for="(day, index) in calendarDays" :key="index">
-        <span class="day-number" v-if="day">{{ day }}</span>
-        <div v-if="hasEvent(day)" class="event">
-          <div v-for="event in getEventsForDay(day)" :key="event">{{ event }}</div>
-        </div>
+      <div class="day" :class="{ 'has-event': hasEvent(day) }" v-for="(day, index) in calendarDays" :key="index">
+        <span class="day-number" v-if="day">{{ day }}<span v-if="isToday(day)"> (today)</span></span>
+        <ul v-if="hasEvent(day)">
+          <!-- todo needs unique key -->
+          <li v-for="event in getEventsForDay(day)" :key="event.name">
+            <div class="event">
+              <span class="event-time">{{ event.startTime }}</span>
+              {{ event.name }}
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -46,6 +52,13 @@
       const endDate = new Date(startDate);
       endDate.setHours(endDate.getHours() + event.fields.duration);
 
+      const startTimeOptions: Intl.DateTimeFormatOptions = {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+        timeZone: 'America/Denver'
+      };
+
       // event doesn't recur
       if (!event.fields.recurrenceRule || event.fields.recurrenceRule.length === 0) {
         if (startDate >= monthStart && startDate <= monthEnd) {
@@ -53,10 +66,12 @@
             name: event.fields.name,
             summary: event.fields.summary,
             startDate: startDate,
+            startTime: new Intl.DateTimeFormat('en-US', startTimeOptions).format(startDate),
             dayOfMonth: startDate.getDate(),
             endDate: endDate
           })
         }
+
       // event is recurring, find out which dates it occurs this month based on it's initial start day
       } else {
         let recurrenceEnd = event.fields.recurrenceEndDate ? new Date(event.fields.recurrenceEndDate) : monthEnd;
@@ -71,6 +86,7 @@
               name: event.fields.name,
               summary: event.fields.summary,
               startDate: new Date(recurrenceDate),
+              startTime: new Intl.DateTimeFormat('en-US', startTimeOptions).format(startDate),
               dayOfMonth: recurrenceDate.getDate(),
               endDate: new Date(recurrenceDate.getTime() + event.fields.duration * 60 * 60 * 1000),
             });
@@ -107,10 +123,10 @@
     return displayedEvents.value.some((event) => event.dayOfMonth === day) ?? false;
   };
 
-  const getEventsForDay = (day: number | null): string[] => {
+  const getEventsForDay = (day: number | null): CalendarDisplayEvent[] => {
     return displayedEvents.value
       .filter((event) => event.dayOfMonth === day)
-      .map((event) => event.name)
+      .map((event) => event)
   };
   
   const daysInMonth = computed(() => {
@@ -172,7 +188,7 @@ button {
 
 .calendar {
   width: 650px;
-  height: 700px;
+  min-height: 800px;
   display: flex;
   flex-direction: column;
   border: 2px solid #ddd;
@@ -202,8 +218,9 @@ button {
 }
 
 .day-number {
-  padding-left: 5px;
-  padding-top: 5px;
+  padding-left: 4px;
+  padding-top: 4px;
+  padding-bottom: 2px;
   align-self: flex-start;
 }
 
@@ -211,28 +228,37 @@ button {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  height: 125px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
   background: #f9f9f9;
   transition: background-color 0.3s ease;
-  cursor: pointer;
+  overflow: hidden;
 }
 
-.day:hover {
+.has-event:hover {
   background: #e0e0e0;
 }
 
-.is-today {
-  background: #ffcc00;
-  color: black;
-  font-weight: bold;
+.has-event {
+  border: 1px solid #bc4749;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 .event {
+  display: flex;
+  flex-direction: column;
   padding: 2px 4px;
   font-size: 0.8rem;
   color: #333;
+  list-style: none;
+  text-align: left;
+  margin: 0;
+}
+
+.event-time {
+  font-weight: bold;
 }
 </style>

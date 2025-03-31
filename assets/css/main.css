@@ -75,3 +75,7 @@ h2 {
         font-size: 32px;
     }
 }
+
+ul, li {
+    all: unset;
+}

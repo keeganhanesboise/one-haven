@@ -20,6 +20,7 @@ export interface CalendarDisplayEvent {
   description?: Document;
   icon?: Asset;
   startDate: Date;
+  startTime: string;
   dayOfMonth: number;
   endDate: Date;
 }

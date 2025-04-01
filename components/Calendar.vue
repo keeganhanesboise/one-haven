@@ -110,10 +110,8 @@
           } else if (recurrenceRule.includes('Monthly')) {
             recurrenceDate.setMonth(recurrenceDate.getMonth() + 1);
           } else {
-            // todo -> handle this case where recurrenceRule was improperly set
-            console.log('orh narh');
-            console.log(event);
-            recurrenceDate.setDate(recurrenceDate.getDate() + 7);
+            console.error('There was a problem with the events recurrence rule: ' + recurrenceRule);
+            return;
           }
         }
       }

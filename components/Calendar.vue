@@ -101,10 +101,10 @@
             });
           }
 
-          // todo -> handle when the user selects more than one recurrence rule
-          // todo -> and one needs to take precedence over the other
+          // if multiple recurrence rules weekly will take precedence
           if (recurrenceRule.includes('Weekly')) {
             recurrenceDate.setDate(recurrenceDate.getDate() + 7);
+          // ...and then bi-weekly
           } else if (recurrenceRule.includes('Bi-Weekly')) {
             recurrenceDate.setDate(recurrenceDate.getDate() + 14);
           } else if (recurrenceRule.includes('Monthly')) {

@@ -57,6 +57,7 @@
 <style scoped>
   h2 {
     color: white;
+    margin-top: 0;
   }
   p {
     color: white;
@@ -67,14 +68,14 @@
   }
   .games-and-events-container {
     display: flex;
+    justify-content: center;
     height: 100%;
+    gap: 50px;
   }
   .event-info-container {
     display: flex;
     flex-direction: column;
     width: 30%;
-    justify-content: center;
-    padding-right: 10px;
   }
   .event-info-img {
     padding: 20px;
@@ -83,14 +84,13 @@
     align-items: center;
   }
   .event-calendar-container {
-    width: 70%;
     display: flex;
     align-items: center;
-    padding-left: 10px;
     justify-content: center;
+    width: 70%;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 991px) {
     #redD20 {
       max-width: 100px;
     }
@@ -114,6 +114,15 @@
     .event-calendar-container {
       width: 100%;
       padding-left: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #redD20 {
+      max-width: 75px;
+    }
+    .games-and-events-container {
+      gap: 25px;
     }
   }
 </style>

@@ -12,6 +12,16 @@ body {
     }
 }
 
+.is-displayed-desktop-l {
+    display: none;
+}
+
+@media (min-width: 769px) {
+    .is-displayed-desktop-l {
+        display: block;
+    }
+}
+
 .is-displayed-mobile {
     display: none;
 }

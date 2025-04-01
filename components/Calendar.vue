@@ -11,8 +11,8 @@
         {{ day }}
       </div>
       <div class="day" :class="{ 'has-event': hasEvent(day) }" v-for="(day, index) in calendarDays" :key="index">
-        <span class="day-number" v-if="day">{{ day }}<span v-if="isToday(day)"> (today)</span></span>
-        <ul v-if="hasEvent(day)">
+        <span class="day-number" v-if="day">{{ day }}<span class="today" v-if="isToday(day)"> (today)</span></span>
+        <ul class="is-displayed-desktop-l" v-if="hasEvent(day)">
           <li v-for="event in getEventsForDay(day)" :key="event.id">
             <div class="event">
               <span class="event-time">{{ event.startTime }}</span>
@@ -196,8 +196,8 @@ button {
 }
 
 .calendar {
-  width: 650px;
   min-height: 800px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   border: 2px solid #ddd;
@@ -269,5 +269,17 @@ button {
 
 .event-time {
   font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .today {
+    display: none;
+  }
+  .calendar {
+    min-height: unset;
+  }
+  .day {
+    height: 10vw;
+  }
 }
 </style>

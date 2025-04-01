@@ -26,8 +26,7 @@
     max-width: 500px;
   }
   #logo {
-    padding: 20px;
-    max-width: 500px;
+    padding-bottom: 20px;
   }
   .hero-container {
     display: flex;
@@ -39,26 +38,27 @@
   .hero-content-container {
     display: flex;
     align-items: center;
+    justify-content: center;
     max-width: 1200px;
     width: 100%;
+    gap: 50px;
   }
   .hero-img-container {
-    width: 50%;
+    width: 40%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
   }
   .logo-container {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 40%;
     align-items: center;
   }
   .call-to-actions {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
-    max-width: 300px;
     padding-inline-start: 0;
   }
   .call-to-actions > li {

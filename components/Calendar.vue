@@ -6,6 +6,8 @@
       <button @click="changeMonth(1)">→</button>
     </div>
 
+    <p class="calendar-error-message" v-if="events === null">Sorry, there was an error loading the calendar events :(</p>
+
     <div class="calendar-grid">
       <div class="day-label" v-for="day in ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']" :key="day">
         {{ day }}
@@ -29,7 +31,7 @@
   import type { CalendarDisplayEvent, CalendarEventEntry } from '~/types/contentful';
 
   const props = defineProps<{
-    events?: CalendarEventEntry[];
+    events?: CalendarEventEntry[] | null;
     startingYear: number;
     startingMonth: number;
   }>();
@@ -267,6 +269,14 @@ button {
 
 .event-time {
   font-weight: bold;
+}
+
+.calendar-error-message {
+  color: red;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+  margin-top: 0;
+  text-align: center;
 }
 
 @media (max-width: 768px) {

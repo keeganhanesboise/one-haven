@@ -11,7 +11,7 @@
             venenatis in, vehicula ornare ipsum. Nulla facilisi.</p>
         </div>
         <div class="event-info-img">
-          <img id="redD20" src="/img/red-d20.svg" alt=""/>
+          <img id="redD20" src="/img/playing-cards.svg" alt=""/>
         </div>
       </div>
       <div v-if="!fetchingCalendarEvents" class="event-calendar-container">
@@ -62,10 +62,6 @@
   p {
     color: white;
   }
-  #redD20 {
-    width: 100%;
-    max-width: 200px
-  }
   .games-and-events-container {
     display: flex;
     justify-content: center;
@@ -91,9 +87,6 @@
   }
 
   @media (max-width: 991px) {
-    #redD20 {
-      max-width: 100px;
-    }
     .games-and-events-container {
       flex-direction: column;
       justify-content: center;
@@ -118,9 +111,6 @@
   }
 
   @media (max-width: 768px) {
-    #redD20 {
-      max-width: 75px;
-    }
     .games-and-events-container {
       gap: 25px;
     }

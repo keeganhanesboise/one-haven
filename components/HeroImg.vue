@@ -3,7 +3,7 @@
     <div class="hero-container">
       <div class="hero-content-container">
         <div class="hero-img-container">
-          <img id="hero-img-desktop" src="/img/coffee-mug-magic-one-haven.svg" alt="">
+          <img id="hero-img-desktop" src="/img/coffee-mug-magic-one-haven-4225.svg" alt="">
         </div>
         <div class="logo-container">
           <h1 class="sr-only">Welcome to One Haven Cafe & Game Shop</h1>

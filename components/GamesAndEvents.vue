@@ -14,8 +14,9 @@
           <img id="redD20" src="/img/playing-cards.svg" alt=""/>
         </div>
       </div>
-      <div v-if="!fetchingCalendarEvents" class="event-calendar-container">
-        <Calendar :events="calendarEvents" :startingYear="currentYear" :startingMonth="currentMonth" />
+      <div class="event-calendar-container">
+        <div v-if="fetchingCalendarEvents" class="placeholder-calendar"></div>
+        <Calendar v-else :events="calendarEvents" :startingYear="currentYear" :startingMonth="currentMonth" />
       </div>
     </div>
   </SectionSlot>
@@ -25,8 +26,8 @@
   import { useContentful } from '~/composables/useContentful';
   import type { CalendarEventEntry } from '~/types/contentful';
 
-  const contentfulClient = useContentful();
-  const calendarEvents = ref<CalendarEventEntry[]>([]);
+  let contentfulClient: any;
+  const calendarEvents = ref<CalendarEventEntry[] | null>([]);
   const fetchingCalendarEvents = ref(false);
 
   const currentDate = new Date();
@@ -37,13 +38,23 @@
     fetchingCalendarEvents.value = true;
 
     try {
-      // ponder -> fetch only current months events instead of all?
-      const events = await contentfulClient.getEntries({
-        content_type: 'calendarEvent',
-      });
-      calendarEvents.value = events.items;
+      contentfulClient = useContentful();
+      if (contentfulClient) {
+        try {
+          // ponder -> fetch only current months events instead of all?
+          const events = await contentfulClient.getEntries({
+            content_type: 'calendarEvent',
+          });
+          calendarEvents.value = events.items;
+        } catch (error) {
+          console.error('Error fetching events:', error);
+          calendarEvents.value = null;
+        }
+      }
     } catch (error) {
-      console.error('Error fetching events:', error);
+      console.error('Failed to initialize Contentful client:', error);
+      contentfulClient = null;
+      calendarEvents.value = null;
     } finally {
       fetchingCalendarEvents.value = false
     }
@@ -84,6 +95,17 @@
     align-items: center;
     justify-content: center;
     width: 70%;
+  }
+  .placeholder-calendar {
+    min-height: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background: #fff;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   }
 
   @media (max-width: 991px) {

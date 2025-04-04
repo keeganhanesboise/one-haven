@@ -35,7 +35,7 @@
 
 <style scoped>
   .section-container-primary {
-    padding: 50px;
+    padding: 100px;
     display: flex;
     justify-content: center;
   }
@@ -43,6 +43,12 @@
   @media (max-width: 480px) {
     .section-container-primary {
       padding: 50px 25px;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    .section-container-primary {
+      padding: 50px;
     }
   }
 

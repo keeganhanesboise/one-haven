@@ -12,7 +12,7 @@
       <div class="day-label" v-for="day in ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']" :key="day">
         {{ day }}
       </div>
-      <div class="day" :class="{ 'has-event': hasEvent(day) }" v-for="(day, index) in calendarDays" :key="index">
+      <div @click="hasEvent(day) ? openDay(day) : null" class="day" :class="{ 'has-event': hasEvent(day) }" v-for="(day, index) in calendarDays" :key="index">
         <span class="day-number" v-if="day">{{ day }}<span class="today" v-if="isToday(day)"> (today)</span></span>
         <ul class="is-displayed-desktop-l" v-if="hasEvent(day)">
           <li v-for="event in getEventsForDay(day)" :key="event.id">
@@ -25,6 +25,7 @@
       </div>
     </div>
   </div>
+  <EventModal :isVisible="showModal" @close="closeDay" :events="openedEvents"/>
 </template>
 
 <script setup lang="ts">
@@ -39,6 +40,8 @@
   const selectedYear = ref(props.startingYear);
   const selectedMonth = ref(props.startingMonth);
   const displayedEvents = ref<CalendarDisplayEvent[]>([]);
+  const showModal = ref(false);
+  const openedEvents = ref<CalendarDisplayEvent[]>([]);
 
   // todo -> add other fields in event
   const generateDisplayEvents = (events: CalendarEventEntry[], year: number, month: number): CalendarDisplayEvent[] => {
@@ -185,6 +188,15 @@
     if (props.events) {
       displayedEvents.value = generateDisplayEvents(props.events, selectedYear.value, selectedMonth.value);
     }
+  }
+
+  const openDay = (day: number | null) => {
+    openedEvents.value = getEventsForDay(day);
+    showModal.value = true;
+  }
+
+  function closeDay(): void {
+    showModal.value = false;
   }
 </script>
 

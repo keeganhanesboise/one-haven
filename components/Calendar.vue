@@ -46,7 +46,6 @@
   const showModal = ref(false);
   const openedEvents = ref<CalendarDisplayEvent[]>([]);
 
-  // todo -> add other fields in event
   const generateDisplayEvents = (events: CalendarEventEntry[], year: number, month: number): CalendarDisplayEvent[] => {
     const calendarDisplayEvents: CalendarDisplayEvent[] = [];
 
@@ -129,10 +128,8 @@
             });
           }
 
-          // if multiple recurrence rules weekly will take precedence
           if (recurrenceRule.includes('Weekly')) {
             recurrenceDate.setDate(recurrenceDate.getDate() + 7);
-          // ...and then bi-weekly
           } else if (recurrenceRule.includes('Bi-Weekly')) {
             recurrenceDate.setDate(recurrenceDate.getDate() + 14);
           } else if (recurrenceRule.includes('Monthly')) {

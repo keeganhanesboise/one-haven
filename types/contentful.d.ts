@@ -8,7 +8,7 @@ export interface CalendarEvent {
   icon?: Asset;
   startDate: string;
   duration: number;
-  recurrenceRule: string[];
+  recurrenceRule: string;
   recurrenceEndDate: string;
 }
 

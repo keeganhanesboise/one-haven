@@ -7,6 +7,7 @@
             <button class="close-button" @click="closeModal">×</button>
             <ul>
               <li v-for="event in events">
+                <img v-if="event.iconUrl" :src="event.iconUrl"  alt=""/>
                 <p>{{ event.name }}</p>
                 <p>{{ event.startTime + ' - ' + event.endTime }}</p>
                 <p>{{ event.summary }}</p>

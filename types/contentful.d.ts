@@ -19,7 +19,7 @@ export interface CalendarDisplayEvent {
   name: string;
   summary: string;
   description?: string | undefined;
-  icon?: Asset;
+  iconUrl?: string;
   startDate: Date;
   startTime: string;
   endTime: string;

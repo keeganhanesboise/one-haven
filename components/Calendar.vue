@@ -62,8 +62,14 @@
         duration,
         summary,
         startDate,
-        description
+        description,
+        icon
       } = event.fields;
+
+      let iconUrl: string = '';
+      if (icon && icon.fields.file?.url) {
+        iconUrl = icon.fields.file.url as string;
+      }
 
       const occurrenceDate = new Date(startDate);
       const endDate = new Date(startDate);
@@ -90,6 +96,7 @@
             name: name,
             summary: summary,
             description: useRichTextRenderer(description ?? emptyDocument, {}),
+            iconUrl: iconUrl,
             startDate: occurrenceDate,
             startTime: new Intl.DateTimeFormat('en-US', timeOptions).format(occurrenceDate),
             endTime: new Intl.DateTimeFormat('en-US', timeOptions).format(endDate),
@@ -113,6 +120,7 @@
               name: name,
               summary: summary,
               description: useRichTextRenderer(description ?? emptyDocument, {}),
+              iconUrl: iconUrl,
               startDate: new Date(recurrenceDate),
               startTime: new Intl.DateTimeFormat('en-US', timeOptions).format(occurrenceDate),
               endTime: new Intl.DateTimeFormat('en-US', timeOptions).format(endDate),

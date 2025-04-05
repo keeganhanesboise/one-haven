@@ -4,11 +4,7 @@
       <div class="event-info-container">
         <div class="event-info-text">
           <h2>Games & Events</h2>
-          <p>Phasellus eu varius ligula, ac rhoncus quam. Sed euismod eros
-            pretium dui sodales, id sodales elit tempor. Nam blandit mollis nisi
-            vitae pulvinar. Vivamus pretium urna ac velit consectetur pellentesque.
-            Morbi sodales nisi eu malesuada molestie. Sed tellus justo, rhoncus eget
-            venenatis in, vehicula ornare ipsum. Nulla facilisi.</p>
+          <p v-html="gamesAndEventsInfo"/>
         </div>
         <div class="event-info-img">
           <img id="redD20" src="/img/playing-cards.svg" alt=""/>
@@ -25,6 +21,10 @@
 <script setup lang="ts">
   import { useContentful } from '~/composables/useContentful';
   import type { CalendarEventEntry } from '~/types/contentful';
+
+  defineProps<{
+    gamesAndEventsInfo: string;
+  }>();
 
   let contentfulClient: any;
   const calendarEvents = ref<CalendarEventEntry[] | null>([]);

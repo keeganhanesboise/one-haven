@@ -1,0 +1,1 @@
+export const CONTENTFUL_HOME_PAGE_ENTRY_ID = '705VceITsv8Jfz4vxfonZU';

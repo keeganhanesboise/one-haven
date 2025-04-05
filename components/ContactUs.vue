@@ -19,21 +19,14 @@
         </div>
         <div class="info-container">
           <div class="address-container">
-            <address>
-              One Haven<br>
-              5956 Stetson Hills Blvd,<br>
-              Colorado Springs, CO 80923
-            </address>
+            <address v-html="address" />
           </div>
-          <div class="hours-container">
-            <ul class="hours-list">
-              <li>Monday: <span>8AM - 10PM</span></li>
-              <li>Tuesday: <span>8AM - 3PM</span></li>
-              <li>Wednesday: <span>8AM - 10PM</span></li>
-              <li>Thursday: <span>8AM - 10PM</span></li>
-              <li>Friday: <span>8AM - 10PM</span></li>
-              <li>Saturday: <span>8AM - 10PM</span></li>
-              <li>Sunday: <span>Closed</span></li>
+          <div class="hours-container" v-if="storeHours">
+            <ul class="hours-list" v-for="hours in storeHours">
+              <li>{{ hours.fields.day }}
+                <span v-if="hours.fields.closed">Closed</span>
+                <span v-else>{{ hours.fields.openTime + ' - ' + hours.fields.closeTime }}</span>
+              </li>
             </ul>
           </div>
         </div>
@@ -41,6 +34,15 @@
     </div>
   </SectionSlot>
 </template>
+
+<script setup lang="ts">
+import type { DayHoursEntry } from "~/types/contentful";
+
+  defineProps<{
+    address: string;
+    storeHours: DayHoursEntry[] | null;
+  }>();
+</script>
 
 <style scoped>
   address {
@@ -116,5 +118,3 @@
     }
   }
 </style>
-<script setup lang="ts">
-</script>

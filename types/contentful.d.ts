@@ -26,3 +26,24 @@ export interface CalendarDisplayEvent {
   dayOfMonth: number;
   endDate: Date;
 }
+
+export interface HomePage {
+  title: string;
+  gamesAndEventsInfo: Document;
+  menus: Asset[];
+  imageCarousel: Asset[];
+  address?: Document;
+  storeHours: DayHoursEntry[];
+}
+
+export type HomePageEntry = Entry<HomePage> & { fields: HomePage };
+
+export interface DayHours {
+  title: string;
+  day: string;
+  openTime?: string;
+  closeTime?: string;
+  closed: boolean;
+}
+
+export type DayHoursEntry = Entry<DayHours> & { fields: DayHours };

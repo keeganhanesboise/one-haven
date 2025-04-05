@@ -2,23 +2,27 @@
   <teleport to="body">
     <transition name="modal-fade">
       <div class="backdrop" v-if="isVisible" @click.self="closeModal">
-        <div class="event-container">
-          <button class="close-button" @click="closeModal">×</button>
-          <ul>
-            <li v-for="event in events">
-              <p>{{ event.name + ' - ' + event.startTime }}</p>
-              <p>{{ event.summary }}</p>
-            </li>
-          </ul>
+        <div class="event-container-primary">
+          <div class="event-container-secondary">
+            <button class="close-button" @click="closeModal">×</button>
+            <ul>
+              <li v-for="event in events">
+                <p>{{ event.name }}</p>
+                <p>{{ event.startTime + ' - ' + event.endTime }}</p>
+                <p>{{ event.summary }}</p>
+                <p>{{ event.description }}</p>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </transition>
   </teleport>
 </template>
-import type { CalendarDisplayEvent } from '~/types/contentful';
-
 <script setup lang="ts">
+
 import type {CalendarDisplayEvent} from "~/types/contentful";
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 defineProps<{
   events: CalendarDisplayEvent[] | undefined,
@@ -35,7 +39,7 @@ function closeModal() {
 <style scoped>
 .modal-fade-enter-active,
 .modal-fade-leave-active {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 .modal-fade-enter-from,
 .modal-fade-leave-to {
@@ -59,12 +63,19 @@ function closeModal() {
   z-index: 1000;
 }
 
-.event-container {
+.event-container-primary {
+  display: flex;
+  justify-content: center;
+  padding: 25px;
+  width: 100%;
+}
+
+.event-container-secondary {
   background-color: #fff;
   border-radius: 12px;
   padding: 1.5rem;
-  max-width: 90%;
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   position: relative;
   animation: scale-in 0.3s ease;

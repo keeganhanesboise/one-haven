@@ -58,13 +58,17 @@
         name,
         duration,
         summary,
-        startDate
+        startDate,
+        description
       } = event.fields;
+
+      console.log(description);
+
       const occurrenceDate = new Date(startDate);
       const endDate = new Date(startDate);
       endDate.setHours(endDate.getHours() + duration);
 
-      const startTimeOptions: Intl.DateTimeFormatOptions = {
+      const timeOptions: Intl.DateTimeFormatOptions = {
         hour: 'numeric',
         minute: '2-digit',
         hour12: true,
@@ -78,8 +82,10 @@
             id: name + occurrenceDate,
             name: name,
             summary: summary,
+            description: description,
             startDate: occurrenceDate,
-            startTime: new Intl.DateTimeFormat('en-US', startTimeOptions).format(occurrenceDate),
+            startTime: new Intl.DateTimeFormat('en-US', timeOptions).format(occurrenceDate),
+            endTime: new Intl.DateTimeFormat('en-US', timeOptions).format(endDate),
             dayOfMonth: occurrenceDate.getDate(),
             endDate: endDate
           })
@@ -99,8 +105,10 @@
               id: name + new Date(recurrenceDate),
               name: name,
               summary: summary,
+              description: description,
               startDate: new Date(recurrenceDate),
-              startTime: new Intl.DateTimeFormat('en-US', startTimeOptions).format(occurrenceDate),
+              startTime: new Intl.DateTimeFormat('en-US', timeOptions).format(occurrenceDate),
+              endTime: new Intl.DateTimeFormat('en-US', timeOptions).format(endDate),
               dayOfMonth: recurrenceDate.getDate(),
               endDate: new Date(recurrenceDate.getTime() + duration * 60 * 60 * 1000),
             });

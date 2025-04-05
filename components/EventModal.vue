@@ -10,7 +10,7 @@
                 <p>{{ event.name }}</p>
                 <p>{{ event.startTime + ' - ' + event.endTime }}</p>
                 <p>{{ event.summary }}</p>
-                <p>{{ event.description }}</p>
+                <p v-html="event.description" />
               </li>
             </ul>
           </div>
@@ -22,7 +22,6 @@
 <script setup lang="ts">
 
 import type {CalendarDisplayEvent} from "~/types/contentful";
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 
 defineProps<{
   events: CalendarDisplayEvent[] | undefined,
@@ -67,7 +66,6 @@ function closeModal() {
   display: flex;
   justify-content: center;
   padding: 25px;
-  width: 100%;
 }
 
 .event-container-secondary {

@@ -18,7 +18,7 @@ export interface CalendarDisplayEvent {
   id: string;
   name: string;
   summary: string;
-  description?: Document;
+  description?: string | undefined;
   icon?: Asset;
   startDate: Date;
   startTime: string;

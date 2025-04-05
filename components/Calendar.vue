@@ -30,6 +30,9 @@
 
 <script setup lang="ts">
   import type { CalendarDisplayEvent, CalendarEventEntry } from '~/types/contentful';
+  import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+  import { BLOCKS } from '@contentful/rich-text-types';
+  import type { Document } from '@contentful/rich-text-types';
 
   const props = defineProps<{
     events?: CalendarEventEntry[] | null;
@@ -62,8 +65,6 @@
         description
       } = event.fields;
 
-      console.log(description);
-
       const occurrenceDate = new Date(startDate);
       const endDate = new Date(startDate);
       endDate.setHours(endDate.getHours() + duration);
@@ -75,6 +76,12 @@
         timeZone: 'America/Denver'
       };
 
+      const emptyDocument: Document = {
+        nodeType: BLOCKS.DOCUMENT,
+        content: [],
+        data: {}
+      }
+
       // event doesn't recur
       if (!recurrenceRule || recurrenceRule.length === 0) {
         if (occurrenceDate >= monthStart && occurrenceDate <= monthEnd) {
@@ -82,7 +89,7 @@
             id: name + occurrenceDate,
             name: name,
             summary: summary,
-            description: description,
+            description: documentToHtmlString(description ?? emptyDocument),
             startDate: occurrenceDate,
             startTime: new Intl.DateTimeFormat('en-US', timeOptions).format(occurrenceDate),
             endTime: new Intl.DateTimeFormat('en-US', timeOptions).format(endDate),
@@ -105,7 +112,7 @@
               id: name + new Date(recurrenceDate),
               name: name,
               summary: summary,
-              description: description,
+              description: documentToHtmlString(description ?? emptyDocument),
               startDate: new Date(recurrenceDate),
               startTime: new Intl.DateTimeFormat('en-US', timeOptions).format(occurrenceDate),
               endTime: new Intl.DateTimeFormat('en-US', timeOptions).format(endDate),

@@ -30,9 +30,9 @@
 
 <script setup lang="ts">
   import type { CalendarDisplayEvent, CalendarEventEntry } from '~/types/contentful';
-  import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
   import { BLOCKS } from '@contentful/rich-text-types';
   import type { Document } from '@contentful/rich-text-types';
+  import { useRichTextRenderer } from '~/composables/useRichTextRenderer';
 
   const props = defineProps<{
     events?: CalendarEventEntry[] | null;
@@ -89,7 +89,7 @@
             id: name + occurrenceDate,
             name: name,
             summary: summary,
-            description: documentToHtmlString(description ?? emptyDocument),
+            description: useRichTextRenderer(description ?? emptyDocument, {}),
             startDate: occurrenceDate,
             startTime: new Intl.DateTimeFormat('en-US', timeOptions).format(occurrenceDate),
             endTime: new Intl.DateTimeFormat('en-US', timeOptions).format(endDate),
@@ -112,7 +112,7 @@
               id: name + new Date(recurrenceDate),
               name: name,
               summary: summary,
-              description: documentToHtmlString(description ?? emptyDocument),
+              description: useRichTextRenderer(description ?? emptyDocument, {}),
               startDate: new Date(recurrenceDate),
               startTime: new Intl.DateTimeFormat('en-US', timeOptions).format(occurrenceDate),
               endTime: new Intl.DateTimeFormat('en-US', timeOptions).format(endDate),

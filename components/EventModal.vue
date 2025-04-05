@@ -66,6 +66,7 @@ function closeModal() {
   display: flex;
   justify-content: center;
   padding: 25px;
+  width: 100%;
 }
 
 .event-container-secondary {

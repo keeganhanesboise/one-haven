@@ -2,6 +2,7 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import type { CommonNode, Next } from '@contentful/rich-text-html-renderer';
 import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 import type { Document } from '@contentful/rich-text-types';
+import DOMPurify from 'dompurify';
 
 export const useRichTextRenderer = (doc: Document, classes: Record<string, string>) => {
   const renderOptions = {
@@ -66,6 +67,13 @@ export const useRichTextRenderer = (doc: Document, classes: Record<string, strin
         return '';
       },
     }
-  }
-  return documentToHtmlString(doc, renderOptions);
+  };
+
+  // Convert the content to HTML using the defined options
+  let htmlContent = documentToHtmlString(doc, renderOptions);
+
+  // Sanitize the raw HTML content using DOMPurify
+  htmlContent = DOMPurify.sanitize(htmlContent);
+
+  return htmlContent;
 }

@@ -2,18 +2,20 @@
   <teleport to="body">
     <transition name="modal-fade">
       <div class="backdrop" v-if="isVisible" @click.self="closeModal">
-        <div class="event-container-primary">
+        <div class="event-container-primary" @click.self="closeModal">
           <div class="event-container-secondary">
-            <button class="close-button" @click="closeModal">×</button>
-            <ul>
-              <li v-for="event in events">
-                <img v-if="event.iconUrl" :src="event.iconUrl"  alt=""/>
-                <p>{{ event.name }}</p>
-                <p>{{ event.startTime + ' - ' + event.endTime }}</p>
-                <p>{{ event.summary }}</p>
-                <p v-html="event.description" />
-              </li>
-            </ul>
+            <div class="modal-content">
+              <button class="close-button" @click="closeModal">×</button>
+              <ul class="modal-scroll">
+                <li v-for="event in events">
+                  <img id="eventImg" v-if="event.iconUrl" :src="event.iconUrl"  alt=""/>
+                  <h2>{{ event.name }}</h2>
+                  <h3>{{ new Date(event.startDate).toDateString() + ' ' + event.startTime + ' - ' + event.endTime }}</h3>
+                  <p>{{ event.summary }}</p>
+                  <p v-html="event.description" />
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -50,6 +52,11 @@ function closeModal() {
   opacity: 1;
 }
 
+#eventImg {
+  padding-top: 2em;
+  width: 100%;
+}
+
 .backdrop {
   position: fixed;
   top: 0;
@@ -76,9 +83,29 @@ function closeModal() {
   padding: 1.5rem;
   width: 100%;
   max-width: 500px;
+  max-height: 80vh;
+  overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   position: relative;
   animation: scale-in 0.3s ease;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.modal-scroll {
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+ul li:not(:last-child) {
+  border-bottom: 1px solid black;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: block;
 }
 
 @keyframes scale-in {

@@ -85,3 +85,28 @@ h2 {
 ul, li {
     all: unset;
 }
+
+button {
+    all: unset;
+    cursor: pointer;
+}
+
+.navigation-button {
+    width: 35px;
+    height: 35px;
+    padding: 20px;
+    transition: filter 0.3s ease;
+    cursor: pointer;
+}
+
+.navigation-button:hover {
+    filter: brightness(75%);
+}
+
+@media (max-width: 767px) {
+    .navigation-button {
+        width: 20px;
+        height: 20px;
+        padding: 10px;
+    }
+}

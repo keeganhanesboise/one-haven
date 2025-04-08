@@ -3,7 +3,7 @@
     <h1 class="sr-only">One Haven Cafe & Game Shop Images</h1>
     <div @touchstart="startTouch" @touchend="touchEnd" class="carousel-container">
       <button @click="prevSlide">
-        <img id="prev" src="/img/prev-icon.png" alt="previous image slide"/>
+        <img class="navigation-button" src="/img/prev-icon.svg" alt="previous image slide"/>
       </button>
       <ul class="img-list">
         <li class="img-container" v-for="image in currentImages" :key="image">
@@ -12,7 +12,7 @@
         </li>
       </ul>
       <button @click="nextSlide">
-        <img id="next" src="/img/next-icon.png" alt="next image slide"/>
+        <img class="navigation-button" src="/img/next-icon.svg" alt="next image slide"/>
       </button>
     </div>
     <ImgModal :isVisible="showModal" @close="closeImg" :image="openedImg"/>
@@ -96,15 +96,6 @@
 </script>
 
 <style scoped>
-  button {
-    all: unset;
-    cursor: pointer;
-  }
-  #prev, #next {
-    width: 50px;
-    height: 50px;
-    padding: 10px;
-  }
   .carousel-container {
     display: flex;
     justify-content: center;
@@ -144,11 +135,13 @@
     transform: translate(-50%, -50%) scale(1.05);
   }
   @media (max-width: 767px) {
-    #prev, #next {
-      display: none;
-    }
     .img-container {
       min-width: 130px;
     }
+  }
+  @media (max-width: 767px) {
+      .navigation-button {
+          display: none;
+      }
   }
 </style>

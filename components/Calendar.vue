@@ -1,9 +1,9 @@
 <template>
   <div class="calendar">
     <div class="calendar-header">
-      <button @click="changeMonth(-1)">←</button>
+      <button @click="changeMonth(-1)"><img class="navigation-button" src="/img/prev-icon.svg" alt="previous image slide"/></button>
       <h3>{{ new Date(selectedYear, selectedMonth).toLocaleString('default', { month: 'long', year: 'numeric' }) }}</h3>
-      <button @click="changeMonth(1)">→</button>
+      <button @click="changeMonth(1)"><img class="navigation-button" src="/img/next-icon.svg" alt="next image slide"/></button>
     </div>
 
     <p class="calendar-error-message" v-if="events === null">Sorry, there was an error loading the calendar events :(</p>
@@ -221,12 +221,6 @@
 </script>
 
 <style scoped>
-button {
-  width: 25px;
-  height: 25px;
-  cursor: pointer;
-}
-
 .calendar {
   min-height: 800px;
   width: 100%;

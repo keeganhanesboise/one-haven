@@ -130,6 +130,7 @@
     height: 100%;
     object-fit: cover;
     transition: transform .3s ease;
+    cursor: pointer;
   }
   .img:hover {
     transform: translate(-50%, -50%) scale(1.05);

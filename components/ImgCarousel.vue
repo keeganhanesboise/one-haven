@@ -1,7 +1,7 @@
 <template>
   <SectionSlot v-if="images && images.length > 0">
     <h1 class="sr-only">One Haven Cafe & Game Shop Images</h1>
-    <div class="carousel-container">
+    <div @touchstart="startTouch" @touchend="touchEnd" class="carousel-container">
       <button @click="prevSlide">
         <img id="prev" src="/img/prev-icon.png" alt="previous image slide"/>
       </button>
@@ -29,6 +29,8 @@
   const startIndex = ref(0);
   const showModal = ref(false);
   const openedImg = ref('');
+  const touchStartX = ref(0);
+  const touchEndX = ref(0);
 
   const currentImages = computed(() => {
     if (props.images && props.images.length > 0) {
@@ -65,6 +67,24 @@
     }
   }
 
+  function startTouch(e: TouchEvent): void {
+    touchStartX.value = e.changedTouches[0].screenX;
+  }
+
+  function touchEnd(e: TouchEvent): void {
+    touchEndX.value = e.changedTouches[0].screenX;
+    handleSwipe();
+  }
+
+  function handleSwipe(): void {
+    const diff = touchStartX.value - touchEndX.value;
+    if (diff > 50) {
+      nextSlide();
+    } else if (diff < -50) {
+      prevSlide();
+    }
+  }
+
   function openImg(url: string): void {
     openedImg.value = url;
     showModal.value = true;
@@ -81,8 +101,8 @@
     cursor: pointer;
   }
   #prev, #next {
-    width: 75px;
-    height: 75px;
+    width: 50px;
+    height: 50px;
     padding: 10px;
   }
   .carousel-container {
@@ -123,16 +143,12 @@
   .img:hover {
     transform: translate(-50%, -50%) scale(1.05);
   }
-  @media (min-width: 481px) and (max-width: 768px) {
+  @media (max-width: 767px) {
     #prev, #next {
-      width: 50px;
-      height: 50px;
+      display: none;
     }
-  }
-  @media (max-width: 482px) {
-    #prev, #next {
-      width: 25px;
-      height: 25px;
+    .img-container {
+      min-width: 130px;
     }
   }
 </style>

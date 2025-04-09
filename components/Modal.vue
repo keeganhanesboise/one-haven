@@ -3,7 +3,7 @@
     <transition name="modal-fade">
       <div class="backdrop" v-if="isVisible" @click.self="closeModal">
         <div class="modal-container-primary" @click.self="closeModal">
-          <div class="modal-container-secondary">
+          <div :class="modalContainerSecondaryClass">
             <div class="modal-content">
               <button class="close-button" @click="closeModal">×</button>
               <slot></slot>
@@ -16,7 +16,8 @@
 </template>
 <script setup lang="ts">
 defineProps<{
-  isVisible: boolean
+  isVisible: boolean,
+  modalContainerSecondaryClass?: string,
 }>();
 
 const emit = defineEmits(['close']);
@@ -58,19 +59,6 @@ function closeModal() {
   justify-content: center;
   padding: 25px;
   width: 100%;
-}
-
-.modal-container-secondary {
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 1.5rem;
-  width: 100%;
-  max-width: 500px;
-  max-height: 80vh;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  position: relative;
-  animation: scale-in 0.3s ease;
 }
 
 .modal-content {

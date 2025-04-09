@@ -1,5 +1,5 @@
 <template>
-  <Modal :isVisible="isVisible">
+  <Modal :isVisible="isVisible" modal-container-secondary-class="modal-events-container">
     <ul class="modal-scroll">
       <li v-for="event in events">
         <img id="eventImg" v-if="event.iconUrl" :src="event.iconUrl"  alt=""/>
@@ -35,5 +35,19 @@ ul li:not(:last-child) {
   padding-bottom: 0.5rem;
   margin-bottom: 0.5rem;
   display: block;
+}
+</style>
+<style>
+.modal-events-container {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: scale-in 0.3s ease;
 }
 </style>

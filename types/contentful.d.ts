@@ -31,6 +31,8 @@ export interface HomePage {
   title: string;
   gamesAndEventsInfo: Document;
   menus: Asset[];
+  aboutUsInfo: Document;
+  aboutUsImage: Asset;
   imageCarousel: Asset[];
   address?: Document;
   storeHours: DayHoursEntry[];

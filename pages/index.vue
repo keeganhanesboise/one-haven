@@ -3,8 +3,9 @@
     <HeroImg id="heroImg" color-primary="whitesmoke" />
     <GamesAndEvents id="gamesAndEvents" color-primary="lilac" color-secondary="whitesmoke" section-separator-svg="/img/section-curve-lilac.svg" section-separator-svg-bottom="/img/section-curve-lilac-bottom.svg" :gamesAndEventsInfo="gamesAndEventsInfo" />
     <Menu :menus="menus" color-primary="whitesmoke" />
-    <ImgCarousel id="imgCarousel" :images="imageCarousel" colorPrimary="white" colorSecondary="whitesmoke" section-separator-svg="/img/section-curve-white.svg" />
-    <ContactUs id="contactUs" colorPrimary="dragonfly" colorSecondary="white" section-separator-svg="/img/section-curve-dragonfly.svg" :address="address" :storeHours="storeHours" />
+    <AboutUs color-primary="cranberry" color-secondary="whitesmoke" section-separator-svg="/img/section-curve-cranberry.svg" section-separator-svg-bottom="/img/section-curve-cranberry-bottom.svg" :aboutUsInfo="aboutUsInfo" :aboutUsImage="aboutUsImage" />
+    <ImgCarousel id="imgCarousel" :images="imageCarousel" colorPrimary="whitesmoke" />
+    <ContactUs id="contactUs" colorPrimary="dragonfly" colorSecondary="whitesmoke" section-separator-svg="/img/section-curve-dragonfly.svg" :address="address" :storeHours="storeHours" />
   </div>
 </template>
 
@@ -18,6 +19,8 @@ import type {Asset} from "contentful";
 const homePageContent = ref<HomePageEntry | null>(null);
 const gamesAndEventsInfo = ref('');
 const menus = ref(['']);
+const aboutUsInfo = ref('');
+const aboutUsImage = ref('');
 const imageCarousel = ref(['']);
 const address = ref('');
 const storeHours = ref<DayHoursEntry[] | null>(null);
@@ -49,6 +52,16 @@ let contentfulClient: any;
         }
         if (fields.menus) {
           menus.value = createImageArray(fields.menus);
+        }
+        if (fields.aboutUsInfo) {
+          aboutUsInfo.value = useRichTextRenderer(fields.aboutUsInfo, {});
+        }
+        if (fields.aboutUsImage) {
+          let url: string = '';
+          if (fields.aboutUsImage && fields.aboutUsImage.fields.file?.url) {
+            url = fields.aboutUsImage.fields.file.url as string;
+          }
+          aboutUsImage.value = url;
         }
         if (fields.imageCarousel) {
           imageCarousel.value = createImageArray(fields.imageCarousel);

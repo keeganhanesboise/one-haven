@@ -27,5 +27,13 @@ export default defineNuxtConfig({
               ' to connect and unwind. Come experience the warmth and camaraderie at One Haven — where everyone belongs!' },
       ]
     }
+  },
+  modules: ['@nuxtjs/google-fonts'],
+  googleFonts: {
+    families: {
+      'Lato': [300, 400, 700],
+      'Baskerville+Old+Face': [400, 700]
+    },
+    display: 'swap',
   }
 })

@@ -1,5 +1,10 @@
 body {
     margin: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 .is-displayed-desktop {
@@ -43,7 +48,7 @@ body {
     overflow: hidden;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1, h2, h3, h4, h5, h6 {
     font-family: "Baskerville Old Face", serif;
 }
 

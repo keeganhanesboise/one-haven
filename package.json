@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^17.0.0",
+    "@nuxtjs/google-fonts": "^3.2.0",
     "contentful": "^11.5.13",
     "dompurify": "^3.2.5",
     "nuxt": "^3.15.4",

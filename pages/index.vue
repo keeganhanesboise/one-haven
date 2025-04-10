@@ -4,9 +4,9 @@
     <HeroImg id="heroImg" color-primary="whitesmoke" />
     <GamesAndEvents id="gamesAndEvents" color-primary="lilac" color-secondary="whitesmoke" section-separator-svg="/img/section-curve/lilac.svg" section-separator-svg-bottom="/img/section-curve/lilac-bottom.svg" :gamesAndEventsInfo="gamesAndEventsInfo" />
     <Menu id="menu" :menus="menus" color-primary="whitesmoke" />
-    <AboutUs id="about" color-primary="cranberry" color-secondary="whitesmoke" section-separator-svg="/img/section-curve/cranberry.svg" section-separator-svg-bottom="/img/section-curve/cranberry-bottom.svg" :aboutUsInfo="aboutUsInfo" :aboutUsImage="aboutUsImage" />
+    <AboutUs id="about" color-primary="cranberry" color-secondary="whitesmoke" section-separator-svg="/img/section-curve/cranberry.svg" section-separator-svg-bottom="/img/section-curve/cranberry-bottom.svg" :aboutUsInfo="aboutUsInfo" :aboutUsImage="aboutUsImage" maxWidthSize="medium" />
     <ImgCarousel id="imgCarousel" :images="imageCarousel" colorPrimary="whitesmoke" />
-    <ContactUs id="contact" colorPrimary="dragonfly" colorSecondary="whitesmoke" section-separator-svg="/img/section-curve/dragonfly.svg" :address="address" :storeHours="storeHours" />
+    <ContactUs id="contact" colorPrimary="dragonfly" colorSecondary="whitesmoke" section-separator-svg="/img/section-curve/dragonfly.svg" :address="address" :storeHours="storeHours" maxWidthSize="medium" />
   </div>
 </template>
 

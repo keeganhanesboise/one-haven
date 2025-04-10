@@ -3,11 +3,15 @@
     <div class="games-and-events-container">
       <div class="event-info-container">
         <div class="event-info-text">
-          <h2>Games & Events</h2>
+          <h2 class="is-displayed-desktop">Games & Events</h2>
+          <div class="is-displayed-mobile-flex mobile-games-heading">
+            <h2 id="mobileHeading">Games & Events</h2>
+            <img id="mobilePlayingCards" src="/img/playing-cards.svg" alt=""/>
+          </div>
           <p v-html="gamesAndEventsInfo"/>
         </div>
         <div class="event-info-img">
-          <img id="redD20" src="/img/playing-cards.svg" alt=""/>
+          <img src="/img/playing-cards.svg" alt=""/>
         </div>
       </div>
       <div class="event-calendar-container">
@@ -107,6 +111,16 @@
     background: #fff;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   }
+  .mobile-games-heading {
+    align-items: center;
+    gap: 15px;
+  }
+  #mobilePlayingCards {
+    width: 50px;
+  }
+  #mobileHeading {
+    margin: 0;
+  }
 
   @media (max-width: 991px) {
     .games-and-events-container {
@@ -135,6 +149,15 @@
   @media (max-width: 768px) {
     .games-and-events-container {
       gap: 25px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .event-info-img {
+      display: none;
+    }
+    .event-info-text {
+      width: 100%;
     }
   }
 </style>

@@ -2,7 +2,7 @@
   <section>
     <img v-if="sectionSeparatorSvg" class="section-separator" :class="sectionBackgroundSecondary" :src="sectionSeparatorSvg" alt="" />
     <div class="section-container-primary" :class="sectionBackgroundPrimary">
-      <div class="section-container-secondary">
+      <div class="section-container-secondary" :class="sectionSecondaryMaxWidth">
         <slot></slot>
       </div>
     </div>
@@ -10,7 +10,7 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
   const props = defineProps({
     colorPrimary: {
       type: String,
@@ -27,10 +27,15 @@
     sectionSeparatorSvgBottom: {
       type: String,
       default: ''
+    },
+    maxWidthSize: {
+      type: String,
+      default: 'large'
     }
   });
   const sectionBackgroundPrimary = computed(() => `section-background-${props.colorPrimary}`)
   const sectionBackgroundSecondary = computed(() => `section-background-${props.colorSecondary}`)
+  const sectionSecondaryMaxWidth = computed(() => props.maxWidthSize);
 </script>
 
 <style scoped>
@@ -53,8 +58,19 @@
   }
 
   .section-container-secondary {
-    max-width: 1600px;
     width: 100%;
+  }
+
+  .small {
+    max-width: 800px;
+  }
+
+  .medium {
+    max-width: 1200px;
+  }
+
+  .large {
+    max-width: 1600px;
   }
 
   .section-separator {

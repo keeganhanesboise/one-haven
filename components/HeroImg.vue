@@ -76,6 +76,14 @@
     .hero-img-container {
       width: 100%;
     }
+    .call-to-actions {
+      gap: 10px;
+      justify-content: space-between;
+    }
+    .logo-container {
+      gap: 10px;
+      width: 50%;
+    }
   }
 </style>
 <script setup lang="ts">

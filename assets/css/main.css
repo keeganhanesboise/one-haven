@@ -27,13 +27,16 @@ html {
     }
 }
 
-.is-displayed-mobile {
+.is-displayed-mobile, .is-displayed-mobile-flex {
     display: none;
 }
 
 @media (max-width: 480px) {
     .is-displayed-mobile {
         display: block;
+    }
+    .is-displayed-mobile-flex {
+        display: flex;
     }
 }
 
@@ -53,37 +56,26 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-    font-size: 24px;
-}
-h1 {
-    font-size: 64px;
+    font-size: 18px;
 }
 
-h2 {
+h1 {
     font-size: 48px;
 }
 
-@media (max-width: 480px) {
-    p {
-        font-size: 14px;
-    }
-    h1 {
-        font-size: 45px;
-    }
-    h2 {
-        font-size: 36px;
-    }
+h2 {
+    font-size: 32px;
 }
 
-@media (min-width: 481px) and (max-width: 768px) {
+@media (max-width: 768px) {
     p {
-        font-size: 14px;
+        font-size: 16px;
     }
     h1 {
-        font-size: 40px;
+        font-size: 36px;
     }
     h2 {
-        font-size: 32px;
+        font-size: 24px;
     }
 }
 

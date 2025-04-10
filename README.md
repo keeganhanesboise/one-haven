@@ -1,4 +1,4 @@
-# One Haven Landing Page
+# One Haven Landing Page [![Netlify Status](https://api.netlify.com/api/v1/badges/f4efddcc-63cf-4357-a456-e01afea2faff/deploy-status)](https://app.netlify.com/sites/onehaven/deploys)
 
 A single-page Nuxt app built for a coffee shop, bakery, and gaming space. Uses Contentful CMS for content management.
 

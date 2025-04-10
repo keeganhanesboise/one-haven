@@ -6,6 +6,7 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
+    "generate:prod": "cross-env NODE_ENV=production nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
@@ -13,9 +14,12 @@
     "@contentful/rich-text-html-renderer": "^17.0.0",
     "@nuxtjs/google-fonts": "^3.2.0",
     "contentful": "^11.5.13",
-    "dompurify": "^3.2.5",
+    "isomorphic-dompurify": "^2.23.0",
     "nuxt": "^3.15.4",
     "vue": "latest",
     "vue-router": "latest"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }

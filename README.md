@@ -1,75 +1,45 @@
-# Nuxt Minimal Starter
+# One Haven Landing Page
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A single-page Nuxt app built for a coffee shop, bakery, and gaming space. Uses Contentful CMS for content management.
+
+## Features
+
+- Nuxt 3 (Vue 3)
+- Static Site Generation
+- Contentful Integration
+- Fully responsive layout
+- Clean, accessible design
 
 ## Setup
 
-Make sure to install dependencies:
+1. Clone the repo:
+    ```bash
+    git clone https://github.com/keeganhanesboise/one-haven-site.git
+    cd one-haven-site
+   ```
+2. Install dependencies:
+    ```bash
+   npm install
+   ```
+3. Create an .env file:
+    ```bash
+    cp .env.example .env 
+   ```
+   Fill in your Contentful credentials.
+4. Run locally:
+    ```bash
+    npm run dev 
+   ```
+5. Build for production:
+    ```bash
+    npm run generate 
+   ```
 
-```bash
-# npm
-npm install
+## Deployment
+This site is deployed using Netlify
 
-# pnpm
-pnpm install
+## License
+This project is licensed under the [MIT License](./LICENSE).
 
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Author
+Keegan Hanes

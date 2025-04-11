@@ -74,7 +74,9 @@
   }
 
   .section-separator {
+    width: 100%;
     display: block;
+    height: 8vw;
   }
 
   .section-background-white {

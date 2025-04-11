@@ -36,8 +36,7 @@
 }
 .menu-img {
   width: 100%;
-  max-height: 1000px;
-  max-width: 800px;
+  max-width: 600px;
   background-color: white;
 }
 </style>

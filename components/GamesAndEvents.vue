@@ -11,7 +11,7 @@
           <p v-html="gamesAndEventsInfo" />
         </div>
         <div class="event-info-img">
-          <img src="/img/playing-cards.svg" alt="" />
+          <img id="desktopPlayingCards" src="/img/playing-cards.svg" alt="" />
         </div>
       </div>
       <div class="event-calendar-container">
@@ -122,6 +122,9 @@ p {
 .mobile-games-heading {
   align-items: center;
   gap: 15px;
+}
+#desktopPlayingCards {
+  width: 100%;
 }
 #mobilePlayingCards {
   width: 50px;

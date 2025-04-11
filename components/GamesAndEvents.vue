@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="event-calendar-container">
-        <div v-if="fetchingCalendarEvents" class="placeholder-calendar"></div>
+        <div v-if="fetchingCalendarEvents || !currentYear || !currentMonth" class="placeholder-calendar"></div>
         <Calendar v-else :events="calendarEvents" :startingYear="currentYear" :startingMonth="currentMonth" />
       </div>
     </div>
@@ -32,13 +32,12 @@
 
   let contentfulClient: any;
   const calendarEvents = ref<CalendarEventEntry[] | null>([]);
-  const fetchingCalendarEvents = ref(false);
+  const fetchingCalendarEvents = ref<boolean>(false);
 
-  const currentDate = new Date();
-  const currentYear = ref(currentDate.getFullYear());
-  const currentMonth = ref(currentDate.getMonth());
+  const currentYear = ref<number>();
+  const currentMonth = ref<number>();
 
-  const getEvents = async (): Promise<any> => {
+  const getEvents = async (): Promise<void> => {
     fetchingCalendarEvents.value = true;
 
     try {
@@ -65,6 +64,9 @@
   }
 
   onMounted(async () => {
+    const currentDate = new Date();
+    currentYear.value = currentDate.getFullYear();
+    currentMonth.value = currentDate.getMonth();
     await getEvents();
   });
 </script>

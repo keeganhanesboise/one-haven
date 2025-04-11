@@ -2,7 +2,7 @@
   <div class="calendar">
     <div class="calendar-header">
       <button @click="changeMonth(-1)"><img class="navigation-button" src="/img/prev-icon.svg" alt="previous image slide"/></button>
-      <h3>{{ new Date(selectedYear, selectedMonth).toLocaleString('default', { month: 'long', year: 'numeric' }) }}</h3>
+      <h3>{{ formattedMonthYear }}</h3>
       <button @click="changeMonth(1)"><img class="navigation-button" src="/img/next-icon.svg" alt="next image slide"/></button>
     </div>
 
@@ -40,11 +40,15 @@
     startingMonth: number;
   }>();
 
-  const selectedYear = ref(props.startingYear);
-  const selectedMonth = ref(props.startingMonth);
+  const selectedYear = ref<number>(props.startingYear);
+  const selectedMonth = ref<number>(props.startingMonth);
   const displayedEvents = ref<CalendarDisplayEvent[]>([]);
-  const showModal = ref(false);
+  const showModal = ref<boolean>(false);
   const openedEvents = ref<CalendarDisplayEvent[]>([]);
+
+  const formattedMonthYear = computed(() => {
+    return new Date(selectedYear.value, selectedMonth.value).toLocaleString('default', { month: 'long', year: 'numeric' });
+  });
 
   const generateDisplayEvents = (events: CalendarEventEntry[], year: number, month: number): CalendarDisplayEvent[] => {
     const calendarDisplayEvents: CalendarDisplayEvent[] = [];
@@ -81,6 +85,8 @@
         timeZone: 'America/Denver'
       };
 
+      const timeFormatter = new Intl.DateTimeFormat('en-US', timeOptions);
+
       const emptyDocument: Document = {
         nodeType: BLOCKS.DOCUMENT,
         content: [],
@@ -97,8 +103,8 @@
             description: useRichTextRenderer(description ?? emptyDocument, {}),
             iconUrl: iconUrl,
             startDate: occurrenceDate,
-            startTime: new Intl.DateTimeFormat('en-US', timeOptions).format(occurrenceDate),
-            endTime: new Intl.DateTimeFormat('en-US', timeOptions).format(endDate),
+            startTime: timeFormatter.format(occurrenceDate),
+            endTime: timeFormatter.format(endDate),
             dayOfMonth: occurrenceDate.getDate(),
             endDate: endDate
           })
@@ -121,8 +127,8 @@
               description: useRichTextRenderer(description ?? emptyDocument, {}),
               iconUrl: iconUrl,
               startDate: new Date(recurrenceDate),
-              startTime: new Intl.DateTimeFormat('en-US', timeOptions).format(occurrenceDate),
-              endTime: new Intl.DateTimeFormat('en-US', timeOptions).format(endDate),
+              startTime: timeFormatter.format(occurrenceDate),
+              endTime: timeFormatter.format(endDate),
               dayOfMonth: recurrenceDate.getDate(),
               endDate: new Date(recurrenceDate.getTime() + duration * 60 * 60 * 1000),
             });

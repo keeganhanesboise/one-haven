@@ -10,12 +10,14 @@ export const useContentful = (): ContentfulClientApi<any> => {
 
   // Ensure required environment variables are set
   if (!spaceId || !accessToken) {
-    throw new Error('Contentful configuration is missing required environment variables');
+    throw new Error(
+      'Contentful configuration is missing required environment variables'
+    );
   }
 
   return createClient({
     space: spaceId,
     accessToken: accessToken,
-    host: previewMode ? 'preview.contentful.com' : undefined,
+    host: previewMode ? 'preview.contentful.com' : undefined
   });
 };

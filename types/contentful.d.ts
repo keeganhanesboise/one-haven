@@ -12,7 +12,9 @@ export interface CalendarEvent {
   recurrenceEndDate: string;
 }
 
-export type CalendarEventEntry = Entry<CalendarEvent> & { fields: CalendarEvent };
+export type CalendarEventEntry = Entry<CalendarEvent> & {
+  fields: CalendarEvent;
+};
 
 export interface CalendarDisplayEvent {
   id: string;

@@ -1,109 +1,116 @@
 body {
-    margin: 0;
-    font-family: 'Lato', sans-serif;
+  margin: 0;
+  font-family: 'Lato', sans-serif;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 .is-displayed-desktop {
-    display: none;
+  display: none;
 }
 
 @media (min-width: 481px) {
-    .is-displayed-desktop {
-        display: block;
-    }
+  .is-displayed-desktop {
+    display: block;
+  }
 }
 
 .is-displayed-desktop-l {
-    display: none;
+  display: none;
 }
 
 @media (min-width: 769px) {
-    .is-displayed-desktop-l {
-        display: block;
-    }
+  .is-displayed-desktop-l {
+    display: block;
+  }
 }
 
-.is-displayed-mobile, .is-displayed-mobile-flex {
-    display: none;
+.is-displayed-mobile,
+.is-displayed-mobile-flex {
+  display: none;
 }
 
 @media (max-width: 480px) {
-    .is-displayed-mobile {
-        display: block;
-    }
-    .is-displayed-mobile-flex {
-        display: flex;
-    }
+  .is-displayed-mobile {
+    display: block;
+  }
+  .is-displayed-mobile-flex {
+    display: flex;
+  }
 }
 
 .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    border: 0;
-    clip: rect(0, 0, 0, 0);
-    overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Baskerville Old Face", serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Baskerville Old Face', serif;
 }
 
 p {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 h1 {
-    font-size: 48px;
+  font-size: 48px;
 }
 
 h2 {
-    font-size: 32px;
+  font-size: 32px;
 }
 
 @media (max-width: 768px) {
-    p {
-        font-size: 16px;
-    }
-    h1 {
-        font-size: 36px;
-    }
-    h2 {
-        font-size: 24px;
-    }
+  p {
+    font-size: 16px;
+  }
+  h1 {
+    font-size: 36px;
+  }
+  h2 {
+    font-size: 24px;
+  }
 }
 
-ul, li {
-    all: unset;
+ul,
+li {
+  all: unset;
 }
 
 button {
-    all: unset;
-    cursor: pointer;
+  all: unset;
+  cursor: pointer;
 }
 
 .navigation-button {
-    width: 35px;
-    height: 35px;
-    padding: 20px;
-    transition: filter 0.3s ease;
-    cursor: pointer;
+  width: 35px;
+  height: 35px;
+  padding: 20px;
+  transition: filter 0.3s ease;
+  cursor: pointer;
 }
 
 .navigation-button:hover {
-    filter: brightness(75%);
+  filter: brightness(75%);
 }
 
 @media (max-width: 767px) {
-    .navigation-button {
-        width: 20px;
-        height: 20px;
-        padding: 10px;
-    }
+  .navigation-button {
+    width: 20px;
+    height: 20px;
+    padding: 10px;
+  }
 }

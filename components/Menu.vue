@@ -11,9 +11,9 @@
 </template>
 
 <script setup lang="ts">
-  defineProps<{
-    menus?: string[];
-  }>();
+defineProps<{
+  menus?: string[];
+}>();
 </script>
 
 <style scoped>

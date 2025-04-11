@@ -18,26 +18,26 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue';
 
-const isVisible = ref(false)
-const isMobileMenuOpen = ref(false)
+const isVisible = ref(false);
+const isMobileMenuOpen = ref(false);
 
 const handleScroll = () => {
-  const scrollY = window.scrollY
-  const firstSection = document.querySelector('section')
-  if (!firstSection) return
-  const firstSectionHeight = firstSection.offsetHeight
-  isVisible.value = scrollY > firstSectionHeight - 50
-}
+  const scrollY = window.scrollY;
+  const firstSection = document.querySelector('section');
+  if (!firstSection) return;
+  const firstSectionHeight = firstSection.offsetHeight;
+  isVisible.value = scrollY > firstSectionHeight - 50;
+};
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-})
+  window.addEventListener('scroll', handleScroll);
+});
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
+  window.removeEventListener('scroll', handleScroll);
+});
 </script>
 
 <style scoped>

@@ -4,20 +4,20 @@
       <div class="about-us-info-container">
         <div class="about-us-info-text">
           <h2>About Us</h2>
-          <p v-html="aboutUsInfo"/>
+          <p v-html="aboutUsInfo" />
         </div>
         <div class="about-us-info-img">
-          <img id="aboutUs" :src="aboutUsImage" alt=""/>
+          <img id="aboutUs" :src="aboutUsImage" alt="" />
         </div>
       </div>
     </div>
   </SectionSlot>
 </template>
 <script setup lang="ts">
-  defineProps<{
-    aboutUsInfo: string;
-    aboutUsImage: string;
-  }>();
+defineProps<{
+  aboutUsInfo: string;
+  aboutUsImage: string;
+}>();
 </script>
 <style scoped>
 #aboutUs {

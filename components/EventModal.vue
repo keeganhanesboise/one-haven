@@ -1,10 +1,20 @@
 <template>
-  <Modal :isVisible="isVisible" modal-container-secondary-class="modal-events-container">
+  <Modal
+    :isVisible="isVisible"
+    modal-container-secondary-class="modal-events-container">
     <ul class="modal-scroll">
       <li v-for="event in events">
-        <img id="eventImg" v-if="event.iconUrl" :src="event.iconUrl"  alt=""/>
+        <img id="eventImg" v-if="event.iconUrl" :src="event.iconUrl" alt="" />
         <h2>{{ event.name }}</h2>
-        <h3>{{ new Date(event.startDate).toDateString() + ' ' + event.startTime + ' - ' + event.endTime }}</h3>
+        <h3>
+          {{
+            new Date(event.startDate).toDateString() +
+            ' ' +
+            event.startTime +
+            ' - ' +
+            event.endTime
+          }}
+        </h3>
         <p>{{ event.summary }}</p>
         <p v-html="event.description" />
       </li>
@@ -12,11 +22,11 @@
   </Modal>
 </template>
 <script setup lang="ts">
-import type {CalendarDisplayEvent} from "~/types/contentful";
+import type { CalendarDisplayEvent } from '~/types/contentful';
 
 defineProps<{
-  events: CalendarDisplayEvent[] | undefined,
-  isVisible: boolean
+  events: CalendarDisplayEvent[] | undefined;
+  isVisible: boolean;
 }>();
 </script>
 

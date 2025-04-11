@@ -16,8 +16,8 @@
 </template>
 <script setup lang="ts">
 defineProps<{
-  isVisible: boolean,
-  modalContainerSecondaryClass?: string,
+  isVisible: boolean;
+  modalContainerSecondaryClass?: string;
 }>();
 
 const emit = defineEmits(['close']);

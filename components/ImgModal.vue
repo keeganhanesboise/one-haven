@@ -1,12 +1,14 @@
 <template>
-  <Modal :isVisible="isVisible" modal-container-secondary-class="modal-img-container">
+  <Modal
+    :isVisible="isVisible"
+    modal-container-secondary-class="modal-img-container">
     <img :src="image" alt="" />
   </Modal>
 </template>
 <script setup lang="ts">
 defineProps<{
-  image: string,
-  isVisible: boolean
+  image: string;
+  isVisible: boolean;
 }>();
 </script>
 <style>

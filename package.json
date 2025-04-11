@@ -8,7 +8,8 @@
     "generate": "nuxt generate",
     "generate:prod": "cross-env NODE_ENV=production nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "format": "prettier . --write"
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^17.0.0",
@@ -20,6 +21,16 @@
     "vue-router": "latest"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "@eslint/compat": "^1.2.8",
+    "@typescript-eslint/eslint-plugin": "^8.29.1",
+    "@typescript-eslint/parser": "^8.29.1",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.24.0",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-vue": "^10.0.0",
+    "eslint-plugin-vuejs-accessibility": "^2.4.1",
+    "lint-staged": "^15.5.1",
+    "prettier": "^3.5.3"
   }
 }

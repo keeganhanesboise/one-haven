@@ -21,16 +21,15 @@
     "vue-router": "latest"
   },
   "devDependencies": {
-    "@eslint/compat": "^1.2.8",
-    "@typescript-eslint/eslint-plugin": "^8.29.1",
-    "@typescript-eslint/parser": "^8.29.1",
+    "@typescript-eslint/eslint-plugin": "^8.25.0",
+    "@typescript-eslint/parser": "^8.25.0",
     "cross-env": "^7.0.3",
-    "eslint": "^9.24.0",
-    "eslint-config-prettier": "^10.1.2",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^10.0.2",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "eslint-plugin-vue": "^10.0.0",
+    "eslint-plugin-vue": "^9.32.0",
     "eslint-plugin-vuejs-accessibility": "^2.4.1",
-    "lint-staged": "^15.5.1",
+    "lint-staged": "^15.4.3",
     "prettier": "^3.5.3"
   }
 }

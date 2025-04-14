@@ -1,20 +1,20 @@
-<template>
-  <SectionSlot>
-    <div class="menu-container">
-      <div class="menu-img-container">
-        <div v-for="menu in menus" class="menu">
-          <img class="menu-img" :src="menu" alt="" />
-        </div>
-      </div>
-    </div>
-  </SectionSlot>
-</template>
-
 <script setup lang="ts">
 defineProps<{
   menus?: string[];
 }>();
 </script>
+
+<template>
+  <SectionSlot>
+    <div class="menu-container">
+      <div class="menu-img-container">
+        <div v-for="menu in menus" :key="menu" class="menu">
+          <img alt="" class="menu-img" :src="menu" />
+        </div>
+      </div>
+    </div>
+  </SectionSlot>
+</template>
 
 <style scoped>
 .menu-container {

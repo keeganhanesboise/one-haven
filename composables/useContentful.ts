@@ -1,4 +1,4 @@
-import { createClient, type ContentfulClientApi } from 'contentful';
+import { type ContentfulClientApi, createClient } from 'contentful';
 import { useRuntimeConfig } from '#app';
 
 export const useContentful = (): ContentfulClientApi<any> => {

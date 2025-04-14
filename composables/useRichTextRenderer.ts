@@ -1,7 +1,7 @@
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import type { CommonNode, Next } from '@contentful/rich-text-html-renderer';
-import { BLOCKS, INLINES } from '@contentful/rich-text-types';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import type { Document } from '@contentful/rich-text-types';
+import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 import DOMPurify from 'isomorphic-dompurify';
 
 export const useRichTextRenderer = (

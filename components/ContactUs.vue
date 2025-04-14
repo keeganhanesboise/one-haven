@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import type { DayHoursEntry } from '~/types/contentful';
+
+defineProps<{
+  address: string;
+  storeHours: DayHoursEntry[] | null;
+}>();
+</script>
+
 <template>
   <SectionSlot>
     <div class="contact-container">
@@ -7,21 +16,25 @@
       <div class="contact-content-container">
         <div class="map-container">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3104.0396103642324!2d-104.7196247226171!3d38.91432037172041!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87134931a0d1dbad%3A0xcd57e855790dcef5!2sOne%20Haven!5e0!3m2!1sen!2sus!4v1743550471671!5m2!1sen!2sus"
-            width="100%"
+            allow="fullscreen"
             height="450"
-            style="border: 0"
-            allowfullscreen=""
-            sandbox="allow-scripts allow-same-origin allow-popups"
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
+            referrerpolicy="no-referrer-when-downgrade"
+            sandbox="allow-scripts allow-same-origin allow-popups"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3104.0396103642324!2d-104.7196247226171!3d38.91432037172041!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87134931a0d1dbad%3A0xcd57e855790dcef5!2sOne%20Haven!5e0!3m2!1sen!2sus!4v1743550471671!5m2!1sen!2sus"
+            style="border: 0"
+            title="map"
+            width="100%" />
         </div>
         <div class="info-container">
           <div class="address-container">
             <address v-html="address" />
           </div>
-          <div class="hours-container" v-if="storeHours">
-            <ul class="hours-list" v-for="hours in storeHours">
+          <div v-if="storeHours" class="hours-container">
+            <ul
+              v-for="hours in storeHours"
+              :key="hours.sys.id"
+              class="hours-list">
               <li>
                 {{ hours.fields.day }}
                 <span v-if="hours.fields.closed">Closed</span>
@@ -37,15 +50,6 @@
   </SectionSlot>
 </template>
 
-<script setup lang="ts">
-import type { DayHoursEntry } from '~/types/contentful';
-
-defineProps<{
-  address: string;
-  storeHours: DayHoursEntry[] | null;
-}>();
-</script>
-
 <style scoped>
 address {
   font-style: normal;
@@ -53,9 +57,6 @@ address {
 }
 h2 {
   color: white;
-}
-#googleMaps {
-  width: 100%;
 }
 .contact-container {
   display: flex;

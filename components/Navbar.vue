@@ -1,24 +1,5 @@
-<template>
-  <nav :class="['navbar', { visible: isVisible }]">
-    <div class="navbar-content">
-      <div class="logo">One Haven</div>
-      <ul class="nav-links" :class="{ open: isMobileMenuOpen }">
-        <li><a href="#gamesAndEvents">Calendar</a></li>
-        <li><a href="#menu">Menu</a></li>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <button class="hamburger" @click="isMobileMenuOpen = !isMobileMenuOpen">
-        <span :class="{ open: isMobileMenuOpen }"></span>
-        <span :class="{ open: isMobileMenuOpen }"></span>
-        <span :class="{ open: isMobileMenuOpen }"></span>
-      </button>
-    </div>
-  </nav>
-</template>
-
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 const isVisible = ref(false);
 const isMobileMenuOpen = ref(false);
@@ -39,6 +20,25 @@ onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
 });
 </script>
+
+<template>
+  <nav :class="['navbar', { visible: isVisible }]">
+    <div class="navbar-content">
+      <div class="logo">One Haven</div>
+      <ul class="nav-links" :class="{ open: isMobileMenuOpen }">
+        <li><a href="#gamesAndEvents">Calendar</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="hamburger" @click="isMobileMenuOpen = !isMobileMenuOpen">
+        <span :class="{ open: isMobileMenuOpen }" />
+        <span :class="{ open: isMobileMenuOpen }" />
+        <span :class="{ open: isMobileMenuOpen }" />
+      </button>
+    </div>
+  </nav>
+</template>
 
 <style scoped>
 .navbar {

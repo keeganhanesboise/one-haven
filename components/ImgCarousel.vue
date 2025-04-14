@@ -1,38 +1,3 @@
-<template>
-  <SectionSlot v-if="images && images.length > 0">
-    <h1 class="sr-only">One Haven Cafe & Game Shop Images</h1>
-    <div
-      @touchstart="startTouch"
-      @touchend="touchEnd"
-      class="carousel-container">
-      <button @click="prevSlide">
-        <img
-          class="navigation-button"
-          src="/img/prev-icon.svg"
-          alt="previous image slide" />
-      </button>
-      <ul class="img-list">
-        <li class="img-container" v-for="image in currentImages" :key="image">
-          <img
-            @click="openImg(image)"
-            v-if="image"
-            class="img"
-            :src="image"
-            alt="" />
-          <div v-else></div>
-        </li>
-      </ul>
-      <button @click="nextSlide">
-        <img
-          class="navigation-button"
-          src="/img/next-icon.svg"
-          alt="next image slide" />
-      </button>
-    </div>
-    <ImgModal :isVisible="showModal" @close="closeImg" :image="openedImg" />
-  </SectionSlot>
-</template>
-
 <script setup lang="ts">
 const props = defineProps<{
   images?: string[];
@@ -109,6 +74,44 @@ function closeImg(): void {
   showModal.value = false;
 }
 </script>
+
+<template>
+  <SectionSlot v-if="images && images.length > 0">
+    <h1 class="sr-only">One Haven Cafe & Game Shop Images</h1>
+    <div
+      class="carousel-container"
+      @touchend="touchEnd"
+      @touchstart="startTouch">
+      <button @click="prevSlide">
+        <img
+          alt="previous image slide"
+          class="navigation-button"
+          src="/img/prev-icon.svg" />
+      </button>
+      <ul class="img-list">
+        <li v-for="image in currentImages" :key="image" class="img-container">
+          <img
+            v-if="image"
+            alt=""
+            class="img"
+            role="button"
+            :src="image"
+            tabindex="0"
+            @click="openImg(image)"
+            @keydown.enter="openImg(image)" />
+          <div v-else />
+        </li>
+      </ul>
+      <button @click="nextSlide">
+        <img
+          alt="next image slide"
+          class="navigation-button"
+          src="/img/next-icon.svg" />
+      </button>
+    </div>
+    <ImgModal :image="openedImg" :is-visible="showModal" @close="closeImg" />
+  </SectionSlot>
+</template>
 
 <style scoped>
 .carousel-container {

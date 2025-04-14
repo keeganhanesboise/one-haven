@@ -1,19 +1,3 @@
-<template>
-  <teleport to="body">
-    <transition name="modal-fade">
-      <div class="backdrop" v-if="isVisible" @click.self="closeModal">
-        <div class="modal-container-primary" @click.self="closeModal">
-          <div :class="modalContainerSecondaryClass">
-            <div class="modal-content">
-              <button class="close-button" @click="closeModal">×</button>
-              <slot></slot>
-            </div>
-          </div>
-        </div>
-      </div>
-    </transition>
-  </teleport>
-</template>
 <script setup lang="ts">
 defineProps<{
   isVisible: boolean;
@@ -26,6 +10,34 @@ function closeModal() {
   emit('close');
 }
 </script>
+
+<template>
+  <teleport to="body">
+    <transition name="modal-fade">
+      <div
+        v-if="isVisible"
+        class="backdrop"
+        role="button"
+        tabindex="0"
+        @click.self="closeModal"
+        @keydown.enter="closeModal">
+        <div
+          class="modal-container-primary"
+          role="button"
+          tabindex="0"
+          @click.self="closeModal"
+          @keydown.enter="closeModal">
+          <div :class="modalContainerSecondaryClass">
+            <div class="modal-content">
+              <button class="close-button" @click="closeModal">×</button>
+              <slot />
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
+  </teleport>
+</template>
 
 <style scoped>
 .modal-fade-enter-active,

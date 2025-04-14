@@ -1,16 +1,18 @@
-<template>
-  <Modal
-    :isVisible="isVisible"
-    modal-container-secondary-class="modal-img-container">
-    <img :src="image" alt="" />
-  </Modal>
-</template>
 <script setup lang="ts">
 defineProps<{
   image: string;
   isVisible: boolean;
 }>();
 </script>
+
+<template>
+  <Modal
+    :is-visible="isVisible"
+    modal-container-secondary-class="modal-img-container">
+    <img alt="" :src="image" />
+  </Modal>
+</template>
+
 <style>
 .modal-img-container {
   background-color: #fff;

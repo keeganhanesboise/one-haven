@@ -1,33 +1,3 @@
-<template>
-  <SectionSlot>
-    <div class="games-and-events-container">
-      <div class="event-info-container">
-        <div class="event-info-text">
-          <h2 class="is-displayed-desktop">Games & Events</h2>
-          <div class="is-displayed-mobile-flex mobile-games-heading">
-            <h2 id="mobileHeading">Games & Events</h2>
-            <img id="mobilePlayingCards" src="/img/playing-cards.svg" alt="" />
-          </div>
-          <p v-html="gamesAndEventsInfo" />
-        </div>
-        <div class="event-info-img">
-          <img id="desktopPlayingCards" src="/img/playing-cards.svg" alt="" />
-        </div>
-      </div>
-      <div class="event-calendar-container">
-        <div
-          v-if="fetchingCalendarEvents || !currentYear || !currentMonth"
-          class="placeholder-calendar"></div>
-        <Calendar
-          v-else
-          :events="calendarEvents"
-          :startingYear="currentYear"
-          :startingMonth="currentMonth" />
-      </div>
-    </div>
-  </SectionSlot>
-</template>
-
 <script setup lang="ts">
 import { useContentful } from '~/composables/useContentful';
 import type { CalendarEventEntry } from '~/types/contentful';
@@ -76,6 +46,36 @@ onMounted(async () => {
   await getEvents();
 });
 </script>
+
+<template>
+  <SectionSlot>
+    <div class="games-and-events-container">
+      <div class="event-info-container">
+        <div class="event-info-text">
+          <h2 class="is-displayed-desktop">Games & Events</h2>
+          <div class="is-displayed-mobile-flex mobile-games-heading">
+            <h2 id="mobileHeading">Games & Events</h2>
+            <img id="mobilePlayingCards" alt="" src="/img/playing-cards.svg" />
+          </div>
+          <p v-html="gamesAndEventsInfo" />
+        </div>
+        <div class="event-info-img">
+          <img id="desktopPlayingCards" alt="" src="/img/playing-cards.svg" />
+        </div>
+      </div>
+      <div class="event-calendar-container">
+        <div
+          v-if="fetchingCalendarEvents || !currentYear || !currentMonth"
+          class="placeholder-calendar" />
+        <Calendar
+          v-else
+          :events="calendarEvents"
+          :starting-month="currentMonth"
+          :starting-year="currentYear" />
+      </div>
+    </div>
+  </SectionSlot>
+</template>
 
 <style scoped>
 h2 {

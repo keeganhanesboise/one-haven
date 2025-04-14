@@ -1,64 +1,12 @@
-<template>
-  <div class="calendar">
-    <div class="calendar-header">
-      <button @click="changeMonth(-1)">
-        <img
-          class="navigation-button"
-          src="/img/prev-icon.svg"
-          alt="previous image slide" />
-      </button>
-      <h3>{{ formattedMonthYear }}</h3>
-      <button @click="changeMonth(1)">
-        <img
-          class="navigation-button"
-          src="/img/next-icon.svg"
-          alt="next image slide" />
-      </button>
-    </div>
-
-    <p class="calendar-error-message" v-if="events === null">
-      Sorry, there was an error loading the calendar events :(
-    </p>
-
-    <div class="calendar-grid">
-      <div
-        class="day-label"
-        v-for="day in ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"
-        :key="day">
-        {{ day }}
-      </div>
-      <div
-        @click="hasEvent(day) ? openDay(day) : null"
-        class="day"
-        :class="{ 'has-event': hasEvent(day) }"
-        v-for="(day, index) in calendarDays"
-        :key="index">
-        <span class="day-number" v-if="day">
-          {{ day }}
-          <span class="today" v-if="isToday(day)">(today)</span>
-        </span>
-        <ul class="is-displayed-desktop-l" v-if="hasEvent(day)">
-          <li v-for="event in getEventsForDay(day)" :key="event.id">
-            <div class="event">
-              <span class="event-time">{{ event.startTime }}</span>
-              {{ event.name }}
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <EventModal :isVisible="showModal" @close="closeDay" :events="openedEvents" />
-</template>
-
 <script setup lang="ts">
+import type { Document } from '@contentful/rich-text-types';
+import { BLOCKS } from '@contentful/rich-text-types';
+
+import { useRichTextRenderer } from '~/composables/useRichTextRenderer';
 import type {
   CalendarDisplayEvent,
   CalendarEventEntry
 } from '~/types/contentful';
-import { BLOCKS } from '@contentful/rich-text-types';
-import type { Document } from '@contentful/rich-text-types';
-import { useRichTextRenderer } from '~/composables/useRichTextRenderer';
 
 const props = defineProps<{
   events?: CalendarEventEntry[] | null;
@@ -151,7 +99,7 @@ const generateDisplayEvents = (
 
       if (recurrenceEnd > monthEnd) recurrenceEnd = monthEnd;
 
-      let recurrenceDate = new Date(occurrenceDate);
+      const recurrenceDate = new Date(occurrenceDate);
 
       while (recurrenceDate <= recurrenceEnd) {
         if (recurrenceDate >= monthStart) {
@@ -247,7 +195,7 @@ const isToday = (day: number | null): boolean => {
 };
 
 const changeMonth = (offset: number) => {
-  let newMonth = selectedMonth.value + offset;
+  const newMonth = selectedMonth.value + offset;
   if (newMonth < 0) {
     selectedMonth.value = 11;
     selectedYear.value -= 1;
@@ -275,6 +223,65 @@ function closeDay(): void {
   showModal.value = false;
 }
 </script>
+
+<template>
+  <div class="calendar">
+    <div class="calendar-header">
+      <button @click="changeMonth(-1)">
+        <img
+          alt="previous image slide"
+          class="navigation-button"
+          src="/img/prev-icon.svg" />
+      </button>
+      <h3>{{ formattedMonthYear }}</h3>
+      <button @click="changeMonth(1)">
+        <img
+          alt="next image slide"
+          class="navigation-button"
+          src="/img/next-icon.svg" />
+      </button>
+    </div>
+
+    <p v-if="events === null" class="calendar-error-message">
+      Sorry, there was an error loading the calendar events :(
+    </p>
+
+    <div class="calendar-grid">
+      <div
+        v-for="day in ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"
+        :key="day"
+        class="day-label">
+        {{ day }}
+      </div>
+      <div
+        v-for="(day, index) in calendarDays"
+        :key="index"
+        class="day"
+        :class="{ 'has-event': hasEvent(day) }"
+        role="button"
+        tabindex="0"
+        @click="hasEvent(day) ? openDay(day) : null"
+        @keydown.enter="hasEvent(day) ? openDay(day) : null">
+        <span v-if="day" class="day-number">
+          {{ day }}
+          <span v-if="isToday(day)" class="today">(today)</span>
+        </span>
+        <ul v-if="hasEvent(day)" class="is-displayed-desktop-l">
+          <li v-for="event in getEventsForDay(day)" :key="event.id">
+            <div class="event">
+              <span class="event-time">{{ event.startTime }}</span>
+              {{ event.name }}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <EventModal
+    :events="openedEvents"
+    :is-visible="showModal"
+    @close="closeDay" />
+</template>
 
 <style scoped>
 .calendar {

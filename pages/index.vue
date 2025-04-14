@@ -1,45 +1,11 @@
-<template>
-  <div>
-    <Navbar />
-    <HeroImg id="heroImg" color-primary="whitesmoke" />
-    <GamesAndEvents
-      id="gamesAndEvents"
-      color-primary="lilac"
-      color-secondary="whitesmoke"
-      section-separator-svg="/img/section-curve/lilac.svg"
-      section-separator-svg-bottom="/img/section-curve/lilac-bottom.svg"
-      :gamesAndEventsInfo="gamesAndEventsInfo" />
-    <Menu id="menu" :menus="menus" color-primary="whitesmoke" />
-    <AboutUs
-      id="about"
-      color-primary="cranberry"
-      color-secondary="whitesmoke"
-      section-separator-svg="/img/section-curve/cranberry.svg"
-      section-separator-svg-bottom="/img/section-curve/cranberry-bottom.svg"
-      :aboutUsInfo="aboutUsInfo"
-      :aboutUsImage="aboutUsImage"
-      maxWidthSize="medium" />
-    <ImgCarousel
-      id="imgCarousel"
-      :images="imageCarousel"
-      colorPrimary="whitesmoke" />
-    <ContactUs
-      id="contact"
-      colorPrimary="dragonfly"
-      colorSecondary="whitesmoke"
-      section-separator-svg="/img/section-curve/dragonfly.svg"
-      :address="address"
-      :storeHours="storeHours"
-      maxWidthSize="medium" />
-  </div>
-</template>
-
 <script setup lang="ts">
-import { useContentful } from '~/composables/useContentful';
-import { CONTENTFUL_HOME_PAGE_ENTRY_ID } from '~/utils/constants';
-import type { DayHoursEntry, HomePageEntry } from '~/types/contentful';
-import { useRichTextRenderer } from '~/composables/useRichTextRenderer';
 import type { Asset } from 'contentful';
+
+import { CONTENTFUL_HOME_PAGE_ENTRY_ID } from '~/utils/constants';
+
+import { useContentful } from '~/composables/useContentful';
+import { useRichTextRenderer } from '~/composables/useRichTextRenderer';
+import type { DayHoursEntry, HomePageEntry } from '~/types/contentful';
 
 const homePageContent = ref<HomePageEntry | null>(null);
 const gamesAndEventsInfo = ref('');
@@ -51,7 +17,7 @@ const address = ref('');
 const storeHours = ref<DayHoursEntry[] | null>(null);
 
 const createImageArray = (assets: Asset[]) => {
-  let imageArray: string[] = [];
+  const imageArray: string[] = [];
   assets.forEach((asset) => {
     let url: string = '';
     if (asset && asset.fields.file?.url) {
@@ -111,3 +77,39 @@ let contentfulClient: any;
   }
 })();
 </script>
+
+<template>
+  <div>
+    <Navbar />
+    <HeroImg id="heroImg" color-primary="whitesmoke" />
+    <GamesAndEvents
+      id="gamesAndEvents"
+      color-primary="lilac"
+      color-secondary="whitesmoke"
+      :games-and-events-info="gamesAndEventsInfo"
+      section-separator-svg="/img/section-curve/lilac.svg"
+      section-separator-svg-bottom="/img/section-curve/lilac-bottom.svg" />
+    <Menu id="menu" color-primary="whitesmoke" :menus="menus" />
+    <AboutUs
+      id="about"
+      :about-us-image="aboutUsImage"
+      :about-us-info="aboutUsInfo"
+      color-primary="cranberry"
+      color-secondary="whitesmoke"
+      max-width-size="medium"
+      section-separator-svg="/img/section-curve/cranberry.svg"
+      section-separator-svg-bottom="/img/section-curve/cranberry-bottom.svg" />
+    <ImgCarousel
+      id="imgCarousel"
+      color-primary="whitesmoke"
+      :images="imageCarousel" />
+    <ContactUs
+      id="contact"
+      :address="address"
+      color-primary="dragonfly"
+      color-secondary="whitesmoke"
+      max-width-size="medium"
+      section-separator-svg="/img/section-curve/dragonfly.svg"
+      :store-hours="storeHours" />
+  </div>
+</template>

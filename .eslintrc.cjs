@@ -42,6 +42,7 @@ module.exports = {
       }
     ],
     'simple-import-sort/exports': 'error',
+    'vue/no-v-html': 'off',
     'vue/html-closing-bracket-newline': [
       'error',
       {

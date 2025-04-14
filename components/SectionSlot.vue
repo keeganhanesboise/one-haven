@@ -1,27 +1,3 @@
-<template>
-  <section>
-    <img
-      v-if="sectionSeparatorSvg"
-      class="section-separator"
-      :class="sectionBackgroundSecondary"
-      :src="sectionSeparatorSvg"
-      alt="" />
-    <div class="section-container-primary" :class="sectionBackgroundPrimary">
-      <div
-        class="section-container-secondary"
-        :class="sectionSecondaryMaxWidth">
-        <slot></slot>
-      </div>
-    </div>
-    <img
-      v-if="sectionSeparatorSvgBottom"
-      class="section-separator"
-      :class="sectionBackgroundSecondary"
-      :src="sectionSeparatorSvgBottom"
-      alt="" />
-  </section>
-</template>
-
 <script setup lang="ts">
 const props = defineProps({
   colorPrimary: {
@@ -53,6 +29,30 @@ const sectionBackgroundSecondary = computed(
 );
 const sectionSecondaryMaxWidth = computed(() => props.maxWidthSize);
 </script>
+
+<template>
+  <section>
+    <img
+      v-if="sectionSeparatorSvg"
+      alt=""
+      class="section-separator"
+      :class="sectionBackgroundSecondary"
+      :src="sectionSeparatorSvg" />
+    <div class="section-container-primary" :class="sectionBackgroundPrimary">
+      <div
+        class="section-container-secondary"
+        :class="sectionSecondaryMaxWidth">
+        <slot />
+      </div>
+    </div>
+    <img
+      v-if="sectionSeparatorSvgBottom"
+      alt=""
+      class="section-separator"
+      :class="sectionBackgroundSecondary"
+      :src="sectionSeparatorSvgBottom" />
+  </section>
+</template>
 
 <style scoped>
 .section-container-primary {

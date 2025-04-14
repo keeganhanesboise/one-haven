@@ -1,3 +1,10 @@
+<script setup lang="ts">
+defineProps<{
+  aboutUsInfo: string;
+  aboutUsImage: string;
+}>();
+</script>
+
 <template>
   <SectionSlot>
     <div class="about-us-container">
@@ -7,18 +14,13 @@
           <p v-html="aboutUsInfo" />
         </div>
         <div class="about-us-info-img">
-          <img id="aboutUs" :src="aboutUsImage" alt="" />
+          <img id="aboutUs" alt="" :src="aboutUsImage" />
         </div>
       </div>
     </div>
   </SectionSlot>
 </template>
-<script setup lang="ts">
-defineProps<{
-  aboutUsInfo: string;
-  aboutUsImage: string;
-}>();
-</script>
+
 <style scoped>
 #aboutUs {
   width: 100%;

@@ -1,10 +1,19 @@
+<script setup lang="ts">
+import type { CalendarDisplayEvent } from '~/types/contentful';
+
+defineProps<{
+  events: CalendarDisplayEvent[] | undefined;
+  isVisible: boolean;
+}>();
+</script>
+
 <template>
   <Modal
-    :isVisible="isVisible"
+    :is-visible="isVisible"
     modal-container-secondary-class="modal-events-container">
     <ul class="modal-scroll">
-      <li v-for="event in events">
-        <img id="eventImg" v-if="event.iconUrl" :src="event.iconUrl" alt="" />
+      <li v-for="event in events" :key="event.id">
+        <img v-if="event.iconUrl" id="eventImg" alt="" :src="event.iconUrl" />
         <h2>{{ event.name }}</h2>
         <h3>
           {{
@@ -21,14 +30,6 @@
     </ul>
   </Modal>
 </template>
-<script setup lang="ts">
-import type { CalendarDisplayEvent } from '~/types/contentful';
-
-defineProps<{
-  events: CalendarDisplayEvent[] | undefined;
-  isVisible: boolean;
-}>();
-</script>
 
 <style scoped>
 #eventImg {
@@ -47,6 +48,7 @@ ul li:not(:last-child) {
   display: block;
 }
 </style>
+
 <style>
 .modal-events-container {
   background-color: #fff;

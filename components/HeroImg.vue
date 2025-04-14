@@ -5,21 +5,21 @@
         <div class="hero-img-container">
           <img
             id="hero-img-desktop"
-            src="/img/coffee-mug-magic-one-haven.svg"
-            alt="" />
+            alt=""
+            src="/img/coffee-mug-magic-one-haven.svg" />
         </div>
         <div class="logo-container">
           <h1 class="sr-only">Welcome to One Haven Cafe & Game Shop</h1>
           <img
             id="logo"
+            alt="One Haven Cafe & Game Shop Logo"
             class="is-displayed-desktop"
-            src="/img/one-haven-logo-desktop.svg"
-            alt="One Haven Cafe & Game Shop Logo" />
+            src="/img/one-haven-logo-desktop.svg" />
           <img
             id="logo-mobile"
+            alt="One Haven Cafe & Game Shop Logo"
             class="is-displayed-mobile"
-            src="/img/one-haven-logo-mobile.svg"
-            alt="One Haven Cafe & Game Shop Logo" />
+            src="/img/one-haven-logo-mobile.svg" />
           <ul class="call-to-actions">
             <li><a>Coffee</a></li>
             <li><a>Gaming</a></li>
@@ -97,4 +97,3 @@
   }
 }
 </style>
-<script setup lang="ts"></script>

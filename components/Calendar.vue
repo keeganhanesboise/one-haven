@@ -233,7 +233,7 @@ function closeDay(): void {
           class="navigation-button"
           src="/img/prev-icon.svg" />
       </button>
-      <transition name="fade" mode="out-in">
+      <transition mode="out-in" name="fade">
         <h3 :key="formattedMonthYear">{{ formattedMonthYear }}</h3>
       </transition>
       <button @click="changeMonth(1)">
@@ -247,7 +247,7 @@ function closeDay(): void {
     <p v-if="events === null" class="calendar-error-message">
       Sorry, there was an error loading the calendar events :(
     </p>
-    <transition name="fade" mode="out-in">
+    <transition mode="out-in" name="fade">
       <div :key="formattedMonthYear" class="calendar-grid">
         <div
           v-for="day in ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"
@@ -259,14 +259,13 @@ function closeDay(): void {
           v-for="(day, index) in calendarDays"
           :key="index"
           class="day"
-          :class="{ 'has-event': hasEvent(day) }"
+          :class="{ 'has-event': hasEvent(day), 'today': isToday(day) }"
           role="button"
           tabindex="0"
           @click="hasEvent(day) ? openDay(day) : null"
           @keydown.enter="hasEvent(day) ? openDay(day) : null">
           <span v-if="day" class="day-number">
             {{ day }}
-            <span v-if="isToday(day)" class="today">(today)</span>
           </span>
           <ul v-if="hasEvent(day)" class="is-displayed-desktop-l">
             <li v-for="event in getEventsForDay(day)" :key="event.id">
@@ -334,6 +333,7 @@ function closeDay(): void {
 }
 
 .day {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -354,6 +354,22 @@ function closeDay(): void {
   border: 1px solid #bc4749;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+}
+
+.day.has-event::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 15px solid #bc4749;
+  border-left: 15px solid transparent;
+  z-index: 1;
+}
+
+.today {
+  background: #e0e0e0;
 }
 
 .event {
@@ -380,14 +396,15 @@ function closeDay(): void {
 }
 
 @media (max-width: 768px) {
-  .today {
-    display: none;
-  }
   .calendar {
     min-height: unset;
   }
   .day {
     height: 10vw;
+  }
+  .day.has-event::after {
+    border-top: 10px solid #bc4749;
+    border-left: 10px solid transparent;
   }
 }
 </style>

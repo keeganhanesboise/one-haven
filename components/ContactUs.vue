@@ -10,7 +10,7 @@ defineProps<{
   <SectionSlot>
     <div class="contact-container">
       <div class="header-container">
-        <h2>Contact Us</h2>
+        <h2>Come Visit!</h2>
       </div>
       <div class="contact-content-container">
         <div class="map-container">
@@ -47,7 +47,7 @@ defineProps<{
               <li>
                 {{ hours.fields.day }}
                 <span v-if="hours.fields.closed">Closed</span>
-                <span class="hours" v-else>
+                <span v-else class="hours">
                   {{ hours.fields.openTime + ' - ' + hours.fields.closeTime }}
                 </span>
               </li>
@@ -77,7 +77,7 @@ h2 {
 .contact-content-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   gap: 10px;
   padding: 0;
 }

@@ -85,7 +85,7 @@ onUnmounted(() => {
   text-decoration: none;
   color: #333;
   font-weight: 500;
-  transition: color 0.2s;
+  transition: color 0.2s ease-in;
 }
 
 .nav-links li a:hover {

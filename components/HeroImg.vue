@@ -21,9 +21,9 @@
             class="is-displayed-mobile"
             src="/img/one-haven-logo-mobile.svg" />
           <ul class="call-to-actions">
-            <li><a>Coffee</a></li>
-            <li><a>Gaming</a></li>
-            <li><a>Food</a></li>
+            <li class="cta-link"><a href="#menu">Coffee</a></li>
+            <li class="cta-link"><a href="#gamesAndEvents">Gaming</a></li>
+            <li class="cta-link"><a href="#menu">Food</a></li>
           </ul>
         </div>
       </div>
@@ -71,11 +71,34 @@
   justify-content: space-evenly;
   width: 100%;
   padding-inline-start: 0;
+  color: #bc4749;
 }
 .call-to-actions > li {
+  display: flex;
+  align-content: center;
+  cursor: pointer;
+  font-weight: bold;
   list-style: none;
 }
-
+@media (min-width: 1024px) {
+  .call-to-actions > li {
+    padding: 20px;
+  }
+  #logo {
+    padding-bottom: 0px;
+  }
+}
+.cta-link {
+  color: #bc4749;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+.cta-link:hover {
+  transform: translateY(-2px);
+  opacity: 0.85;
+}
 @media (max-width: 480px) {
   #hero-img-desktop {
     min-height: auto;

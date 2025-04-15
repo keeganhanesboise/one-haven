@@ -2,7 +2,6 @@
 import type { DayHoursEntry } from '~/types/contentful';
 
 defineProps<{
-  address: string;
   storeHours: DayHoursEntry[] | null;
 }>();
 </script>
@@ -28,7 +27,17 @@ defineProps<{
         </div>
         <div class="info-container">
           <div class="address-container">
-            <address v-html="address" />
+            <a
+              href="https://www.google.com/maps/dir//One+Haven+5956+Stetson+Hills+Blvd+Colorado+Springs,+CO+80923/@38.9143204,-104.7170498,16z/data=!4m8!4m7!1m0!1m5!1m1!1s0x87134931a0d1dbad:0xcd57e855790dcef5!2m2!1d-104.7170498!2d38.9143204?entry=ttu&g_ep=EgoyMDI1MDQwOS4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank">
+              <address>
+                One Haven 5956
+                <br />
+                Stetson Hills Blvd,
+                <br />
+                Colorado Springs, CO 80923
+              </address>
+            </a>
           </div>
           <div v-if="storeHours" class="hours-container">
             <ul
@@ -38,7 +47,7 @@ defineProps<{
               <li>
                 {{ hours.fields.day }}
                 <span v-if="hours.fields.closed">Closed</span>
-                <span v-else>
+                <span class="hours" v-else>
                   {{ hours.fields.openTime + ' - ' + hours.fields.closeTime }}
                 </span>
               </li>
@@ -53,7 +62,8 @@ defineProps<{
 <style scoped>
 address {
   font-style: normal;
-  font-family: 'Baskerville Old Face', serif;
+  font-family: 'lato', serif;
+  color: #b388ff;
 }
 h2 {
   color: white;
@@ -87,7 +97,6 @@ h2 {
 }
 .address-container {
   padding: 10px;
-  color: white;
 }
 .hours-container {
   padding: 10px;

@@ -13,7 +13,6 @@ const menus = ref(['']);
 const aboutUsInfo = ref('');
 const aboutUsImage = ref('');
 const imageCarousel = ref(['']);
-const address = ref('');
 const storeHours = ref<DayHoursEntry[] | null>(null);
 
 const createImageArray = (assets: Asset[]) => {
@@ -62,9 +61,6 @@ let contentfulClient: any;
         if (fields.imageCarousel) {
           imageCarousel.value = createImageArray(fields.imageCarousel);
         }
-        if (fields.address) {
-          address.value = useRichTextRenderer(fields.address, {});
-        }
         if (fields.storeHours) {
           storeHours.value = fields.storeHours;
         }
@@ -105,7 +101,6 @@ let contentfulClient: any;
       :images="imageCarousel" />
     <ContactUs
       id="contact"
-      :address="address"
       color-primary="dragonfly"
       color-secondary="whitesmoke"
       max-width-size="medium"

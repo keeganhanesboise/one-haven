@@ -7,6 +7,16 @@ html {
   scroll-behavior: smooth;
 }
 
+ul,
+li,
+a {
+  all: unset;
+}
+
+a {
+  cursor: pointer;
+}
+
 .is-displayed-desktop {
   display: none;
 }
@@ -61,7 +71,7 @@ h6 {
   font-family: 'Baskerville Old Face', serif;
 }
 
-p {
+p, li, address {
   font-size: 18px;
 }
 
@@ -74,7 +84,7 @@ h2 {
 }
 
 @media (max-width: 768px) {
-  p {
+  p, li, address {
     font-size: 16px;
   }
   h1 {
@@ -83,11 +93,6 @@ h2 {
   h2 {
     font-size: 24px;
   }
-}
-
-ul,
-li {
-  all: unset;
 }
 
 button {

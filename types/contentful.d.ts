@@ -36,7 +36,6 @@ export interface HomePage {
   aboutUsInfo: Document;
   aboutUsImage: Asset;
   imageCarousel: Asset[];
-  address?: Document;
   storeHours: DayHoursEntry[];
 }
 

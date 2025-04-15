@@ -46,6 +46,7 @@ p {
   flex-direction: row;
   justify-content: space-between;
   padding-right: 0;
+  gap: 20px;
 }
 .about-us-info-img {
   width: 40%;
@@ -56,5 +57,19 @@ p {
 }
 .about-us-info-text {
   width: 60%;
+}
+
+@media (max-width: 768px) {
+  .about-us-info-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .about-us-info-img,
+  .about-us-info-text {
+    width: 100%;
+  }
+  .about-us-info-img {
+    max-width: 500px;
+  }
 }
 </style>

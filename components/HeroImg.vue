@@ -1,3 +1,5 @@
+
+
 <template>
   <SectionSlot>
     <div class="hero-container">
@@ -80,18 +82,15 @@
     padding: 20px;
   }
   #logo {
-    padding-bottom: 0px;
+    padding-bottom: 0;
   }
 }
 .cta-link {
   text-decoration: none;
-  transition:
-    transform 0.2s ease,
-    opacity 0.2s ease;
+  transition: transform 0.2s ease;
 }
 .cta-link:hover {
   transform: translateY(-2px);
-  opacity: 0.85;
 }
 @media (max-width: 480px) {
   #hero-img {

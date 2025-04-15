@@ -1,6 +1,4 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue';
-
 const isVisible = ref(false);
 const isMobileMenuOpen = ref(false);
 
@@ -25,35 +23,44 @@ onUnmounted(() => {
   <nav :class="['navbar', { visible: isVisible }]">
     <div class="navbar-content">
       <div class="logo">One Haven</div>
-      <ul class="nav-links" :class="{ open: isMobileMenuOpen }">
-        <li class="nav-link"><a href="#gamesAndEvents">Calendar</a></li>
-        <li class="nav-link"><a href="#menu">Menu</a></li>
-        <li class="nav-link"><a href="#about">About Us</a></li>
-        <li class="nav-link"><a href="#contact">Contact</a></li>
-      </ul>
       <button class="hamburger" @click="isMobileMenuOpen = !isMobileMenuOpen">
         <span :class="{ open: isMobileMenuOpen }" />
         <span :class="{ open: isMobileMenuOpen }" />
         <span :class="{ open: isMobileMenuOpen }" />
       </button>
+      <ul class="nav-links-desktop">
+        <li class="nav-link"><a href="#gamesAndEvents">Calendar</a></li>
+        <li class="nav-link"><a href="#menu">Menu</a></li>
+        <li class="nav-link"><a href="#about">About Us</a></li>
+        <li class="nav-link"><a href="#contact">Contact</a></li>
+      </ul>
     </div>
+    <ul class="nav-links" :class="{ open: isMobileMenuOpen }">
+      <li class="nav-link"><a href="#gamesAndEvents">Calendar</a></li>
+      <li class="nav-link"><a href="#menu">Menu</a></li>
+      <li class="nav-link"><a href="#about">About Us</a></li>
+      <li class="nav-link"><a href="#contact">Contact</a></li>
+    </ul>
   </nav>
 </template>
 
 <style scoped>
 .navbar {
   position: fixed;
-  width: 100%;
   top: 0;
   left: 0;
+  width: 100%;
+  z-index: 1000;
   background: rgba(245, 245, 245, 0.95);
   backdrop-filter: blur(8px);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transform: translateY(-100%);
-  transition: transform 0.3s ease;
-  z-index: 1000;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
+  overflow: hidden;
+  transform: translateY(-100%);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .navbar.visible {
@@ -75,26 +82,52 @@ onUnmounted(() => {
   color: #333;
 }
 
-.nav-links {
-  display: flex;
-  gap: 2rem;
+.nav-links,
+.nav-links-desktop {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.nav-links li a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
+.nav-links-desktop {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links {
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0 2rem;
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.4s ease,
+    padding 0.4s ease;
+}
+
+.nav-links.open {
+  max-height: 300px;
+  padding: 1rem 2rem;
 }
 
 .nav-link {
-  padding: 5px;
-  transition: transform 0.2s ease;
   cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 .nav-link:hover {
   transform: translateY(-2px);
+}
+
+.nav-links a,
+.nav-links-desktop a {
+  display: block;
+  padding: 5px;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
 }
 
 .hamburger {
@@ -114,25 +147,20 @@ onUnmounted(() => {
 }
 
 @media (max-width: 768px) {
+  .nav-links {
+    display: flex;
+  }
+
   .hamburger {
     display: flex;
   }
 
-  .nav-links {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: white;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1rem 2rem;
+  .nav-links-desktop {
     display: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   }
 
-  .nav-links.open {
-    display: flex;
+  .nav-link {
+    width: 100%;
   }
 }
 </style>

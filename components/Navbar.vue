@@ -26,10 +26,10 @@ onUnmounted(() => {
     <div class="navbar-content">
       <div class="logo">One Haven</div>
       <ul class="nav-links" :class="{ open: isMobileMenuOpen }">
-        <li><a href="#gamesAndEvents">Calendar</a></li>
-        <li><a href="#menu">Menu</a></li>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li class="nav-link"><a href="#gamesAndEvents">Calendar</a></li>
+        <li class="nav-link"><a href="#menu">Menu</a></li>
+        <li class="nav-link"><a href="#about">About Us</a></li>
+        <li class="nav-link"><a href="#contact">Contact</a></li>
       </ul>
       <button class="hamburger" @click="isMobileMenuOpen = !isMobileMenuOpen">
         <span :class="{ open: isMobileMenuOpen }" />
@@ -85,11 +85,16 @@ onUnmounted(() => {
   text-decoration: none;
   color: #333;
   font-weight: 500;
-  transition: color 0.2s ease-in;
 }
 
-.nav-links li a:hover {
-  color: #104241;
+.nav-link {
+  padding: 5px;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  transform: translateY(-2px);
 }
 
 .hamburger {

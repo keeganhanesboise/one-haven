@@ -3,10 +3,7 @@
     <div class="hero-container">
       <div class="hero-content-container">
         <div class="hero-img-container">
-          <img
-            id="hero-img-desktop"
-            alt=""
-            src="/img/coffee-mug-magic-one-haven.svg" />
+          <img id="hero-img" alt="" src="/img/coffee-mug-magic-one-haven.svg" />
         </div>
         <div class="logo-container">
           <h1 class="sr-only">Welcome to One Haven Cafe & Game Shop</h1>
@@ -32,7 +29,7 @@
 </template>
 
 <style scoped>
-#hero-img-desktop {
+#hero-img {
   width: 100%;
   max-width: 500px;
 }
@@ -57,7 +54,7 @@
 .hero-img-container {
   width: 40%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
 }
 .logo-container {
@@ -71,13 +68,11 @@
   justify-content: space-evenly;
   width: 100%;
   padding-inline-start: 0;
-  color: #bc4749;
 }
 .call-to-actions > li {
   display: flex;
   align-content: center;
   cursor: pointer;
-  font-weight: bold;
   list-style: none;
 }
 @media (min-width: 1024px) {
@@ -89,7 +84,6 @@
   }
 }
 .cta-link {
-  color: #bc4749;
   text-decoration: none;
   transition:
     transform 0.2s ease,
@@ -100,7 +94,8 @@
   opacity: 0.85;
 }
 @media (max-width: 480px) {
-  #hero-img-desktop {
+  #hero-img {
+    width: 75%;
     min-height: auto;
   }
   .hero-content-container {

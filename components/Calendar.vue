@@ -229,14 +229,16 @@ function closeDay(): void {
     <div class="calendar-header">
       <button @click="changeMonth(-1)">
         <img
-          alt="previous image slide"
+          alt="previous calendar month"
           class="navigation-button"
           src="/img/prev-icon.svg" />
       </button>
-      <h3>{{ formattedMonthYear }}</h3>
+      <transition name="fade" mode="out-in">
+        <h3 :key="formattedMonthYear">{{ formattedMonthYear }}</h3>
+      </transition>
       <button @click="changeMonth(1)">
         <img
-          alt="next image slide"
+          alt="next calendar month"
           class="navigation-button"
           src="/img/next-icon.svg" />
       </button>
@@ -245,37 +247,38 @@ function closeDay(): void {
     <p v-if="events === null" class="calendar-error-message">
       Sorry, there was an error loading the calendar events :(
     </p>
-
-    <div class="calendar-grid">
-      <div
-        v-for="day in ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"
-        :key="day"
-        class="day-label">
-        {{ day }}
-      </div>
-      <div
-        v-for="(day, index) in calendarDays"
-        :key="index"
-        class="day"
-        :class="{ 'has-event': hasEvent(day) }"
-        role="button"
-        tabindex="0"
-        @click="hasEvent(day) ? openDay(day) : null"
-        @keydown.enter="hasEvent(day) ? openDay(day) : null">
-        <span v-if="day" class="day-number">
+    <transition name="fade" mode="out-in">
+      <div :key="formattedMonthYear" class="calendar-grid">
+        <div
+          v-for="day in ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"
+          :key="day"
+          class="day-label">
           {{ day }}
-          <span v-if="isToday(day)" class="today">(today)</span>
-        </span>
-        <ul v-if="hasEvent(day)" class="is-displayed-desktop-l">
-          <li v-for="event in getEventsForDay(day)" :key="event.id">
-            <div class="event">
-              <span class="event-time">{{ event.startTime }}</span>
-              {{ event.name }}
-            </div>
-          </li>
-        </ul>
+        </div>
+        <div
+          v-for="(day, index) in calendarDays"
+          :key="index"
+          class="day"
+          :class="{ 'has-event': hasEvent(day) }"
+          role="button"
+          tabindex="0"
+          @click="hasEvent(day) ? openDay(day) : null"
+          @keydown.enter="hasEvent(day) ? openDay(day) : null">
+          <span v-if="day" class="day-number">
+            {{ day }}
+            <span v-if="isToday(day)" class="today">(today)</span>
+          </span>
+          <ul v-if="hasEvent(day)" class="is-displayed-desktop-l">
+            <li v-for="event in getEventsForDay(day)" :key="event.id">
+              <div class="event">
+                <span class="event-time">{{ event.startTime }}</span>
+                {{ event.name }}
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </transition>
   </div>
   <EventModal
     :events="openedEvents"
@@ -284,6 +287,14 @@ function closeDay(): void {
 </template>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 .calendar {
   min-height: 800px;
   width: 100%;

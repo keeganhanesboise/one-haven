@@ -8,7 +8,8 @@ export default defineNuxtConfig({
     public: {
       contentfulPreviewMode: process.env.CONTENTFUL_PREVIEW_MODE || 'false',
       contentfulSpaceId: process.env.CONTENTFUL_SPACE_ID || '',
-      contentfulAccessToken: process.env.CONTENTFUL_ACCESS_TOKEN || ''
+      contentfulAccessToken: process.env.CONTENTFUL_ACCESS_TOKEN || '',
+      gaId: process.env.GA_ID || ''
     }
   },
   app: {
@@ -33,6 +34,7 @@ export default defineNuxtConfig({
     }
   },
   modules: ['@nuxtjs/google-fonts'],
+  plugins: ['~/plugins/ga.client.ts'],
   googleFonts: {
     families: {
       Lato: [300, 400, 700],

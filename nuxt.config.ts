@@ -30,7 +30,8 @@ export default defineNuxtConfig({
             ' inclusivity, and good food, our cafe is the perfect place for gamers, creatives, and coffee lovers alike' +
             ' to connect and unwind. Come experience the warmth and camaraderie at One Haven — where everyone belongs!'
         }
-      ]
+      ],
+      link: [{ rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }]
     }
   },
   modules: ['@nuxtjs/google-fonts'],

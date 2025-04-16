@@ -71,7 +71,7 @@ h6 {
   font-family: 'Baskerville Old Face', serif;
 }
 
-p, li, address {
+p, li, address, a {
   font-size: 18px;
 }
 
@@ -84,7 +84,7 @@ h2 {
 }
 
 @media (max-width: 768px) {
-  p, li, address {
+  p, li, address, a {
     font-size: 16px;
   }
   h1 {

@@ -4,8 +4,12 @@ const props = defineProps<{
 }>();
 
 const slideSize = 6;
+const numberOfSlides = props?.images?.length
+  ? Math.ceil(props.images.length / slideSize)
+  : 0;
 
 const startIndex = ref(0);
+const slideIndex = ref(0);
 const showModal = ref(false);
 const openedImg = ref('');
 const touchStartX = ref(0);
@@ -29,8 +33,10 @@ function nextSlide(): void {
     const newIndex = startIndex.value + slideSize;
     if (newIndex >= props.images.length) {
       startIndex.value = 0;
+      slideIndex.value = 0;
     } else {
       startIndex.value = newIndex;
+      slideIndex.value++;
     }
   }
 }
@@ -41,8 +47,10 @@ function prevSlide(): void {
     if (newIndex < 0) {
       startIndex.value =
         Math.floor(props.images.length / slideSize) * slideSize;
+      slideIndex.value = numberOfSlides;
     } else {
       startIndex.value = newIndex;
+      slideIndex.value--;
     }
   }
 }
@@ -88,20 +96,22 @@ function closeImg(): void {
           class="navigation-button"
           src="/img/prev-icon.svg" />
       </button>
-      <ul class="img-list">
-        <li v-for="image in currentImages" :key="image" class="img-container">
-          <img
-            v-if="image"
-            alt=""
-            class="img"
-            role="button"
-            :src="image"
-            tabindex="0"
-            @click="openImg(image)"
-            @keydown.enter="openImg(image)" />
-          <div v-else />
-        </li>
-      </ul>
+      <transition mode="out-in" name="fade">
+        <ul :key="startIndex" class="img-list">
+          <li v-for="image in currentImages" :key="image" class="img-container">
+            <img
+              v-if="image"
+              alt=""
+              class="img"
+              role="button"
+              :src="image"
+              tabindex="0"
+              @click="openImg(image)"
+              @keydown.enter="openImg(image)" />
+            <div v-else />
+          </li>
+        </ul>
+      </transition>
       <button @click="nextSlide">
         <img
           alt="next image slide"
@@ -109,11 +119,47 @@ function closeImg(): void {
           src="/img/next-icon.svg" />
       </button>
     </div>
+    <div class="carousel-dots">
+      <span
+        v-for="index in numberOfSlides"
+        :key="index"
+        class="dot"
+        :class="{ active: index - 1 === slideIndex }" />
+    </div>
     <ImgModal :image="openedImg" :is-visible="showModal" @close="closeImg" />
   </SectionSlot>
 </template>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.dot.active {
+  background-color: #333;
+  transform: scale(1.2);
+}
 .carousel-container {
   display: flex;
   justify-content: center;

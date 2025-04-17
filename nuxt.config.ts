@@ -31,7 +31,10 @@ export default defineNuxtConfig({
             ' to connect and unwind. Come experience the warmth and camaraderie at One Haven — where everyone belongs!'
         }
       ],
-      link: [{ rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }]
+      link: [
+        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
+        { rel: 'mask-icon', href: '/safari-pinned-tab.svg' }
+      ]
     }
   },
   modules: ['@nuxtjs/google-fonts'],

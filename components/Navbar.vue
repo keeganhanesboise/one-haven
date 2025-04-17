@@ -1,13 +1,22 @@
-<script setup>
-const isVisible = ref(false);
+<script setup lang="ts">
+const props = defineProps({
+  hideInitially: {
+    type: Boolean,
+    default: false
+  }
+});
+
+const isVisible = ref(!props.hideInitially);
 const isMobileMenuOpen = ref(false);
 
 const handleScroll = () => {
-  const scrollY = window.scrollY;
-  const firstSection = document.querySelector('section');
-  if (!firstSection) return;
-  const firstSectionHeight = firstSection.offsetHeight;
-  isVisible.value = scrollY > firstSectionHeight - 50;
+  if (props.hideInitially) {
+    const scrollY = window.scrollY;
+    const firstSection = document.querySelector('section');
+    if (!firstSection) return;
+    const firstSectionHeight = firstSection.offsetHeight;
+    isVisible.value = scrollY > firstSectionHeight - 50;
+  }
 };
 
 const toggleMobileMenu = () => {
@@ -26,31 +35,31 @@ onUnmounted(() => {
 <template>
   <nav :class="['navbar', { visible: isVisible }]">
     <div class="navbar-content">
-      <div class="logo">One Haven</div>
+      <a class="logo" href="/">One Haven</a>
       <button class="hamburger" @click="toggleMobileMenu">
         <span :class="{ open: isMobileMenuOpen }" />
         <span :class="{ open: isMobileMenuOpen }" />
         <span :class="{ open: isMobileMenuOpen }" />
       </button>
       <ul class="nav-links-desktop">
-        <li class="nav-link"><a href="#gamesAndEvents">Calendar</a></li>
-        <li class="nav-link"><a href="#menu">Menu</a></li>
-        <li class="nav-link"><a href="#about">About Us</a></li>
-        <li class="nav-link"><a href="#contact">Contact</a></li>
+        <li class="nav-link"><a href="/#gamesAndEvents">Calendar</a></li>
+        <li class="nav-link"><a href="/#menu">Menu</a></li>
+        <li class="nav-link"><a href="/#about">About Us</a></li>
+        <li class="nav-link"><a href="/#contact">Contact</a></li>
       </ul>
     </div>
     <ul class="nav-links-mobile" :class="{ open: isMobileMenuOpen }">
       <li class="nav-link">
-        <a href="#gamesAndEvents" @click="toggleMobileMenu">Calendar</a>
+        <a href="/#gamesAndEvents" @click="toggleMobileMenu">Calendar</a>
       </li>
       <li class="nav-link">
-        <a href="#menu" @click="toggleMobileMenu">Menu</a>
+        <a href="/#menu" @click="toggleMobileMenu">Menu</a>
       </li>
       <li class="nav-link">
-        <a href="#about" @click="toggleMobileMenu">About Us</a>
+        <a href="/#about" @click="toggleMobileMenu">About Us</a>
       </li>
       <li class="nav-link">
-        <a href="#contact" @click="toggleMobileMenu">Contact</a>
+        <a href="/#contact" @click="toggleMobileMenu">Contact</a>
       </li>
     </ul>
   </nav>
@@ -92,6 +101,7 @@ onUnmounted(() => {
   font-weight: bold;
   font-size: 1.25rem;
   color: #333;
+  padding: 5px;
 }
 
 .nav-links-mobile,

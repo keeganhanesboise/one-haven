@@ -1,5 +1,3 @@
-
-
 <template>
   <SectionSlot>
     <div class="hero-container">
@@ -20,9 +18,9 @@
             class="is-displayed-mobile"
             src="/img/one-haven-logo-mobile.svg" />
           <ul class="call-to-actions">
-            <li class="cta-link"><a href="#menu">Coffee</a></li>
-            <li class="cta-link"><a href="#gamesAndEvents">Gaming</a></li>
-            <li class="cta-link"><a href="#menu">Food</a></li>
+            <li class="cta-link"><a href="/#menu">Coffee</a></li>
+            <li class="cta-link"><a href="/#gamesAndEvents">Gaming</a></li>
+            <li class="cta-link"><a href="/#menu">Food</a></li>
           </ul>
         </div>
       </div>

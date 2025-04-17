@@ -8,13 +8,17 @@ const props = defineProps({
     type: String,
     default: 'white'
   },
-  sectionSeparatorSvg: {
-    type: String,
-    default: ''
+  separatorTop: {
+    type: Boolean,
+    default: false
   },
-  sectionSeparatorSvgBottom: {
+  separatorBottom: {
+    type: Boolean,
+    default: false
+  },
+  separatorColor: {
     type: String,
-    default: ''
+    default: 'white'
   },
   maxWidthSize: {
     type: String,
@@ -32,12 +36,18 @@ const sectionSecondaryMaxWidth = computed(() => props.maxWidthSize);
 
 <template>
   <section>
-    <img
-      v-if="sectionSeparatorSvg"
-      alt=""
+    <svg
+      v-if="separatorTop"
+      id="sectionSeparator"
       class="section-separator"
       :class="sectionBackgroundSecondary"
-      :src="sectionSeparatorSvg" />
+      :fill="separatorColor"
+      preserveAspectRatio="none"
+      viewBox="0 0 900 50"
+      xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M709,40l-187.3-27.5c-46.6-8.1-97.5-8.6-144.8-1.5h0C252.7,29.5,118.6,25.6,0,0v50h900v-30c-59.1,19.1-132.5,28.1-191,20Z" />
+    </svg>
     <div class="section-container-primary" :class="sectionBackgroundPrimary">
       <div
         class="section-container-secondary"
@@ -45,12 +55,18 @@ const sectionSecondaryMaxWidth = computed(() => props.maxWidthSize);
         <slot />
       </div>
     </div>
-    <img
-      v-if="sectionSeparatorSvgBottom"
-      alt=""
+    <svg
+      v-if="separatorBottom"
+      id="sectionSeparatorBottom"
       class="section-separator"
       :class="sectionBackgroundSecondary"
-      :src="sectionSeparatorSvgBottom" />
+      :fill="separatorColor"
+      preserveAspectRatio="none"
+      viewBox="0 0 900 50"
+      xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M376.9,11h0c47.3-7.1,98.2-6.5,144.8,1.5l187.3,32.4c61.3,10.6,131.9,4.1,191-14.9V0H0c118.6,25.6,252.7,29.5,376.9,11Z" />
+    </svg>
   </section>
 </template>
 
@@ -59,6 +75,7 @@ const sectionSecondaryMaxWidth = computed(() => props.maxWidthSize);
   padding: 100px;
   display: flex;
   justify-content: center;
+  margin: 0;
 }
 
 @media (max-width: 480px) {
@@ -90,9 +107,15 @@ const sectionSecondaryMaxWidth = computed(() => props.maxWidthSize);
 }
 
 .section-separator {
-  width: 100%;
   display: block;
+  width: 100%;
   height: 8vw;
+  line-height: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  margin-bottom: -1px;
+  margin-top: -1px;
 }
 
 .section-background-white {

@@ -83,8 +83,9 @@ let contentfulClient: any;
       color-primary="lilac"
       color-secondary="whitesmoke"
       :games-and-events-info="gamesAndEventsInfo"
-      section-separator-svg="/img/section-curve/lilac.svg"
-      section-separator-svg-bottom="/img/section-curve/lilac-bottom.svg" />
+      separator-bottom="true"
+      separator-color="#6b667a"
+      separator-top="true" />
     <Menu id="menu" color-primary="whitesmoke" :menus="menus" />
     <AboutUs
       id="about"
@@ -93,8 +94,9 @@ let contentfulClient: any;
       color-primary="cranberry"
       color-secondary="whitesmoke"
       max-width-size="medium"
-      section-separator-svg="/img/section-curve/cranberry.svg"
-      section-separator-svg-bottom="/img/section-curve/cranberry-bottom.svg" />
+      separator-bottom="true"
+      separator-color="#a63d40"
+      separator-top="true" />
     <ImgCarousel
       id="imgCarousel"
       color-primary="whitesmoke"
@@ -104,7 +106,8 @@ let contentfulClient: any;
       color-primary="dragonfly"
       color-secondary="whitesmoke"
       max-width-size="medium"
-      section-separator-svg="/img/section-curve/dragonfly.svg"
+      separator-color="#104241"
+      separator-top="true"
       :store-hours="storeHours" />
   </div>
 </template>

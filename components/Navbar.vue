@@ -10,6 +10,10 @@ const handleScroll = () => {
   isVisible.value = scrollY > firstSectionHeight - 50;
 };
 
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value;
+};
+
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
 });
@@ -23,7 +27,7 @@ onUnmounted(() => {
   <nav :class="['navbar', { visible: isVisible }]">
     <div class="navbar-content">
       <div class="logo">One Haven</div>
-      <button class="hamburger" @click="isMobileMenuOpen = !isMobileMenuOpen">
+      <button class="hamburger" @click="toggleMobileMenu">
         <span :class="{ open: isMobileMenuOpen }" />
         <span :class="{ open: isMobileMenuOpen }" />
         <span :class="{ open: isMobileMenuOpen }" />
@@ -35,11 +39,19 @@ onUnmounted(() => {
         <li class="nav-link"><a href="#contact">Contact</a></li>
       </ul>
     </div>
-    <ul class="nav-links" :class="{ open: isMobileMenuOpen }">
-      <li class="nav-link"><a href="#gamesAndEvents">Calendar</a></li>
-      <li class="nav-link"><a href="#menu">Menu</a></li>
-      <li class="nav-link"><a href="#about">About Us</a></li>
-      <li class="nav-link"><a href="#contact">Contact</a></li>
+    <ul class="nav-links-mobile" :class="{ open: isMobileMenuOpen }">
+      <li class="nav-link">
+        <a href="#gamesAndEvents" @click="toggleMobileMenu">Calendar</a>
+      </li>
+      <li class="nav-link">
+        <a href="#menu" @click="toggleMobileMenu">Menu</a>
+      </li>
+      <li class="nav-link">
+        <a href="#about" @click="toggleMobileMenu">About Us</a>
+      </li>
+      <li class="nav-link">
+        <a href="#contact" @click="toggleMobileMenu">Contact</a>
+      </li>
     </ul>
   </nav>
 </template>
@@ -82,7 +94,7 @@ onUnmounted(() => {
   color: #333;
 }
 
-.nav-links,
+.nav-links-mobile,
 .nav-links-desktop {
   list-style: none;
   padding: 0;
@@ -94,7 +106,7 @@ onUnmounted(() => {
   gap: 2rem;
 }
 
-.nav-links {
+.nav-links-mobile {
   display: none;
   flex-direction: column;
   align-items: flex-start;
@@ -107,7 +119,7 @@ onUnmounted(() => {
     padding 0.4s ease;
 }
 
-.nav-links.open {
+.nav-links-mobile.open {
   max-height: 300px;
   padding: 1rem 2rem;
 }
@@ -121,7 +133,7 @@ onUnmounted(() => {
   transform: translateY(-2px);
 }
 
-.nav-links a,
+.nav-links-mobile a,
 .nav-links-desktop a {
   display: block;
   padding: 5px;
@@ -147,7 +159,7 @@ onUnmounted(() => {
 }
 
 @media (max-width: 768px) {
-  .nav-links {
+  .nav-links-mobile {
     display: flex;
   }
 

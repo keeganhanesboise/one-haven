@@ -41,6 +41,67 @@ const setInstagramIcon = (src: string) => {
             style="border: 0"
             title="map"
             width="100%" />
+          <div
+            class="is-displayed-desktop-flex-l footer-container margin-top-10px">
+            <div>
+              <p class="footer-text copy-right-text">
+                {{ `© ${currentDate} One Haven. All rights reserved.` }}
+              </p>
+              <a class="footer-text">Privacy Policy</a>
+            </div>
+            <div class="social-container">
+              <a
+                class="social-icon-container"
+                href="https://www.instagram.com/one_haven5956/"
+                target="_blank"
+                @blur="
+                  setInstagramIcon(
+                    '/img/social-icons/Instagram_Glyph_White.svg'
+                  )
+                "
+                @focus="
+                  setInstagramIcon(
+                    '/img/social-icons/Instagram_Glyph_Gradient.svg'
+                  )
+                "
+                @mouseenter="
+                  setInstagramIcon(
+                    '/img/social-icons/Instagram_Glyph_Gradient.svg'
+                  )
+                "
+                @mouseleave="
+                  setInstagramIcon(
+                    '/img/social-icons/Instagram_Glyph_White.svg'
+                  )
+                ">
+                <img
+                  alt="Link to the One Haven Instagram"
+                  class="social-icon"
+                  :src="instagramIcon" />
+              </a>
+              <a
+                class="social-icon-container"
+                href="https://discord.gg/FWnQzgjr"
+                target="_blank"
+                @blur="
+                  setDiscordIcon('/img/social-icons/Discord-Symbol-White.svg')
+                "
+                @focus="
+                  setDiscordIcon('/img/social-icons/Discord-Symbol-Blurple.svg')
+                "
+                @mouseenter="
+                  setDiscordIcon('/img/social-icons/Discord-Symbol-Blurple.svg')
+                "
+                @mouseleave="
+                  setDiscordIcon('/img/social-icons/Discord-Symbol-White.svg')
+                ">
+                <img
+                  alt="Link to join the One Haven Discorg"
+                  class="social-icon"
+                  :src="discordIcon" />
+              </a>
+            </div>
+          </div>
         </div>
         <div class="info-container">
           <div class="address-container">
@@ -71,55 +132,61 @@ const setInstagramIcon = (src: string) => {
             </ul>
           </div>
         </div>
-      </div>
-      <div class="footer-container">
-        <div>
-          <p class="footer-text">
-            {{ `© ${currentDate} One Haven. All rights reserved.` }}
-          </p>
-          <a class="footer-text">Privacy Policy</a>
-        </div>
-        <div class="social-container">
-          <a
-            class="social-icon-container"
-            href="https://www.instagram.com/one_haven5956/"
-            target="_blank"
-            @blur="
-              setInstagramIcon('/img/social-icons/Instagram_Glyph_White.svg')
-            "
-            @focus="
-              setInstagramIcon('/img/social-icons/Instagram_Glyph_Gradient.svg')
-            "
-            @mouseenter="
-              setInstagramIcon('/img/social-icons/Instagram_Glyph_Gradient.svg')
-            "
-            @mouseleave="
-              setInstagramIcon('/img/social-icons/Instagram_Glyph_White.svg')
-            ">
-            <img
-              alt="Link to the One Haven Instagram"
-              class="social-icon"
-              :src="instagramIcon" />
-          </a>
-          <a
-            class="social-icon-container"
-            href="https://discord.gg/FWnQzgjr"
-            target="_blank"
-            @blur="setDiscordIcon('/img/social-icons/Discord-Symbol-White.svg')"
-            @focus="
-              setDiscordIcon('/img/social-icons/Discord-Symbol-Blurple.svg')
-            "
-            @mouseenter="
-              setDiscordIcon('/img/social-icons/Discord-Symbol-Blurple.svg')
-            "
-            @mouseleave="
-              setDiscordIcon('/img/social-icons/Discord-Symbol-White.svg')
-            ">
-            <img
-              alt="Link to join the One Haven Discorg"
-              class="social-icon"
-              :src="discordIcon" />
-          </a>
+        <div class="is-displayed-mobile-flex-l footer-container">
+          <div>
+            <p class="footer-text">
+              {{ `© ${currentDate} One Haven. All rights reserved.` }}
+            </p>
+            <a class="footer-text">Privacy Policy</a>
+          </div>
+          <div class="social-container">
+            <a
+              class="social-icon-container"
+              href="https://www.instagram.com/one_haven5956/"
+              target="_blank"
+              @blur="
+                setInstagramIcon('/img/social-icons/Instagram_Glyph_White.svg')
+              "
+              @focus="
+                setInstagramIcon(
+                  '/img/social-icons/Instagram_Glyph_Gradient.svg'
+                )
+              "
+              @mouseenter="
+                setInstagramIcon(
+                  '/img/social-icons/Instagram_Glyph_Gradient.svg'
+                )
+              "
+              @mouseleave="
+                setInstagramIcon('/img/social-icons/Instagram_Glyph_White.svg')
+              ">
+              <img
+                alt="Link to the One Haven Instagram"
+                class="social-icon"
+                :src="instagramIcon" />
+            </a>
+            <a
+              class="social-icon-container"
+              href="https://discord.gg/FWnQzgjr"
+              target="_blank"
+              @blur="
+                setDiscordIcon('/img/social-icons/Discord-Symbol-White.svg')
+              "
+              @focus="
+                setDiscordIcon('/img/social-icons/Discord-Symbol-Blurple.svg')
+              "
+              @mouseenter="
+                setDiscordIcon('/img/social-icons/Discord-Symbol-Blurple.svg')
+              "
+              @mouseleave="
+                setDiscordIcon('/img/social-icons/Discord-Symbol-White.svg')
+              ">
+              <img
+                alt="Link to join the One Haven Discorg"
+                class="social-icon"
+                :src="discordIcon" />
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -163,11 +230,7 @@ a {
   flex-wrap: wrap;
   font-size: 18px;
 }
-.address-container {
-  padding: 10px;
-}
 .hours-container {
-  padding: 10px;
   color: white;
   width: 250px;
 }
@@ -181,20 +244,22 @@ a {
 }
 .footer-text {
   font-size: 14px;
+  margin: 0;
+}
+.copy-right-text {
+  padding-bottom: 5px;
 }
 .footer-container {
-  display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  gap: 15px;
 }
 .social-container {
+  gap: 15px;
   height: 100%;
   display: flex;
   align-items: center;
-}
-.social-icon-container {
-  padding: 10px;
 }
 .social-icon {
   height: 30px;
@@ -202,13 +267,14 @@ a {
 @media (max-width: 768px) {
   .contact-content-container {
     flex-direction: column;
+    gap: 15px;
   }
   .map-container,
   .info-container {
-    width: auto;
+    width: 100%;
   }
-  .footer-container {
-    padding: 10px;
+  .social-container {
+    gap: 10px;
   }
 }
 @media (max-width: 480px) {

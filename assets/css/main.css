@@ -17,7 +17,10 @@ a {
   cursor: pointer;
 }
 
-.is-displayed-desktop {
+.is-displayed-desktop,
+.is-displayed-desktop-l,
+.is-displayed-desktop-flex,
+.is-displayed-desktop-flex-l {
   display: none;
 }
 
@@ -25,20 +28,24 @@ a {
   .is-displayed-desktop {
     display: block;
   }
-}
-
-.is-displayed-desktop-l {
-  display: none;
+  .is-displayed-desktop-flex {
+    display: flex;
+  }
 }
 
 @media (min-width: 769px) {
   .is-displayed-desktop-l {
     display: block;
   }
+  .is-displayed-desktop-flex-l {
+    display: flex;
+  }
 }
 
 .is-displayed-mobile,
-.is-displayed-mobile-flex {
+.is-displayed-mobile-l,
+.is-displayed-mobile-flex,
+.is-displayed-mobile-flex-l {
   display: none;
 }
 
@@ -47,6 +54,15 @@ a {
     display: block;
   }
   .is-displayed-mobile-flex {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .is-displayed-mobile-l {
+    display: block;
+  }
+  .is-displayed-mobile-flex-l {
     display: flex;
   }
 }
@@ -71,7 +87,10 @@ h6 {
   font-family: 'Baskerville Old Face', serif;
 }
 
-p, li, address, a {
+p,
+li,
+address,
+a {
   font-size: 18px;
 }
 
@@ -84,7 +103,10 @@ h2 {
 }
 
 @media (max-width: 768px) {
-  p, li, address, a {
+  p,
+  li,
+  address,
+  a {
     font-size: 16px;
   }
   h1 {
@@ -118,4 +140,8 @@ button {
     height: 20px;
     padding: 10px;
   }
+}
+
+.margin-top-10px {
+  margin-top: 10px;
 }

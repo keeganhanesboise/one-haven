@@ -83,9 +83,9 @@ let contentfulClient: any;
       color-primary="lilac"
       color-secondary="whitesmoke"
       :games-and-events-info="gamesAndEventsInfo"
-      separator-bottom="true"
+      :separator-bottom="true"
       separator-color="#6b667a"
-      separator-top="true" />
+      :separator-top="true" />
     <Menu id="menu" color-primary="whitesmoke" :menus="menus" />
     <AboutUs
       id="about"
@@ -94,9 +94,9 @@ let contentfulClient: any;
       color-primary="cranberry"
       color-secondary="whitesmoke"
       max-width-size="medium"
-      separator-bottom="true"
+      :separator-bottom="true"
       separator-color="#a63d40"
-      separator-top="true" />
+      :separator-top="true" />
     <ImgCarousel
       id="imgCarousel"
       color-primary="whitesmoke"
@@ -107,7 +107,7 @@ let contentfulClient: any;
       color-secondary="whitesmoke"
       max-width-size="medium"
       separator-color="#104241"
-      separator-top="true"
+      :separator-top="true"
       :store-hours="storeHours" />
   </div>
 </template>

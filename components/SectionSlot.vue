@@ -112,6 +112,7 @@ const sectionSecondaryMaxWidth = computed(() => props.maxWidthSize);
   height: 8vw;
   line-height: 0;
   padding: 0;
+  overflow: initial;
   border: none;
   background: none;
 }

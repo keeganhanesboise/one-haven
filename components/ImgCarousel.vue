@@ -4,9 +4,6 @@ const props = defineProps<{
 }>();
 
 const slideSize = 6;
-const numberOfSlides = props?.images?.length
-  ? Math.ceil(props.images.length / slideSize)
-  : 0;
 
 const startIndex = ref(0);
 const slideIndex = ref(0);
@@ -14,6 +11,10 @@ const showModal = ref(false);
 const openedImg = ref('');
 const touchStartX = ref(0);
 const touchEndX = ref(0);
+
+const numberOfSlides = computed(() =>
+  props?.images?.length ? Math.ceil(props.images.length / slideSize) : 0
+);
 
 const currentImages = computed(() => {
   if (props.images && props.images.length > 0) {
@@ -47,7 +48,7 @@ function prevSlide(): void {
     if (newIndex < 0) {
       startIndex.value =
         Math.floor(props.images.length / slideSize) * slideSize;
-      slideIndex.value = numberOfSlides;
+      slideIndex.value = numberOfSlides.value;
     } else {
       startIndex.value = newIndex;
       slideIndex.value--;

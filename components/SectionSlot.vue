@@ -46,7 +46,7 @@ const sectionSecondaryMaxWidth = computed(() => props.maxWidthSize);
       viewBox="0 0 900 50"
       xmlns="http://www.w3.org/2000/svg">
       <path
-        d="M709,40l-187.3-27.5c-46.6-8.1-97.5-8.6-144.8-1.5h0C252.7,29.5,118.6,25.6,0,0v50h900v-30c-59.1,19.1-132.5,28.1-191,20Z" />
+        d="M709.04,40l-187.27-27.51c-46.63-8.07-97.51-8.61-144.84-1.53h0C252.74,29.55,118.61,25.58,0,0v60h900v-30c-59.05,19.06-132.53,18.06-190.96,10Z" />
     </svg>
     <div class="section-container-primary" :class="sectionBackgroundPrimary">
       <div
@@ -114,8 +114,6 @@ const sectionSecondaryMaxWidth = computed(() => props.maxWidthSize);
   padding: 0;
   border: none;
   background: none;
-  margin-bottom: -1px;
-  margin-top: -1px;
 }
 
 .section-background-white {

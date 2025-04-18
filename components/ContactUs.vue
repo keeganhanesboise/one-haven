@@ -139,7 +139,7 @@ const setInstagramIcon = (src: string) => {
             <p class="footer-text">
               {{ `© ${currentDate} One Haven. All rights reserved.` }}
             </p>
-            <a class="footer-text">Privacy Policy</a>
+            <a class="footer-text" href="/privacy">Privacy Policy</a>
           </div>
           <div class="social-container">
             <a

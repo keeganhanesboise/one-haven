@@ -33,7 +33,8 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
-        { rel: 'mask-icon', href: '/safari-pinned-tab.svg' }
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#000' }
       ]
     }
   },

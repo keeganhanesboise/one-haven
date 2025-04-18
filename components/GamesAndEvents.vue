@@ -135,7 +135,7 @@ p {
   margin: 0;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1280px) {
   .games-and-events-container {
     flex-direction: column;
     justify-content: center;

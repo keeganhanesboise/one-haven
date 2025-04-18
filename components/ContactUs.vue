@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { DateTime } from 'luxon';
+
 import type { DayHoursEntry } from '~/types/contentful';
 
 defineProps<{
@@ -10,8 +12,8 @@ const discordIcon = ref('/img/social-icons/Discord-Symbol-White.svg');
 const instagramIcon = ref('/img/social-icons/Instagram_Glyph_White.svg');
 
 onMounted(async () => {
-  const today = new Date();
-  currentDate.value = today.getFullYear();
+  const today = DateTime.local();
+  currentDate.value = today.year;
 });
 
 const setDiscordIcon = (src: string) => {

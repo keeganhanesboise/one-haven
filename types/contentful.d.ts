@@ -10,10 +10,20 @@ export interface CalendarEvent {
   duration: number;
   recurrenceRule: string;
   recurrenceEndDate: string;
+  exceptionDates?: ExceptionDateEntry[];
 }
 
 export type CalendarEventEntry = Entry<CalendarEvent> & {
   fields: CalendarEvent;
+};
+
+export interface ExceptionDate {
+  title: string;
+  date: string;
+}
+
+export type ExceptionDateEntry = Entry<ExceptionDate> & {
+  fields: ExceptionDate;
 };
 
 export interface CalendarDisplayEvent {

@@ -6,7 +6,8 @@ import { DateTime } from 'luxon';
 import { useRichTextRenderer } from '~/composables/useRichTextRenderer';
 import type {
   CalendarDisplayEvent,
-  CalendarEventEntry
+  CalendarEventEntry,
+  ExceptionDateEntry
 } from '~/types/contentful';
 
 const props = defineProps<{
@@ -28,6 +29,15 @@ const formattedMonthYear = computed(() => {
   ).toLocaleString({ month: 'long', year: 'numeric' });
 });
 
+const isDateExcludedFromRecurringEvent = (
+  excludedDates: (DateTime<true> | DateTime<false>)[],
+  occurrenceDate: DateTime<true> | DateTime<false>
+): boolean => {
+  return excludedDates
+    .map((date) => date.toISODate())
+    .includes(occurrenceDate.toISODate());
+};
+
 const generateDisplayEvents = (
   events: CalendarEventEntry[],
   year: number,
@@ -44,6 +54,7 @@ const generateDisplayEvents = (
 
   events.forEach((event) => {
     const {
+      exceptionDates,
       recurrenceRule,
       recurrenceEndDate,
       name,
@@ -102,8 +113,23 @@ const generateDisplayEvents = (
         zone: 'America/Denver'
       });
 
+      // gather any dates this recurring event should be excluded from
+      let convertedExceptionDates: (DateTime<true> | DateTime<false>)[] = [];
+      if (exceptionDates && exceptionDates.length) {
+        convertedExceptionDates = exceptionDates.map(
+          (entry: ExceptionDateEntry) =>
+            DateTime.fromISO(entry.fields.date, { zone: 'America/Denver' })
+        );
+      }
+
       while (recurrenceDate <= recurrenceEnd) {
-        if (recurrenceDate >= monthStart) {
+        if (
+          recurrenceDate >= monthStart &&
+          !isDateExcludedFromRecurringEvent(
+            convertedExceptionDates,
+            recurrenceDate
+          )
+        ) {
           calendarDisplayEvents.push({
             id: name + recurrenceDate,
             name: name,
@@ -285,7 +311,9 @@ function closeDay(): void {
               </div>
             </li>
           </ul>
-          <div v-if="getEventsForDay(day).length > 2" class="more-events">
+          <div
+            v-if="getEventsForDay(day).length > 2"
+            class="more-events is-displayed-desktop-l">
             +{{ getEventsForDay(day).length - 2 }} more
           </div>
         </div>
@@ -394,7 +422,6 @@ function closeDay(): void {
 }
 
 .more-events {
-  display: inline-block;
   height: 16px;
   font-size: 0.8rem;
 }

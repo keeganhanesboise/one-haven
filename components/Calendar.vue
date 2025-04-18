@@ -364,18 +364,6 @@ function closeDay(): void {
   cursor: pointer;
 }
 
-.day.has-event::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 0;
-  height: 0;
-  border-top: 15px solid #bc4749;
-  border-left: 15px solid transparent;
-  z-index: 1;
-}
-
 .today {
   background: #e0e0e0;
 }

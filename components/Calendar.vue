@@ -157,7 +157,7 @@ const hasEvent = (day: number | null): boolean | undefined => {
 const getEventsForDay = (day: number | null): CalendarDisplayEvent[] => {
   return displayedEvents.value
     .filter((event) => event.dayOfMonth === day)
-    .map((event) => event);
+    .sort((a, b) => a.startDate - b.startDate);
 };
 
 const daysInMonth = computed(() => {

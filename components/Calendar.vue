@@ -275,14 +275,19 @@ function closeDay(): void {
           <span v-if="day" class="day-number">
             {{ day }}
           </span>
-          <ul v-if="hasEvent(day)" class="is-displayed-desktop-l">
-            <li v-for="event in getEventsForDay(day)" :key="event.id">
+          <ul v-if="hasEvent(day)" class="events-list is-displayed-desktop-l">
+            <li
+              v-for="event in getEventsForDay(day).slice(0, 2)"
+              :key="event.id">
               <div class="event">
                 <span class="event-time">{{ event.startTime }}</span>
                 {{ event.name }}
               </div>
             </li>
           </ul>
+          <div v-if="getEventsForDay(day).length > 2" class="more-events">
+            +{{ getEventsForDay(day).length - 2 }} more
+          </div>
         </div>
       </div>
     </transition>
@@ -368,6 +373,11 @@ function closeDay(): void {
   background: #e0e0e0;
 }
 
+.events-list {
+  max-height: 72px;
+  overflow: hidden;
+}
+
 .event {
   display: flex;
   flex-direction: column;
@@ -381,6 +391,12 @@ function closeDay(): void {
 
 .event-time {
   font-weight: bold;
+}
+
+.more-events {
+  display: inline-block;
+  height: 16px;
+  font-size: 0.8rem;
 }
 
 .calendar-error-message {

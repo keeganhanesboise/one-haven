@@ -48,7 +48,7 @@ function prevSlide(): void {
     if (newIndex < 0) {
       startIndex.value =
         Math.floor(props.images.length / slideSize) * slideSize;
-      slideIndex.value = numberOfSlides.value;
+      slideIndex.value = numberOfSlides.value - 1;
     } else {
       startIndex.value = newIndex;
       slideIndex.value--;

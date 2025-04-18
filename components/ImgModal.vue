@@ -25,4 +25,10 @@ defineProps<{
   position: relative;
   animation: scale-in 0.3s ease;
 }
+
+@media (max-width: 480px) {
+  .modal-img-container {
+    width: 85%;
+  }
+}
 </style>

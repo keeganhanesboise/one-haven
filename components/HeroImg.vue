@@ -76,7 +76,7 @@
   list-style: none;
 }
 @media (min-width: 1024px) {
-  .call-to-actions > li {
+  .call-to-actions > li > a {
     padding: 20px;
   }
   #logo {

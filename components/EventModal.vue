@@ -12,7 +12,8 @@ defineProps<{
 <template>
   <Modal
     :is-visible="isVisible"
-    modal-container-secondary-class="modal-events-container">
+    modal-container-primary-class="modal-events-primary-container"
+    modal-container-secondary-class="modal-events-secondary-container">
     <ul class="modal-scroll">
       <li v-for="event in events" :key="event.id">
         <img v-if="event.iconUrl" id="eventImg" alt="" :src="event.iconUrl" />
@@ -54,7 +55,14 @@ ul li:not(:last-child) {
 </style>
 
 <style>
-.modal-events-container {
+.modal-events-primary-container {
+  display: flex;
+  justify-content: center;
+  padding: 25px;
+  width: 100%;
+}
+
+.modal-events-secondary-container {
   background-color: #fff;
   border-radius: 12px;
   padding: 1.5rem;

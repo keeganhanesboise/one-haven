@@ -1,6 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   isVisible: boolean;
+  modalContainerPrimaryClass?: string;
   modalContainerSecondaryClass?: string;
 }>();
 
@@ -22,7 +23,7 @@ function closeModal() {
         @click.self="closeModal"
         @keydown.enter="closeModal">
         <div
-          class="modal-container-primary"
+          :class="modalContainerPrimaryClass"
           role="button"
           tabindex="0"
           @click.self="closeModal"
@@ -66,14 +67,8 @@ function closeModal() {
   z-index: 1000;
 }
 
-.modal-container-primary {
-  display: flex;
-  justify-content: center;
-  padding: 25px;
-  width: 100%;
-}
-
 .modal-content {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -91,13 +86,27 @@ function closeModal() {
 }
 
 .close-button {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: transparent;
-  border: none;
+  width: 32px;
+  height: 32px;
+  color: black;
+  background: white;
+  border-radius: 50%;
   font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  color: #333;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+@media (max-width: 768px) {
+  .close-button {
+    width: 24px;
+    height: 24px;
+  }
 }
 </style>

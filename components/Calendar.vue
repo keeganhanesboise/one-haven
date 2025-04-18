@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Document } from '@contentful/rich-text-types';
 import { BLOCKS } from '@contentful/rich-text-types';
+import { DateTime } from 'luxon';
 
 import { useRichTextRenderer } from '~/composables/useRichTextRenderer';
 import type {
@@ -21,10 +22,10 @@ const showModal = ref<boolean>(false);
 const openedEvents = ref<CalendarDisplayEvent[]>([]);
 
 const formattedMonthYear = computed(() => {
-  return new Date(selectedYear.value, selectedMonth.value).toLocaleString(
-    'default',
-    { month: 'long', year: 'numeric' }
-  );
+  return DateTime.fromObject(
+    { year: selectedYear.value, month: selectedMonth.value },
+    { locale: 'en-US' }
+  ).toLocaleString({ month: 'long', year: 'numeric' });
 });
 
 const generateDisplayEvents = (
@@ -34,9 +35,12 @@ const generateDisplayEvents = (
 ): CalendarDisplayEvent[] => {
   const calendarDisplayEvents: CalendarDisplayEvent[] = [];
 
-  const monthStart = new Date(year, month, 1);
-  const monthEnd = new Date(year, month + 1, 1);
-  monthEnd.setHours(0, 0, 0, 0);
+  const monthStart = DateTime.fromObject(
+    { year, month: month, day: 1 },
+    { zone: 'America/Denver' }
+  );
+
+  const monthEnd = monthStart.plus({ months: 1 });
 
   events.forEach((event) => {
     const {
@@ -55,18 +59,11 @@ const generateDisplayEvents = (
       iconUrl = icon.fields.file.url as string;
     }
 
-    const occurrenceDate = new Date(startDate);
-    const endDate = new Date(startDate);
-    endDate.setHours(endDate.getHours() + duration);
+    const occurrenceDate = DateTime.fromISO(startDate, {
+      zone: 'America/Denver'
+    });
 
-    const timeOptions: Intl.DateTimeFormatOptions = {
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true,
-      timeZone: 'America/Denver'
-    };
-
-    const timeFormatter = new Intl.DateTimeFormat('en-US', timeOptions);
+    const endDate = occurrenceDate.plus({ hours: duration });
 
     const emptyDocument: Document = {
       nodeType: BLOCKS.DOCUMENT,
@@ -84,9 +81,9 @@ const generateDisplayEvents = (
           description: useRichTextRenderer(description ?? emptyDocument, {}),
           iconUrl: iconUrl,
           startDate: occurrenceDate,
-          startTime: timeFormatter.format(occurrenceDate),
-          endTime: timeFormatter.format(endDate),
-          dayOfMonth: occurrenceDate.getDate(),
+          startTime: occurrenceDate.toLocaleString(DateTime.TIME_SIMPLE),
+          endTime: endDate.toLocaleString(DateTime.TIME_SIMPLE),
+          dayOfMonth: occurrenceDate.day,
           endDate: endDate
         });
       }
@@ -94,37 +91,39 @@ const generateDisplayEvents = (
       // event is recurring, find out which dates it occurs this month based on it's initial start day
     } else {
       let recurrenceEnd = recurrenceEndDate
-        ? new Date(recurrenceEndDate)
+        ? DateTime.fromISO(recurrenceEndDate, {
+            zone: 'America/Denver'
+          })
         : monthEnd;
 
       if (recurrenceEnd > monthEnd) recurrenceEnd = monthEnd;
 
-      const recurrenceDate = new Date(occurrenceDate);
+      let recurrenceDate = DateTime.fromISO(startDate, {
+        zone: 'America/Denver'
+      });
 
       while (recurrenceDate <= recurrenceEnd) {
         if (recurrenceDate >= monthStart) {
           calendarDisplayEvents.push({
-            id: name + new Date(recurrenceDate),
+            id: name + recurrenceDate,
             name: name,
             summary: summary,
             description: useRichTextRenderer(description ?? emptyDocument, {}),
             iconUrl: iconUrl,
-            startDate: new Date(recurrenceDate),
-            startTime: timeFormatter.format(occurrenceDate),
-            endTime: timeFormatter.format(endDate),
-            dayOfMonth: recurrenceDate.getDate(),
-            endDate: new Date(
-              recurrenceDate.getTime() + duration * 60 * 60 * 1000
-            )
+            startDate: recurrenceDate,
+            startTime: occurrenceDate.toLocaleString(DateTime.TIME_SIMPLE),
+            endTime: endDate.toLocaleString(DateTime.TIME_SIMPLE),
+            dayOfMonth: recurrenceDate.day,
+            endDate: recurrenceDate.plus({ hours: duration })
           });
         }
 
         if (recurrenceRule.includes('Weekly')) {
-          recurrenceDate.setDate(recurrenceDate.getDate() + 7);
+          recurrenceDate = recurrenceDate.plus({ week: 1 });
         } else if (recurrenceRule.includes('Bi-Weekly')) {
-          recurrenceDate.setDate(recurrenceDate.getDate() + 14);
+          recurrenceDate = recurrenceDate.plus({ week: 2 });
         } else if (recurrenceRule.includes('Monthly')) {
-          recurrenceDate.setMonth(recurrenceDate.getMonth() + 1);
+          recurrenceDate = recurrenceDate.plus({ month: 1 });
         } else {
           console.error(
             'There was a problem with the events recurrence rule: ' +
@@ -162,11 +161,20 @@ const getEventsForDay = (day: number | null): CalendarDisplayEvent[] => {
 };
 
 const daysInMonth = computed(() => {
-  return new Date(selectedYear.value, selectedMonth.value + 1, 0).getDate();
+  const date = DateTime.fromObject({
+    year: selectedYear.value,
+    month: selectedMonth.value
+  });
+  return date.isValid ? date.daysInMonth : 0;
 });
 
 const firstDayOfMonth = computed(() => {
-  return new Date(selectedYear.value, selectedMonth.value, 1).getDay(); // 0 = Sunday
+  const firstDay = DateTime.fromObject({
+    year: selectedYear.value,
+    month: selectedMonth.value,
+    day: 1
+  }).weekday;
+  return firstDay === 7 ? 0 : firstDay; // Converts 7 (Sunday) to 0
 });
 
 const calendarDays = computed(() => {
@@ -186,21 +194,21 @@ const calendarDays = computed(() => {
 });
 
 const isToday = (day: number | null): boolean => {
-  const today = new Date();
+  const today = DateTime.local();
   return (
-    day === today.getDate() &&
-    selectedMonth.value === today.getMonth() &&
-    selectedYear.value === today.getFullYear()
+    day === today.day &&
+    selectedMonth.value === today.month &&
+    selectedYear.value === today.year
   );
 };
 
 const changeMonth = (offset: number) => {
   const newMonth = selectedMonth.value + offset;
   if (newMonth < 0) {
-    selectedMonth.value = 11;
+    selectedMonth.value = 12;
     selectedYear.value -= 1;
-  } else if (newMonth > 11) {
-    selectedMonth.value = 0;
+  } else if (newMonth > 12) {
+    selectedMonth.value = 1;
     selectedYear.value += 1;
   } else {
     selectedMonth.value = newMonth;
@@ -259,7 +267,7 @@ function closeDay(): void {
           v-for="(day, index) in calendarDays"
           :key="index"
           class="day"
-          :class="{ 'has-event': hasEvent(day), 'today': isToday(day) }"
+          :class="{ 'has-event': hasEvent(day), today: isToday(day) }"
           role="button"
           tabindex="0"
           @click="hasEvent(day) ? openDay(day) : null"
@@ -357,7 +365,7 @@ function closeDay(): void {
 }
 
 .day.has-event::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   right: 0;

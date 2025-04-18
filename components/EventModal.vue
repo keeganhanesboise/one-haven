@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { DateTime } from 'luxon';
+
 import type { CalendarDisplayEvent } from '~/types/contentful';
 
 defineProps<{
@@ -17,7 +19,9 @@ defineProps<{
         <h2>{{ event.name }}</h2>
         <h3>
           {{
-            new Date(event.startDate).toDateString() +
+            DateTime.fromISO(event.startDate)
+              .setZone('America/Denver')
+              .toLocaleString(DateTime.DATE_FULL) +
             ' ' +
             event.startTime +
             ' - ' +

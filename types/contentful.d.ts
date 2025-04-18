@@ -22,11 +22,11 @@ export interface CalendarDisplayEvent {
   summary: string;
   description?: string | undefined;
   iconUrl?: string;
-  startDate: Date;
+  startDate: DateTime<true> | DateTime<false>;
   startTime: string;
   endTime: string;
   dayOfMonth: number;
-  endDate: Date;
+  endDate: DateTime<true> | DateTime<false>;
 }
 
 export interface HomePage {

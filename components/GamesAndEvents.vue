@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { DateTime } from 'luxon';
+
 import { useContentful } from '~/composables/useContentful';
 import type { CalendarEventEntry } from '~/types/contentful';
 
@@ -40,9 +42,9 @@ const getEvents = async (): Promise<void> => {
 };
 
 onMounted(async () => {
-  const currentDate = new Date();
-  currentYear.value = currentDate.getFullYear();
-  currentMonth.value = currentDate.getMonth();
+  const currentDate = DateTime.local();
+  currentYear.value = currentDate.year;
+  currentMonth.value = currentDate.month;
   await getEvents();
 });
 </script>

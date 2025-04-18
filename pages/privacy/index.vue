@@ -123,3 +123,9 @@ let contentfulClient: any;
     :separator-top="true"
     :store-hours="storeHours" />
 </template>
+
+<style scoped>
+a {
+  overflow-wrap: break-word;
+}
+</style>

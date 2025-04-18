@@ -5,7 +5,7 @@ export interface CalendarEvent {
   name: string;
   summary: string;
   description?: Document;
-  icon?: Asset;
+  image?: Asset;
   startDate: string;
   duration: number;
   recurrenceRule: string;
@@ -31,7 +31,7 @@ export interface CalendarDisplayEvent {
   name: string;
   summary: string;
   description?: string | undefined;
-  iconUrl?: string;
+  imageUrl?: string;
   startDate: DateTime<true> | DateTime<false>;
   startTime: string;
   endTime: string;

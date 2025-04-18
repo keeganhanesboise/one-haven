@@ -62,12 +62,12 @@ const generateDisplayEvents = (
       summary,
       startDate,
       description,
-      icon
+      image
     } = event.fields;
 
-    let iconUrl: string = '';
-    if (icon && icon.fields.file?.url) {
-      iconUrl = icon.fields.file.url as string;
+    let imageUrl: string = '';
+    if (image && image.fields.file?.url) {
+      imageUrl = image.fields.file.url as string;
     }
 
     const occurrenceDate = DateTime.fromISO(startDate, {
@@ -90,7 +90,7 @@ const generateDisplayEvents = (
           name: name,
           summary: summary,
           description: useRichTextRenderer(description ?? emptyDocument, {}),
-          iconUrl: iconUrl,
+          imageUrl: imageUrl,
           startDate: occurrenceDate,
           startTime: occurrenceDate.toLocaleString(DateTime.TIME_SIMPLE),
           endTime: endDate.toLocaleString(DateTime.TIME_SIMPLE),
@@ -135,7 +135,7 @@ const generateDisplayEvents = (
             name: name,
             summary: summary,
             description: useRichTextRenderer(description ?? emptyDocument, {}),
-            iconUrl: iconUrl,
+            imageUrl: imageUrl,
             startDate: recurrenceDate,
             startTime: occurrenceDate.toLocaleString(DateTime.TIME_SIMPLE),
             endTime: endDate.toLocaleString(DateTime.TIME_SIMPLE),

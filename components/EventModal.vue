@@ -16,7 +16,7 @@ defineProps<{
     modal-container-secondary-class="modal-events-secondary-container">
     <ul class="modal-scroll">
       <li v-for="event in events" :key="event.id">
-        <img v-if="event.iconUrl" id="eventImg" alt="" :src="event.iconUrl" />
+        <img v-if="event.imageUrl" id="eventImg" alt="" :src="event.imageUrl" />
         <h2>{{ event.name }}</h2>
         <h3>
           {{

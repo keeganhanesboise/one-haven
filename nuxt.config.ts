@@ -17,7 +17,7 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'en'
       },
-      title: 'One Haven Coffee',
+      title: 'One Haven',
       meta: [
         {
           name: 'description',

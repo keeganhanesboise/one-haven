@@ -1,10 +1,12 @@
 <script setup lang="ts">
-const props = defineProps({
-  hideInitially: {
-    type: Boolean,
-    default: false
+const props = withDefaults(
+  defineProps<{
+    hideInitially?: boolean;
+  }>(),
+  {
+    hideInitially: false
   }
-});
+);
 
 const isVisible = ref(!props.hideInitially);
 const isMobileMenuOpen = ref(false);

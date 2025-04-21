@@ -1,30 +1,23 @@
 <script setup lang="ts">
-const props = defineProps({
-  colorPrimary: {
-    type: String,
-    default: 'white'
-  },
-  colorSecondary: {
-    type: String,
-    default: 'white'
-  },
-  separatorTop: {
-    type: Boolean,
-    default: false
-  },
-  separatorBottom: {
-    type: Boolean,
-    default: false
-  },
-  separatorColor: {
-    type: String,
-    default: 'white'
-  },
-  maxWidthSize: {
-    type: String,
-    default: 'large'
+const props = withDefaults(
+  defineProps<{
+    colorPrimary?: string;
+    colorSecondary?: string;
+    separatorTop?: boolean;
+    separatorBottom?: boolean;
+    separatorColor?: string;
+    maxWidthSize?: string;
+  }>(),
+  {
+    colorPrimary: 'white',
+    colorSecondary: 'white',
+    separatorTop: false,
+    separatorBottom: false,
+    separatorColor: 'white',
+    maxWidthSize: 'large'
   }
-});
+);
+
 const sectionBackgroundPrimary = computed(
   () => `section-background-${props.colorPrimary}`
 );

@@ -7,6 +7,7 @@ defineProps<{
 <template>
   <SectionSlot>
     <div class="menu-container">
+      <h2 class="sr-only">Menus</h2>
       <div class="menu-img-container">
         <div v-for="menu in menus" :key="menu" class="menu">
           <img alt="" class="menu-img" :src="menu" />

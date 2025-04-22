@@ -34,15 +34,13 @@ const setInstagramIcon = (src: string) => {
       <div class="contact-content-container">
         <div class="map-container">
           <iframe
+            id="googleMaps"
             allow="fullscreen"
             height="450"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            sandbox="allow-scripts allow-same-origin allow-popups"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3104.0396103642324!2d-104.7196247226171!3d38.91432037172041!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87134931a0d1dbad%3A0xcd57e855790dcef5!2sOne%20Haven!5e0!3m2!1sen!2sus!4v1743550471671!5m2!1sen!2sus"
-            style="border: 0"
-            title="map"
-            width="100%" />
+            title="map" />
           <div
             class="is-displayed-desktop-flex-l footer-container margin-top-10px">
             <div>
@@ -196,6 +194,10 @@ const setInstagramIcon = (src: string) => {
 </template>
 
 <style scoped>
+#googleMaps {
+  border: 0;
+  width: 100%;
+}
 address {
   font-style: normal;
   font-family: 'lato', serif;

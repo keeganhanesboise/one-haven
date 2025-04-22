@@ -9,7 +9,7 @@ import type { DayHoursEntry, HomePageEntry } from '~/types/contentful';
 
 const homePageContent = ref<HomePageEntry | null>(null);
 const gamesAndEventsInfo = ref('');
-const menus = ref(['']);
+const menus = ref<string[]>([]);
 const aboutUsInfo = ref('');
 const aboutUsImage = ref('');
 const imageCarousel = ref(['']);
@@ -85,8 +85,9 @@ let contentfulClient: any;
     :separator-bottom="true"
     separator-color="#6b667a"
     :separator-top="true" />
-  <Menu id="menu" color-primary="whitesmoke" :menus="menus" />
+  <Menu v-if="menus" id="menu" color-primary="whitesmoke" :menus="menus" />
   <AboutUs
+    v-if="aboutUsImage && aboutUsInfo"
     id="about"
     :about-us-image="aboutUsImage"
     :about-us-info="aboutUsInfo"

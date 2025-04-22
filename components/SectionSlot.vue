@@ -31,7 +31,6 @@ const sectionSecondaryMaxWidth = computed(() => props.maxWidthSize);
   <section>
     <svg
       v-if="separatorTop"
-      id="sectionSeparator"
       class="section-separator"
       :class="sectionBackgroundSecondary"
       :fill="separatorColor"
@@ -50,7 +49,6 @@ const sectionSecondaryMaxWidth = computed(() => props.maxWidthSize);
     </div>
     <svg
       v-if="separatorBottom"
-      id="sectionSeparatorBottom"
       class="section-separator"
       :class="sectionBackgroundSecondary"
       :fill="separatorColor"

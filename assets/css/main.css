@@ -7,14 +7,16 @@ html {
   scroll-behavior: smooth;
 }
 
-ul,
-li,
-a {
-  all: unset;
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 a {
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 .is-displayed-desktop,
@@ -118,8 +120,9 @@ h2 {
 }
 
 button {
-  all: unset;
   cursor: pointer;
+  background: none;
+  border: none;
 }
 
 .navigation-button {

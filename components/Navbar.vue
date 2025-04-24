@@ -37,17 +37,25 @@ onUnmounted(() => {
 <template>
   <nav :class="['navbar', { visible: isVisible }]">
     <div class="navbar-content">
-      <a class="logo" href="/">One Haven</a>
+      <a class="logo" href="/" @focus="isVisible = true">One Haven</a>
       <button class="hamburger" @click="toggleMobileMenu">
         <span :class="{ open: isMobileMenuOpen }" />
         <span :class="{ open: isMobileMenuOpen }" />
         <span :class="{ open: isMobileMenuOpen }" />
       </button>
       <ul class="nav-links-desktop">
-        <li class="nav-link"><a href="/#gamesAndEvents">Calendar</a></li>
-        <li class="nav-link"><a href="/#menu">Menu</a></li>
-        <li class="nav-link"><a href="/#about">About Us</a></li>
-        <li class="nav-link"><a href="/#contact">Contact</a></li>
+        <li class="nav-link">
+          <a href="/#gamesAndEvents" @focus="isVisible = true">Calendar</a>
+        </li>
+        <li class="nav-link">
+          <a href="/#menu" @focus="isVisible = true">Menu</a>
+        </li>
+        <li class="nav-link">
+          <a href="/#about" @focus="isVisible = true">About Us</a>
+        </li>
+        <li class="nav-link">
+          <a href="/#contact" @focus="isVisible = true">Contact</a>
+        </li>
       </ul>
     </div>
     <ul class="nav-links-mobile" :class="{ open: isMobileMenuOpen }">

@@ -103,7 +103,7 @@ function closeImg(): void {
             <img
               v-if="image"
               alt=""
-              class="img"
+              class="carousel-img"
               role="button"
               :src="image"
               tabindex="0"
@@ -186,7 +186,7 @@ function closeImg(): void {
   align-items: center;
   border-radius: 8px;
 }
-.img {
+.carousel-img {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -197,8 +197,10 @@ function closeImg(): void {
   transition: transform 0.3s ease;
   cursor: pointer;
 }
-.img:hover {
+.carousel-img:hover,
+img:focus-visible {
   transform: translate(-50%, -50%) scale(1.05);
+  outline: none;
 }
 @media (max-width: 767px) {
   .img-container {

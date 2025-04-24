@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  currentDate: string | undefined;
+  currentDate: number | undefined;
   instagramIcon: string;
   discordIcon: string;
   setInstagramIcon: (src: string) => void;

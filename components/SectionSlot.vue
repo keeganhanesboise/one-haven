@@ -18,13 +18,13 @@ const props = withDefaults(
   }
 );
 
-const sectionBackgroundPrimary = computed(
+const sectionBackgroundPrimary = computed<string>(
   () => `section-background-${props.colorPrimary}`
 );
-const sectionBackgroundSecondary = computed(
+const sectionBackgroundSecondary = computed<string>(
   () => `section-background-${props.colorSecondary}`
 );
-const sectionSecondaryMaxWidth = computed(() => props.maxWidthSize);
+const sectionSecondaryMaxWidth = computed<string>(() => props.maxWidthSize);
 </script>
 
 <template>

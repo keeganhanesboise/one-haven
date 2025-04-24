@@ -10,7 +10,7 @@ defineProps<{
     :is-visible="isVisible"
     modal-container-primary-class="modal-img-primary-container"
     modal-container-secondary-class="modal-img-secondary-container">
-    <img class="modal-img" alt="" :src="image" />
+    <img alt="" class="modal-img" :src="image" />
   </Modal>
 </template>
 

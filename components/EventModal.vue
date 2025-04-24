@@ -7,6 +7,13 @@ defineProps<{
   events: CalendarDisplayEvent[] | undefined;
   isVisible: boolean;
 }>();
+
+const createEventDateHeader = (event: CalendarDisplayEvent): string => {
+  const dateString = DateTime.fromISO(event.startDate)
+    .setZone('America/Denver')
+    .toLocaleString(DateTime.DATE_FULL);
+  return dateString + ' ' + event.startTime + ' - ' + event.endTime;
+};
 </script>
 
 <template>
@@ -19,15 +26,7 @@ defineProps<{
         <img v-if="event.imageUrl" id="eventImg" alt="" :src="event.imageUrl" />
         <h2>{{ event.name }}</h2>
         <h3>
-          {{
-            DateTime.fromISO(event.startDate)
-              .setZone('America/Denver')
-              .toLocaleString(DateTime.DATE_FULL) +
-            ' ' +
-            event.startTime +
-            ' - ' +
-            event.endTime
-          }}
+          {{ createEventDateHeader(event) }}
         </h3>
         <p>{{ event.summary }}</p>
         <p v-html="event.description" />

@@ -3,20 +3,20 @@ const props = defineProps<{
   images?: string[];
 }>();
 
-const slideSize = 6;
+const slideSize: number = 6;
 
-const startIndex = ref(0);
-const slideIndex = ref(0);
-const showModal = ref(false);
-const openedImg = ref('');
-const touchStartX = ref(0);
-const touchEndX = ref(0);
+const startIndex = ref<number>(0);
+const slideIndex = ref<number>(0);
+const showModal = ref<boolean>(false);
+const openedImg = ref<string>('');
+const touchStartX = ref<number>(0);
+const touchEndX = ref<number>(0);
 
-const numberOfSlides = computed(() =>
+const numberOfSlides = computed<number>(() =>
   props?.images?.length ? Math.ceil(props.images.length / slideSize) : 0
 );
 
-const currentImages = computed(() => {
+const currentImages = computed<string[]>(() => {
   if (props.images && props.images.length > 0) {
     const endIndex = startIndex.value + slideSize;
     const safeEndIndex = Math.min(endIndex, props.images?.length);

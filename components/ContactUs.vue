@@ -7,14 +7,11 @@ defineProps<{
   storeHours: DayHoursEntry[] | null;
 }>();
 
-const currentDate = ref();
-const discordIcon = ref('/img/social-icons/Discord-Symbol-White.svg');
-const instagramIcon = ref('/img/social-icons/Instagram_Glyph_White.svg');
-
-onMounted(async () => {
-  const today = DateTime.local();
-  currentDate.value = today.year;
-});
+const currentDate = ref<number | undefined>();
+const discordIcon = ref<string>('/img/social-icons/Discord-Symbol-White.svg');
+const instagramIcon = ref<string>(
+  '/img/social-icons/Instagram_Glyph_White.svg'
+);
 
 const setDiscordIcon = (src: string) => {
   discordIcon.value = src;
@@ -23,6 +20,11 @@ const setDiscordIcon = (src: string) => {
 const setInstagramIcon = (src: string) => {
   instagramIcon.value = src;
 };
+
+onMounted(async () => {
+  const today = DateTime.local();
+  currentDate.value = today.year;
+});
 </script>
 
 <template>

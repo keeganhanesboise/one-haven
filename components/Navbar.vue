@@ -8,10 +8,10 @@ const props = withDefaults(
   }
 );
 
-const isVisible = ref(!props.hideInitially);
-const isMobileMenuOpen = ref(false);
+const isVisible = ref<boolean>(!props.hideInitially);
+const isMobileMenuOpen = ref<boolean>(false);
 
-const handleScroll = () => {
+const handleScroll = (): void => {
   if (props.hideInitially) {
     const scrollY = window.scrollY;
     const firstSection = document.querySelector('section');
@@ -21,7 +21,7 @@ const handleScroll = () => {
   }
 };
 
-const toggleMobileMenu = () => {
+const toggleMobileMenu = (): void => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
 };
 

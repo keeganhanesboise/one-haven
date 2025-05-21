@@ -120,9 +120,14 @@ h2 {
 }
 
 button {
+  all: unset;
   cursor: pointer;
-  background: none;
-  border: none;
+  display: inline-block;
+}
+
+button:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 2px;
 }
 
 .navigation-button {

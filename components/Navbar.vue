@@ -45,7 +45,7 @@ onUnmounted(() => {
       </button>
       <ul class="nav-links-desktop">
         <li class="nav-link">
-          <a href="/#gamesAndEvents" @focus="isVisible = true">Calendar</a>
+          <a href="/#gamesAndEvents" @focus="isVisible = true">Events</a>
         </li>
         <li class="nav-link">
           <a href="/#menu" @focus="isVisible = true">Menu</a>
@@ -60,7 +60,7 @@ onUnmounted(() => {
     </div>
     <ul class="nav-links-mobile" :class="{ open: isMobileMenuOpen }">
       <li class="nav-link">
-        <a href="/#gamesAndEvents" @click="toggleMobileMenu">Calendar</a>
+        <a href="/#gamesAndEvents" @click="toggleMobileMenu">Events</a>
       </li>
       <li class="nav-link">
         <a href="/#menu" @click="toggleMobileMenu">Menu</a>

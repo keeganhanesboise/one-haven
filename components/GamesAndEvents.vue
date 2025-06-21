@@ -65,16 +65,16 @@ onMounted(async () => {
           <img id="desktopPlayingCards" alt="" src="/img/playing-cards.svg" />
         </div>
       </div>
-      <div class="event-calendar-container">
-        <div
-          v-if="fetchingCalendarEvents || !currentYear || !currentMonth"
-          class="placeholder-calendar" />
-        <Calendar
-          v-else
-          :events="calendarEvents"
-          :starting-month="currentMonth"
-          :starting-year="currentYear" />
-      </div>
+<!--      <div class="event-calendar-container">-->
+<!--        <div-->
+<!--          v-if="fetchingCalendarEvents || !currentYear || !currentMonth"-->
+<!--          class="placeholder-calendar" />-->
+<!--        <Calendar-->
+<!--          v-else-->
+<!--          :events="calendarEvents"-->
+<!--          :starting-month="currentMonth"-->
+<!--          :starting-year="currentYear" />-->
+<!--      </div>-->
     </div>
   </SectionSlot>
 </template>
